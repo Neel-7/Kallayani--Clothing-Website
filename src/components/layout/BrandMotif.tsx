@@ -29,22 +29,3 @@ export function LotusMark({ className = "", ...props }: MotifProps) {
     </svg>
   );
 }
-
-export function ThreadMotif({ className = "", ...props }: MotifProps) {
-  return (
-    <svg
-      className={className}
-      viewBox="0 0 64 64"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      {...props}
-    >
-      <g stroke="currentColor" strokeWidth="3.2" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M31 7H14C9.6 7 7 9.8 7 14V31C8.5 19.2 16.5 12.1 31 12.1" />
-        <path d="M57 31V14C57 9.6 54.2 7 50 7H33C44.8 8.5 51.9 16.5 51.9 31" />
-        <path d="M33 57H50C54.4 57 57 54.2 57 50V33C55.5 44.8 47.5 51.9 33 51.9" />
-        <path d="M7 33V50C7 54.4 9.8 57 14 57H31C19.2 55.5 12.1 47.5 12.1 33" />
-      </g>
-    </svg>
-  );
-}

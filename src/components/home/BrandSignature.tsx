@@ -2,7 +2,6 @@ import { useRef } from "react";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { ThreadMotif } from "@/components/layout/BrandMotif";
 
 gsap.registerPlugin(ScrollTrigger, useGSAP);
 
@@ -63,7 +62,6 @@ export function BrandSignature() {
     <div className="brand-signature__sequence" key={sequenceIndex} aria-hidden="true">
       {values.map((value) => (
         <span className="brand-signature__value" key={`${sequenceIndex}-${value}`}>
-          <ThreadMotif aria-hidden="true" />
           {value}
         </span>
       ))}

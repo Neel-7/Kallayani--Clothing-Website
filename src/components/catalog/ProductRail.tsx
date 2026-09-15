@@ -4,7 +4,6 @@ import { Button } from "@/components/ui/button";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
 import type { Product } from "@/types/catalog";
 import { addToBag, toggleWishlist, type RootState } from "@/store/store";
-import { ThreadMotif } from "@/components/layout/BrandMotif";
 
 const dollars = new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 });
 
@@ -33,10 +32,7 @@ export function ProductRail({ title, eyebrow, products }: { title: string; eyebr
     <section className="product-section" id="products" aria-labelledby={`rail-${title.replace(/\s/g, "-").toLowerCase()}`}>
       <Carousel className="product-carousel" opts={{ align: "start", containScroll: "trimSnaps" }}>
         <div className="product-section__head shell">
-          <div className="product-section__title">
-            <ThreadMotif className="section-motif" aria-hidden="true" />
-            <div>{eyebrow && <p className="section-kicker">{eyebrow}</p>}<h2 id={`rail-${title.replace(/\s/g, "-").toLowerCase()}`}>{title}</h2></div>
-          </div>
+          <div>{eyebrow && <p className="section-kicker">{eyebrow}</p>}<h2 id={`rail-${title.replace(/\s/g, "-").toLowerCase()}`}>{title}</h2></div>
           <div className="product-carousel__controls"><CarouselPrevious /><CarouselNext /></div>
         </div>
         <CarouselContent className="product-rail">
