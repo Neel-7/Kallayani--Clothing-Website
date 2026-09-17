@@ -12,7 +12,6 @@ export function CollectionPage() {
   const collection = collectionBySlug[slug];
 
   useEffect(() => {
-    window.scrollTo({ top: 0, behavior: "instant" });
     document.title = collection ? `${collection.name} — Kallayani` : "Not found — Kallayani";
   }, [collection]);
 
@@ -22,7 +21,7 @@ export function CollectionPage() {
     <>
       <CollectionBanner collection={collection} />
       <SubcategoryShelf name={collection.name} items={collection.subcategories} />
-      <ProductRail eyebrow={`The ${collection.name} selection`} title="Newly considered" products={collection.products} />
+      <ProductRail key={collection.slug} title="Trending now" products={collection.products} />
       <Newsletter />
     </>
   );

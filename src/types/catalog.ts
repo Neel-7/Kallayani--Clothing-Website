@@ -24,6 +24,7 @@ export type Collection = {
   headline: string;
   description: string;
   hero: MediaAsset;
+  categoryImage: MediaAsset;
   subcategories: Subcategory[];
   products: Product[];
 };

@@ -1,53 +1,52 @@
 import { useRef } from "react";
 import { ChevronDown } from "lucide-react";
+import { Link } from "react-router-dom";
 import { primaryNavItems } from "./mega-menu-data";
 
 type PrimaryNavProps = {
   activeMenu: string | null;
   currentPath: string;
-  onOpen: (id: string) => void;
+  onOpen: (id: string, focusFirst?: boolean) => void;
   onClose: () => void;
 };
 
 export function PrimaryNav({ activeMenu, currentPath, onOpen, onClose }: PrimaryNavProps) {
-  const buttons = useRef<Array<HTMLButtonElement | null>>([]);
+  const links = useRef<Array<HTMLAnchorElement | null>>([]);
 
-  const handleKeyDown = (event: React.KeyboardEvent<HTMLButtonElement>, index: number, id: string) => {
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLAnchorElement>, index: number, id: string) => {
     if (event.key === "ArrowRight" || event.key === "ArrowLeft") {
       event.preventDefault();
       const step = event.key === "ArrowRight" ? 1 : -1;
-      buttons.current[(index + step + primaryNavItems.length) % primaryNavItems.length]?.focus();
+      links.current[(index + step + primaryNavItems.length) % primaryNavItems.length]?.focus();
     }
     if (event.key === "ArrowDown") {
       event.preventDefault();
-      onOpen(id);
-      window.requestAnimationFrame(() => document.querySelector<HTMLAnchorElement>(`#mega-menu-${id} [role='menuitem']`)?.focus());
+      onOpen(id, true);
     }
     if (event.key === "Escape") onClose();
   };
 
   return (
     <nav className="primary-nav desktop-only" aria-label="Primary navigation">
-      <ul>
+      <ul className="shell">
         {primaryNavItems.map((item, index) => {
           const isOpen = activeMenu === item.id;
-          const isCurrent = item.viewAllHref !== "/" && currentPath.startsWith(item.viewAllHref);
+          const isCurrent = currentPath === `/${item.id}`;
           return (
             <li key={item.id}>
-              <button
-                ref={(element) => { buttons.current[index] = element; }}
+              <Link
+                ref={(element) => { links.current[index] = element; }}
                 className={`${isOpen ? "is-open" : ""} ${isCurrent ? "is-current" : ""}`}
-                type="button"
+                to={item.viewAllHref === "/" ? "/#products" : item.viewAllHref}
                 aria-haspopup="true"
                 aria-expanded={isOpen}
                 aria-controls={`mega-menu-${item.id}`}
                 onMouseEnter={() => onOpen(item.id)}
-                onFocus={() => onOpen(item.id)}
-                onClick={() => isOpen ? onClose() : onOpen(item.id)}
+                onClick={onClose}
                 onKeyDown={(event) => handleKeyDown(event, index, item.id)}
               >
                 {item.label}<ChevronDown size={12} aria-hidden="true" />
-              </button>
+              </Link>
             </li>
           );
         })}

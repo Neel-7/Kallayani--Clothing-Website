@@ -8,7 +8,7 @@ export function Newsletter() {
     <section className="newsletter shell" id="newsletter">
       <div>
         <p className="section-kicker">Notes from the loom</p>
-        <h2>A slower kind<br /><em>of inbox.</em></h2>
+        <h2>A slower kind <em>of inbox.</em></h2>
       </div>
       <form onSubmit={(event) => event.preventDefault()}>
         <label htmlFor="email">First access to new edits, maker stories, and private appointments.</label>

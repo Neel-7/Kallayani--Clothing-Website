@@ -11,13 +11,13 @@ export function HomePage() {
     <>
       <HeroCarousel />
       <CategoryBento />
-      <BrandSignature />
-      <EditorialImages />
       <ProductRail
-        eyebrow="Newly arrived"
-        title="Pieces worth meeting"
+        title="New & noteworthy"
+        viewAllHref="/women#products"
         products={featuredProducts}
       />
+      <EditorialImages />
+      <BrandSignature />
       <Newsletter />
     </>
   );

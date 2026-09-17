@@ -19,14 +19,14 @@ export function EditorialImages() {
       <div className="editorial-duet">
         {[left, right].map((feature) => (
           <article className="editorial-card" key={feature.title}>
-            <img src={feature.image.src} alt={feature.image.alt} style={{ objectPosition: feature.image.position }} />
+            <img loading="lazy" src={feature.image.src} alt={feature.image.alt} style={{ objectPosition: feature.image.position }} />
             <Link className="editorial-card__image-link" to={feature.href} aria-label={`Shop ${feature.title}`} />
             <EditorialCopy {...feature} />
           </article>
         ))}
       </div>
       <article className="editorial-card editorial-card--wide">
-        <img src={wide.image.src} alt={wide.image.alt} style={{ objectPosition: wide.image.position }} />
+        <img loading="lazy" src={wide.image.src} alt={wide.image.alt} style={{ objectPosition: wide.image.position }} />
         <Link className="editorial-card__image-link" to={wide.href} aria-label={`Shop ${wide.title}`} />
         <EditorialCopy {...wide} />
       </article>
