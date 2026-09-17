@@ -31,12 +31,7 @@ export function HeroCarousel() {
   }, [api]);
 
   useEffect(() => {
-    if (
-      !api ||
-      paused ||
-      stopped ||
-      window.matchMedia("(prefers-reduced-motion: reduce)").matches
-    )
+    if (!api || paused || stopped || window.matchMedia("(prefers-reduced-motion: reduce)").matches)
       return;
     const timer = window.setInterval(() => api.scrollNext(), AUTOPLAY_MS);
     return () => window.clearInterval(timer);
@@ -52,8 +47,7 @@ export function HeroCarousel() {
       onMouseLeave={() => setPaused(false)}
       onFocusCapture={() => setPaused(true)}
       onBlurCapture={(event) => {
-        if (!event.currentTarget.contains(event.relatedTarget))
-          setPaused(false);
+        if (!event.currentTarget.contains(event.relatedTarget)) setPaused(false);
       }}
     >
       <CarouselContent className="hero-carousel__content">

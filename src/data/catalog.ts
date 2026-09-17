@@ -1,9 +1,4 @@
-import type {
-  Collection,
-  EditorialFeature,
-  HeroSlide,
-  Product,
-} from "@/types/catalog";
+import type { Collection, EditorialFeature, HeroSlide, Product } from "@/types/catalog";
 
 const media = {
   womenBanner: {
@@ -151,14 +146,7 @@ const menProducts = [
     148,
     media.indigo,
   ),
-  product(
-    "sada-kurta",
-    "Sada motif kurta",
-    "Supplementary-weft cotton",
-    "Nadia",
-    136,
-    media.ivory,
-  ),
+  product("sada-kurta", "Sada motif kurta", "Supplementary-weft cotton", "Nadia", 136, media.ivory),
   product(
     "rong-evening",
     "Rong evening panjabi",
@@ -167,14 +155,10 @@ const menProducts = [
     172,
     media.winePanjabi,
   ),
-  product(
-    "kaash-kurta",
-    "Kaash relaxed kurta",
-    "Textured handloom",
-    "Shantipur",
-    154,
-    { ...media.menBanner, position: "68% 35%" },
-  ),
+  product("kaash-kurta", "Kaash relaxed kurta", "Textured handloom", "Shantipur", 154, {
+    ...media.menBanner,
+    position: "68% 35%",
+  }),
   product(
     "indigo-longline",
     "Indigo longline panjabi",
@@ -186,14 +170,7 @@ const menProducts = [
 ];
 
 const womenProducts = [
-  product(
-    "rakta-jamdani",
-    "Rakta Jamdani saree",
-    "Jamdani",
-    "Bengal",
-    248,
-    media.women,
-  ),
+  product("rakta-jamdani", "Rakta Jamdani saree", "Jamdani", "Bengal", 248, media.women),
   product(
     "nila-kanjeevaram",
     "Nila Kanjeevaram saree",
@@ -210,14 +187,7 @@ const womenProducts = [
     286,
     media.womenCampaign,
   ),
-  product(
-    "rani-zari",
-    "Rani zari saree",
-    "Kanjeevaram silk",
-    "Tamil Nadu",
-    348,
-    media.wineSaree,
-  ),
+  product("rani-zari", "Rani zari saree", "Kanjeevaram silk", "Tamil Nadu", 348, media.wineSaree),
   product("shada-tant", "Shada Tant saree", "Handloom cotton", "Phulia", 168, {
     ...media.womenBanner,
     position: "69% 35%",
@@ -225,30 +195,9 @@ const womenProducts = [
 ];
 
 const kidsProducts = [
-  product(
-    "ranga-cotton",
-    "Ranga cotton set",
-    "Handloom cotton",
-    "Bengal",
-    96,
-    media.kidsBanner,
-  ),
-  product(
-    "shada-festive",
-    "Shada festive set",
-    "Festive cotton",
-    "Bengal",
-    114,
-    media.kids,
-  ),
-  product(
-    "aalor-kurta",
-    "Aalor cotton kurta",
-    "Handloom cotton",
-    "Bengal",
-    132,
-    media.kidsPanjabi,
-  ),
+  product("ranga-cotton", "Ranga cotton set", "Handloom cotton", "Bengal", 96, media.kidsBanner),
+  product("shada-festive", "Shada festive set", "Festive cotton", "Bengal", 114, media.kids),
+  product("aalor-kurta", "Aalor cotton kurta", "Handloom cotton", "Bengal", 132, media.kidsPanjabi),
   product(
     "khela-dress",
     "Khela cotton dress",
@@ -288,14 +237,7 @@ const homeProducts = [
     132,
     media.tablecloth,
   ),
-  product(
-    "block-print-throw",
-    "Block-print throw",
-    "Hand block print",
-    "Bengal",
-    150,
-    media.home,
-  ),
+  product("block-print-throw", "Block-print throw", "Hand block print", "Bengal", 150, media.home),
   product(
     "indigo-cushion",
     "Indigo cushion cover",
@@ -323,30 +265,9 @@ const jewelleryProducts = [
     132,
     media.earrings,
   ),
-  product(
-    "temple-bangle",
-    "Temple bangle",
-    "Hand-finished metal",
-    "Kolkata",
-    186,
-    media.jewellery,
-  ),
-  product(
-    "kajal-ring",
-    "Kajal garnet ring",
-    "Hand-finished metal",
-    "Kolkata",
-    154,
-    media.ring,
-  ),
-  product(
-    "moti-pendant",
-    "Moti pendant",
-    "Hand-finished metal",
-    "Kolkata",
-    168,
-    media.jewellery,
-  ),
+  product("temple-bangle", "Temple bangle", "Hand-finished metal", "Kolkata", 186, media.jewellery),
+  product("kajal-ring", "Kajal garnet ring", "Hand-finished metal", "Kolkata", 154, media.ring),
+  product("moti-pendant", "Moti pendant", "Hand-finished metal", "Kolkata", 168, media.jewellery),
 ];
 
 export const heroSlides: HeroSlide[] = [
@@ -410,8 +331,7 @@ export const collections: Collection[] = [
     slug: "women",
     name: "Women",
     headline: "Woven to move with you.",
-    description:
-      "Sarees and separates chosen for their clarity of craft and ease of wear.",
+    description: "Sarees and separates chosen for their clarity of craft and ease of wear.",
     hero: media.womenBanner,
     categoryImage: media.women,
     subcategories: [
@@ -447,8 +367,7 @@ export const collections: Collection[] = [
     slug: "kids",
     name: "Kids",
     headline: "Made for movement.",
-    description:
-      "Soft handloom cotton and celebration clothes that still feel like play.",
+    description: "Soft handloom cotton and celebration clothes that still feel like play.",
     hero: media.kidsBanner,
     categoryImage: media.kids,
     subcategories: [
@@ -463,8 +382,7 @@ export const collections: Collection[] = [
     slug: "home",
     name: "Home",
     headline: "Pattern, held quietly.",
-    description:
-      "Table, bed, and living textiles made to settle into a room rather than stage it.",
+    description: "Table, bed, and living textiles made to settle into a room rather than stage it.",
     hero: media.homeBanner,
     categoryImage: media.home,
     subcategories: [
@@ -479,8 +397,7 @@ export const collections: Collection[] = [
     slug: "jewellery",
     name: "Jewellery",
     headline: "Adornment with a point of view.",
-    description:
-      "Sculptural pieces shaped by regional motifs and finished by hand.",
+    description: "Sculptural pieces shaped by regional motifs and finished by hand.",
     hero: media.jewelleryBanner,
     categoryImage: media.jewellery,
     subcategories: [
@@ -493,9 +410,7 @@ export const collections: Collection[] = [
   },
 ];
 
-export const collectionBySlug = Object.fromEntries(
-  collections.map((entry) => [entry.slug, entry]),
-);
+export const collectionBySlug = Object.fromEntries(collections.map((entry) => [entry.slug, entry]));
 export const featuredProducts = [
   womenProducts[0],
   menProducts[0],

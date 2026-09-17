@@ -13,7 +13,11 @@ export const SheetContent = React.forwardRef<
 >(({ side = "right", className, children, ...props }, ref) => (
   <DialogPrimitive.Portal>
     <DialogPrimitive.Overlay className="sheet-overlay" />
-    <DialogPrimitive.Content ref={ref} className={cn("sheet-content", `sheet-content--${side}`, className)} {...props}>
+    <DialogPrimitive.Content
+      ref={ref}
+      className={cn("sheet-content", `sheet-content--${side}`, className)}
+      {...props}
+    >
       {children}
       <DialogPrimitive.Close className="sheet-close" aria-label="Close panel">
         <X size={20} />

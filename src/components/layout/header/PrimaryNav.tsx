@@ -13,7 +13,11 @@ type PrimaryNavProps = {
 export function PrimaryNav({ activeMenu, currentPath, onOpen, onClose }: PrimaryNavProps) {
   const links = useRef<Array<HTMLAnchorElement | null>>([]);
 
-  const handleKeyDown = (event: React.KeyboardEvent<HTMLAnchorElement>, index: number, id: string) => {
+  const handleKeyDown = (
+    event: React.KeyboardEvent<HTMLAnchorElement>,
+    index: number,
+    id: string,
+  ) => {
     if (event.key === "ArrowRight" || event.key === "ArrowLeft") {
       event.preventDefault();
       const step = event.key === "ArrowRight" ? 1 : -1;
@@ -35,7 +39,9 @@ export function PrimaryNav({ activeMenu, currentPath, onOpen, onClose }: Primary
           return (
             <li key={item.id}>
               <Link
-                ref={(element) => { links.current[index] = element; }}
+                ref={(element) => {
+                  links.current[index] = element;
+                }}
                 className={`${isOpen ? "is-open" : ""} ${isCurrent ? "is-current" : ""}`}
                 to={item.viewAllHref === "/" ? "/#products" : item.viewAllHref}
                 aria-haspopup="true"
@@ -45,7 +51,8 @@ export function PrimaryNav({ activeMenu, currentPath, onOpen, onClose }: Primary
                 onClick={onClose}
                 onKeyDown={(event) => handleKeyDown(event, index, item.id)}
               >
-                {item.label}<ChevronDown size={12} aria-hidden="true" />
+                {item.label}
+                <ChevronDown size={12} aria-hidden="true" />
               </Link>
             </li>
           );

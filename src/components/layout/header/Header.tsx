@@ -34,9 +34,7 @@ export function Header() {
     if (focusFirst) {
       clearTimers();
       if (activeMenu === id) {
-        headerRef.current
-          ?.querySelector<HTMLAnchorElement>(`#mega-menu-${id} a`)
-          ?.focus();
+        headerRef.current?.querySelector<HTMLAnchorElement>(`#mega-menu-${id} a`)?.focus();
         focusMenu.current = false;
         return;
       }
@@ -53,15 +51,12 @@ export function Header() {
     if (openTimer.current) clearTimeout(openTimer.current);
     if (closeTimer.current) clearTimeout(closeTimer.current);
     if (immediate) setActiveMenu(null);
-    else
-      closeTimer.current = setTimeout(() => setActiveMenu(null), CLOSE_DELAY);
+    else closeTimer.current = setTimeout(() => setActiveMenu(null), CLOSE_DELAY);
   };
 
   useEffect(() => {
     if (activeMenu && focusMenu.current) {
-      headerRef.current
-        ?.querySelector<HTMLAnchorElement>(`#mega-menu-${activeMenu} a`)
-        ?.focus();
+      headerRef.current?.querySelector<HTMLAnchorElement>(`#mega-menu-${activeMenu} a`)?.focus();
       focusMenu.current = false;
     }
   }, [activeMenu]);
@@ -92,13 +87,10 @@ export function Header() {
     <header
       className="site-header"
       ref={headerRef}
-      onMouseEnter={() =>
-        closeTimer.current && clearTimeout(closeTimer.current)
-      }
+      onMouseEnter={() => closeTimer.current && clearTimeout(closeTimer.current)}
       onMouseLeave={() => closeMenu()}
       onBlurCapture={(event) => {
-        if (!headerRef.current?.contains(event.relatedTarget as Node | null))
-          closeMenu();
+        if (!headerRef.current?.contains(event.relatedTarget as Node | null)) closeMenu();
       }}
     >
       {showAnnouncement && (
@@ -118,9 +110,7 @@ export function Header() {
       <div className="header-main shell">
         <MobileNavigation />
         <BrandMark />
-        <span className="header-tagline desktop-only">
-          Heritage in every thread
-        </span>
+        <span className="header-tagline desktop-only">Heritage in every thread</span>
         <DesktopUtilityNav />
         <UtilityNav />
       </div>
@@ -130,9 +120,7 @@ export function Header() {
         onOpen={openMenu}
         onClose={() => closeMenu(true)}
       />
-      {menuConfig && (
-        <MegaMenu config={menuConfig} onNavigate={() => closeMenu(true)} />
-      )}
+      {menuConfig && <MegaMenu config={menuConfig} onNavigate={() => closeMenu(true)} />}
     </header>
   );
 }

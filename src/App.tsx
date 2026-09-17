@@ -13,8 +13,7 @@ function App() {
     const target = hash && document.getElementById(hash.slice(1));
     if (target) target.scrollIntoView({ behavior: "instant" });
     else window.scrollTo({ top: 0, behavior: "instant" });
-    if (pathname === "/")
-      document.title = "Kallayani — Heritage in Every Thread";
+    if (pathname === "/") document.title = "Kallayani — Heritage in Every Thread";
   }, [pathname, hash]);
 
   return (

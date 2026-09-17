@@ -36,11 +36,7 @@ export function MegaMenu({ config, onNavigate }: MegaMenuProps) {
             Explore {config.label.toLowerCase()} <ArrowRight size={15} />
           </Link>
         </div>
-        <Link
-          className="mega-menu__promo"
-          to={config.promo.href}
-          onClick={onNavigate}
-        >
+        <Link className="mega-menu__promo" to={config.promo.href} onClick={onNavigate}>
           <img src={config.promo.image} alt={config.promo.alt} />
           <span>
             {config.promo.caption}

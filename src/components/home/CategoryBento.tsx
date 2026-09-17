@@ -10,7 +10,14 @@ export function CategoryBento() {
       <div className="category-bento">
         {collections.map((item) => (
           <Link key={item.slug} to={`/${item.slug}`} className="category-card">
-            <div className="category-card__media"><img loading="lazy" src={item.categoryImage.src} alt={item.categoryImage.alt} style={{ objectPosition: item.categoryImage.position }} /></div>
+            <div className="category-card__media">
+              <img
+                loading="lazy"
+                src={item.categoryImage.src}
+                alt={item.categoryImage.alt}
+                style={{ objectPosition: item.categoryImage.position }}
+              />
+            </div>
             <span>{item.name === "Home" ? "Home décor" : item.name}</span>
           </Link>
         ))}

@@ -13,7 +13,11 @@ const shopSlice = createSlice({
   reducers: {
     toggleWishlist(state, action: PayloadAction<string>) {
       const index = state.wishlist.indexOf(action.payload);
-      index >= 0 ? state.wishlist.splice(index, 1) : state.wishlist.push(action.payload);
+      if (index >= 0) {
+        state.wishlist.splice(index, 1);
+      } else {
+        state.wishlist.push(action.payload);
+      }
     },
     addToBag(state) {
       state.bagCount += 1;
