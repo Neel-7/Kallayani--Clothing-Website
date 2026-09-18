@@ -17,9 +17,74 @@ const media = {
     position: "50% 20%",
   },
   menBanner: {
-    src: "/images/men-campaign-v2.webp",
-    alt: "Men wearing indigo and ivory embroidered panjabis in a warm sunlit courtyard",
-    position: "50% 35%",
+    src: "/images/men/collection-hero.webp",
+    alt: "Two men of different ages in indigo and ivory handwoven panjabis at a textile atelier",
+    position: "50% 42%",
+  },
+  menHomeCampaign: {
+    src: "/images/men/home-campaign.webp",
+    alt: "Man in an ivory panjabi and indigo waistcoat walking through a sunlit colonnade",
+    position: "50% 38%",
+  },
+  menCategory: {
+    src: "/images/men/home-category.webp",
+    alt: "Man wearing a rust handwoven panjabi beside an indigo doorway",
+    position: "50% 32%",
+  },
+  menTraditionals: {
+    src: "/images/men/subcategory-traditionals.webp",
+    alt: "Man wearing an indigo handwoven traditional panjabi in a courtyard",
+    position: "50% 25%",
+  },
+  menShirts: {
+    src: "/images/men/subcategory-shirts.webp",
+    alt: "Man wearing a striped handloom cotton shirt beside a shuttered window",
+    position: "50% 30%",
+  },
+  menPants: {
+    src: "/images/men/subcategory-pants.webp",
+    alt: "Man wearing tailored olive cotton pants on a sunlit terrace",
+    position: "50% 50%",
+  },
+  menTShirts: {
+    src: "/images/men/subcategory-t-shirts.webp",
+    alt: "Man wearing a brick-red cotton T-shirt against a blue wall",
+    position: "50% 30%",
+  },
+  menPolo: {
+    src: "/images/men/subcategory-polo.webp",
+    alt: "Man wearing a forest-green textured polo shirt on a veranda",
+    position: "50% 28%",
+  },
+  menAccessories: {
+    src: "/images/men/subcategory-accessories.webp",
+    alt: "Leather satchel, indigo scarf, belt and watch on a stone table",
+    position: "50% 50%",
+  },
+  menNewArrivals: {
+    src: "/images/men/subcategory-new-arrivals.webp",
+    alt: "Man walking in a mineral-teal panjabi on a stone veranda",
+    position: "50% 28%",
+  },
+  menKaash: {
+    src: "/images/men/product-kaash.webp",
+    alt: "Man wearing a pale stone handloom kurta and charcoal trousers",
+    position: "50% 50%",
+  },
+  menLongline: {
+    src: "/images/men/product-longline.webp",
+    alt: "Man wearing a midnight indigo longline panjabi and ivory trousers",
+    position: "50% 50%",
+  },
+  menMati: {
+    src: "/images/men/product-mati.webp",
+    alt: "Man wearing a terracotta handwoven panjabi and ivory trousers",
+    position: "50% 50%",
+  },
+  menMegh: {
+    src: "/images/men/product-megh.webp",
+    alt: "Man wearing a sage-green cotton kurta and cream trousers",
+    position: "50% 50%",
   },
   kidsBanner: {
     src: "/images/kids-campaign-v2.webp",
@@ -47,9 +112,9 @@ const media = {
     position: "50% 25%",
   },
   winePanjabi: {
-    src: "/images/panjabi-wine-editorial.webp",
-    alt: "Man wearing a wine handloom panjabi in a sunlit courtyard",
-    position: "50% 20%",
+    src: "/images/men/product-rong.webp",
+    alt: "Man wearing a wine handloom panjabi and cream trousers in a studio",
+    position: "50% 50%",
   },
   kidsDress: {
     src: "/images/kids-teal-dress.webp",
@@ -96,18 +161,13 @@ const media = {
     alt: "Two women in handwoven red and black sarees in a bright colonnade",
     position: "center top",
   },
-  menCampaign: {
-    src: "/images/men-campaign.webp",
-    alt: "Two men wearing indigo and ivory handwoven kurtas",
-    position: "center top",
-  },
   indigo: {
-    src: "/images/men-indigo.webp",
+    src: "/images/men/product-kallayani-indigo.webp",
     alt: "Man wearing a deep indigo handloom panjabi",
     position: "50% 18%",
   },
   ivory: {
-    src: "/images/men-ivory.webp",
+    src: "/images/men/product-sada.webp",
     alt: "Man wearing an ivory handloom kurta with indigo motifs",
     position: "50% 18%",
   },
@@ -155,18 +215,17 @@ const menProducts = [
     172,
     media.winePanjabi,
   ),
-  product("kaash-kurta", "Kaash relaxed kurta", "Textured handloom", "Shantipur", 154, {
-    ...media.menBanner,
-    position: "68% 35%",
-  }),
+  product("kaash-kurta", "Kaash relaxed kurta", "Textured handloom", "Shantipur", 154, media.menKaash),
   product(
     "indigo-longline",
     "Indigo longline panjabi",
     "Low-impact dye",
     "Bengal",
     188,
-    media.menCampaign,
+    media.menLongline,
   ),
+  product("mati-panjabi", "Mati woven panjabi", "Handloom cotton", "Bengal", 162, media.menMati),
+  product("megh-kurta", "Megh cotton kurta", "Woven stripe cotton", "Bengal", 142, media.menMegh),
 ];
 
 const womenProducts = [
@@ -285,7 +344,7 @@ export const heroSlides: HeroSlide[] = [
     description: "Light cotton. Rich indigo. A little more ease.",
     href: "/men",
     cta: "Discover men",
-    image: media.menBanner,
+    image: media.menHomeCampaign,
   },
   {
     id: "kids",
@@ -351,15 +410,15 @@ export const collections: Collection[] = [
     headline: "Cut for the present.",
     description: "Handwoven cloth, easy proportions, and considered detail.",
     hero: media.menBanner,
-    categoryImage: media.indigo,
+    categoryImage: media.menCategory,
     subcategories: [
-      { name: "Panjabis", image: media.indigo },
-      { name: "Kurtas", image: media.ivory },
-      { name: "Festive wear", image: media.winePanjabi },
-      {
-        name: "New arrivals",
-        image: { ...media.menBanner, position: "60% 30%" },
-      },
+      { name: "New Arrivals", image: media.menNewArrivals },
+      { name: "Shirts", image: media.menShirts },
+      { name: "Pants", image: media.menPants },
+      { name: "T-Shirts", image: media.menTShirts },
+      { name: "Polo", image: media.menPolo },
+      { name: "Accessories", image: media.menAccessories },
+      { name: "Traditionals", image: media.menTraditionals },
     ],
     products: menProducts,
   },

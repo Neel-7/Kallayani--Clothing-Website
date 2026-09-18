@@ -8,9 +8,9 @@ const categoryImages: Record<string, { src: string; alt: string; position: strin
     position: "50% 42%",
   },
   men: {
-    src: "/images/men-campaign-v2.webp",
-    alt: "Two men wearing handwoven panjabis",
-    position: "50% 40%",
+    src: "/images/men/home-category.webp",
+    alt: "Man wearing a rust handwoven panjabi beside an indigo doorway",
+    position: "50% 32%",
   },
   kids: {
     src: "/images/kids-edit.webp",

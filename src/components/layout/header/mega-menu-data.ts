@@ -57,44 +57,37 @@ export const primaryNavItems: NavItemConfig[] = [
     viewAllHref: "/men",
     columns: [
       {
-        heading: "Indian wear",
+        heading: "Discover",
         links: [
-          { label: "Panjabis", href: "/men#shop-category" },
-          { label: "Kurtas", href: "/men#shop-category" },
-          { label: "Jackets", href: "/men#shop-category" },
-          { label: "Festive sets", href: "/men#products" },
+          { label: "New Arrivals", href: "/men#shop-category" },
         ],
       },
       {
-        heading: "Everyday",
+        heading: "Clothing",
         links: [
           { label: "Shirts", href: "/men#shop-category" },
-          { label: "Trousers", href: "/men#shop-category" },
-          { label: "Layering", href: "/men#products" },
+          { label: "Pants", href: "/men#shop-category" },
+          { label: "T-Shirts", href: "/men#shop-category" },
+          { label: "Polo", href: "/men#shop-category" },
         ],
       },
       {
-        heading: "By cloth",
+        heading: "Finishing touches",
         links: [
-          { label: "Handloom cotton", href: "/men#products" },
-          { label: "Silk blends", href: "/men#products" },
-          { label: "Indigo", href: "/men#products" },
-          { label: "Textured white", href: "/men#products" },
+          { label: "Accessories", href: "/men#shop-category" },
         ],
       },
       {
-        heading: "Occasion",
+        heading: "Heritage",
         links: [
-          { label: "Wedding", href: "/men#products" },
-          { label: "Celebration", href: "/men#products" },
-          { label: "Weekend", href: "/men#products" },
+          { label: "Traditionals", href: "/men#shop-category" },
         ],
       },
     ],
     promo: {
-      image: "/images/panjabi-wine-editorial.webp",
-      alt: "Man wearing a wine handloom panjabi",
-      caption: "New forms for him",
+      image: "/images/men/mega-menu.webp",
+      alt: "Man in an olive handloom panjabi examining cloth at a textile studio",
+      caption: "Cloth with a story",
       href: "/men",
     },
   },

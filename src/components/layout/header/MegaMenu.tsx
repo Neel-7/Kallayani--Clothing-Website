@@ -1,6 +1,5 @@
 import { ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
-import { primaryNavItems } from "./mega-menu-data";
 import type { NavItemConfig } from "./types";
 
 type MegaMenuProps = {

@@ -4,7 +4,7 @@ export function CollectionBanner({ collection }: { collection: Collection }) {
   return (
     <section className="relative h-[min(50vw,calc(100svh-130px))] min-h-[420px] max-h-[1020px] overflow-hidden bg-soft after:pointer-events-none after:absolute after:inset-0 after:bg-[linear-gradient(transparent_50%,#17141266)] tablet:h-[62vw] tablet:min-h-[460px] tablet:max-h-[620px] phone:h-[min(68svh,580px)] phone:min-h-[450px]">
       <img
-        className="h-full w-full object-cover desktop:!object-top"
+        className={`h-full w-full object-cover desktop:!object-top ${collection.slug === "men" ? "phone:!object-[45%_50%]" : ""}`}
         fetchPriority="high"
         src={collection.hero.src}
         alt={collection.hero.alt}
