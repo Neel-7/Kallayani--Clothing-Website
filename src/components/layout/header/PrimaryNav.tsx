@@ -32,20 +32,20 @@ export function PrimaryNav({ activeMenu, currentPath, onOpen, onClose }: Primary
   return (
     <nav
       data-primary-nav
-      className="ml-[clamp(20px,2.25vw,42px)] h-full min-w-0 flex-1 tablet:hidden"
+      className="h-full w-max max-w-full justify-self-center tablet:hidden"
       aria-label="Primary navigation"
     >
-      <ul className="flex h-full list-none items-center justify-between gap-3 p-0 headerCompact:gap-2">
+      <ul className="flex h-full list-none items-center justify-center gap-[clamp(10px,1.2vw,22px)] p-0">
         {primaryNavItems.map((item, index) => {
           const isOpen = activeMenu === item.id;
           const isCurrent = currentPath === `/${item.id}`;
           return (
-            <li key={item.id}>
+            <li className="h-full" key={item.id}>
               <Link
                 ref={(element) => {
                   links.current[index] = element;
                 }}
-                className={`relative inline-flex h-full items-center whitespace-nowrap p-0 text-sm font-medium uppercase tracking-[.025em] transition-colors duration-[180ms] cursor-pointer hover:text-wine focus-visible:text-wine after:absolute after:inset-x-0 after:bottom-[21px] after:h-px after:origin-left after:scale-x-0 after:bg-wine after:transition-transform after:duration-[180ms] hover:after:scale-x-100 focus-visible:after:scale-x-100 ${isOpen || isCurrent ? "text-wine after:scale-x-100" : ""}`}
+                className={`group inline-flex h-full items-center whitespace-nowrap p-0 text-sm font-medium uppercase tracking-[.025em] transition-colors duration-[180ms] cursor-pointer hover:text-wine focus-visible:text-wine ${isOpen || isCurrent ? "text-wine" : ""}`}
                 to={item.viewAllHref === "/" ? "/#products" : item.viewAllHref}
                 aria-haspopup="true"
                 aria-expanded={isOpen}
@@ -54,7 +54,11 @@ export function PrimaryNav({ activeMenu, currentPath, onOpen, onClose }: Primary
                 onClick={onClose}
                 onKeyDown={(event) => handleKeyDown(event, index, item.id)}
               >
-                {item.label}
+                <span
+                  className={`relative after:absolute after:inset-x-0 after:-bottom-1 after:h-px after:origin-left after:scale-x-0 after:bg-wine after:transition-transform after:duration-[180ms] group-hover:after:scale-x-100 group-focus-visible:after:scale-x-100 ${isOpen || isCurrent ? "after:scale-x-100" : ""}`}
+                >
+                  {item.label}
+                </span>
               </Link>
             </li>
           );

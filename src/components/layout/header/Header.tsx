@@ -107,7 +107,7 @@ export function Header() {
           </button>
         </div>
       )}
-      <div className="mx-auto flex h-[72px] max-w-[1600px] items-center gap-[clamp(14px,1.7vw,28px)] px-gutter headerCompact:gap-[14px] headerCompact:[&>a_span]:text-[27px] tablet:grid tablet:h-[68px] tablet:grid-cols-[76px_1fr_88px] tablet:gap-0 phone:h-16 phone:grid-cols-[52px_1fr_80px] [&>a]:tablet:justify-self-center phone:[&>a_span]:text-[27px] phone:[&>a_svg]:h-[23px] phone:[&>a_svg]:w-[29px]">
+      <div className="grid h-[72px] w-full grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] items-center px-[clamp(12px,1.25vw,24px)] headerCompact:[&>a_span]:text-[27px] tablet:h-[68px] tablet:grid-cols-[76px_1fr_88px] phone:h-16 phone:grid-cols-[52px_1fr_80px] [&>a]:tablet:justify-self-center phone:[&>a_span]:text-[27px] phone:[&>a_svg]:h-[23px] phone:[&>a_svg]:w-[29px]">
         <MobileNavigation />
         <BrandMark />
         <PrimaryNav
@@ -116,8 +116,10 @@ export function Header() {
           onOpen={openMenu}
           onClose={() => closeMenu(true)}
         />
-        <DesktopUtilityNav />
-        <UtilityNav />
+        <div className="flex items-center justify-self-end gap-[clamp(8px,1vw,16px)] tablet:gap-0">
+          <DesktopUtilityNav />
+          <UtilityNav />
+        </div>
       </div>
       {menuConfig && <MegaMenu config={menuConfig} onNavigate={() => closeMenu(true)} />}
     </header>
