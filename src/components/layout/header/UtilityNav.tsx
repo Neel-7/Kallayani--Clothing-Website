@@ -34,15 +34,16 @@ function IconAction({
 
 export function DesktopUtilityNav() {
   return (
-    <div className="flex w-full items-center gap-1 compact:max-w-[300px] compact:justify-self-end tablet:hidden">
+    <div className="w-[clamp(170px,15vw,220px)] shrink-0 headerCompact:w-10 tablet:hidden">
       <SearchSheet
         trigger={
           <Button
             variant="ghost"
-            className="w-full justify-start !border-x-0 !border-t-0 border-b border-ink px-0 pl-1 text-[13px] font-normal normal-case tracking-normal hover:border-b-wine"
+            className="w-full justify-start !border-x-0 !border-t-0 border-b border-ink px-0 pl-1 text-[13px] font-normal normal-case tracking-normal hover:border-b-wine headerCompact:size-10 headerCompact:justify-center headerCompact:border-b-0 headerCompact:pl-0"
+            aria-label="Search collections"
           >
             <Search size={20} />
-            <span>Search the collection</span>
+            <span className="headerCompact:hidden">Search the collection</span>
           </Button>
         }
       />
@@ -54,7 +55,7 @@ export function UtilityNav() {
   const bagCount = useSelector((state: RootState) => state.shop.bagCount);
   return (
     <div className="flex items-center justify-self-end gap-1 tablet:gap-0">
-      <span className="mr-2 text-xs tablet:hidden">USD</span>
+      <span className="mr-2 text-xs headerCompact:hidden">USD</span>
       <span className="hidden tablet:block">
         <SearchSheet
           trigger={

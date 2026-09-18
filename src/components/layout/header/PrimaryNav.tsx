@@ -1,5 +1,4 @@
 import { useRef } from "react";
-import { ChevronDown } from "lucide-react";
 import { Link } from "react-router-dom";
 import { primaryNavItems } from "./mega-menu-data";
 
@@ -31,8 +30,12 @@ export function PrimaryNav({ activeMenu, currentPath, onOpen, onClose }: Primary
   };
 
   return (
-    <nav data-primary-nav className="h-9 tablet:hidden" aria-label="Primary navigation">
-      <ul className="mx-gutter flex h-full list-none items-center gap-[clamp(24px,3vw,48px)] p-0">
+    <nav
+      data-primary-nav
+      className="ml-[clamp(20px,2.25vw,42px)] h-full min-w-0 flex-1 tablet:hidden"
+      aria-label="Primary navigation"
+    >
+      <ul className="flex h-full list-none items-center justify-between gap-3 p-0 headerCompact:gap-2">
         {primaryNavItems.map((item, index) => {
           const isOpen = activeMenu === item.id;
           const isCurrent = currentPath === `/${item.id}`;
@@ -42,7 +45,7 @@ export function PrimaryNav({ activeMenu, currentPath, onOpen, onClose }: Primary
                 ref={(element) => {
                   links.current[index] = element;
                 }}
-                className={`relative inline-flex h-9 items-center gap-[5px] p-0 text-[clamp(12px,.76vw,14px)] font-medium uppercase tracking-[.025em] cursor-pointer after:absolute after:inset-x-0 after:bottom-0 after:h-[2px] after:origin-left after:scale-x-0 after:bg-wine after:transition-transform after:duration-[180ms] hover:after:scale-x-100 [&_svg]:w-3 [&_svg]:transition-transform [&_svg]:duration-[180ms] ${isOpen || isCurrent ? "after:scale-x-100" : ""} ${isOpen ? "[&_svg]:rotate-180" : ""}`}
+                className={`relative inline-flex h-full items-center whitespace-nowrap p-0 text-sm font-medium uppercase tracking-[.025em] transition-colors duration-[180ms] cursor-pointer hover:text-wine focus-visible:text-wine after:absolute after:inset-x-0 after:bottom-[21px] after:h-px after:origin-left after:scale-x-0 after:bg-wine after:transition-transform after:duration-[180ms] hover:after:scale-x-100 focus-visible:after:scale-x-100 ${isOpen || isCurrent ? "text-wine after:scale-x-100" : ""}`}
                 to={item.viewAllHref === "/" ? "/#products" : item.viewAllHref}
                 aria-haspopup="true"
                 aria-expanded={isOpen}
@@ -52,7 +55,6 @@ export function PrimaryNav({ activeMenu, currentPath, onOpen, onClose }: Primary
                 onKeyDown={(event) => handleKeyDown(event, index, item.id)}
               >
                 {item.label}
-                <ChevronDown size={12} aria-hidden="true" />
               </Link>
             </li>
           );

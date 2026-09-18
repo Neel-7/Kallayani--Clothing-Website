@@ -107,21 +107,18 @@ export function Header() {
           </button>
         </div>
       )}
-      <div className="mx-gutter grid h-[54px] grid-cols-[auto_1fr_minmax(220px,290px)_auto] items-center gap-6 compact:grid-cols-[auto_1fr_auto] tablet:h-[68px] tablet:grid-cols-[76px_1fr_88px] tablet:gap-0 phone:h-16 phone:grid-cols-[52px_1fr_80px] [&>a]:tablet:justify-self-center phone:[&>a_span]:text-[27px] phone:[&>a_svg]:h-[23px] phone:[&>a_svg]:w-[29px]">
+      <div className="mx-auto flex h-[72px] max-w-[1600px] items-center gap-[clamp(14px,1.7vw,28px)] px-gutter headerCompact:gap-[14px] headerCompact:[&>a_span]:text-[27px] tablet:grid tablet:h-[68px] tablet:grid-cols-[76px_1fr_88px] tablet:gap-0 phone:h-16 phone:grid-cols-[52px_1fr_80px] [&>a]:tablet:justify-self-center phone:[&>a_span]:text-[27px] phone:[&>a_svg]:h-[23px] phone:[&>a_svg]:w-[29px]">
         <MobileNavigation />
         <BrandMark />
-        <span className="border-l border-line pl-5 font-serif text-[13px] italic text-muted compact:hidden">
-          Heritage in every thread
-        </span>
+        <PrimaryNav
+          activeMenu={activeMenu}
+          currentPath={location.pathname}
+          onOpen={openMenu}
+          onClose={() => closeMenu(true)}
+        />
         <DesktopUtilityNav />
         <UtilityNav />
       </div>
-      <PrimaryNav
-        activeMenu={activeMenu}
-        currentPath={location.pathname}
-        onOpen={openMenu}
-        onClose={() => closeMenu(true)}
-      />
       {menuConfig && <MegaMenu config={menuConfig} onNavigate={() => closeMenu(true)} />}
     </header>
   );

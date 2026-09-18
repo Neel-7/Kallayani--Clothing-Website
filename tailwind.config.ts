@@ -19,6 +19,7 @@ export default {
       },
       spacing: { gutter: "clamp(16px,2vw,40px)" },
       screens: {
+        headerCompact: { max: "1320px" },
         compact: { max: "1150px" },
         tablet: { max: "900px" },
         phone: { max: "600px" },
