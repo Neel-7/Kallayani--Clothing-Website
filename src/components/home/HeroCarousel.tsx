@@ -90,8 +90,8 @@ export function HeroCarousel() {
           </CarouselItem>
         ))}
       </CarouselContent>
-      <CarouselPrevious className="!absolute left-gutter top-1/2 z-[5] !size-11 !rounded-full !border-0 !bg-transparent !text-white -translate-y-1/2 !opacity-60 hover:!bg-transparent hover:!text-white hover:!opacity-100 [&_svg]:!size-[27px] [&_svg]:!stroke-[2.5] phone:left-3 phone:top-[38%] phone:!size-9" />
-      <CarouselNext className="!absolute right-gutter top-1/2 z-[5] !size-11 !rounded-full !border-0 !bg-transparent !text-white -translate-y-1/2 !opacity-60 hover:!bg-transparent hover:!text-white hover:!opacity-100 [&_svg]:!size-[27px] [&_svg]:!stroke-[2.5] phone:right-3 phone:top-[38%] phone:!size-9" />
+      <CarouselPrevious className="!absolute left-4 desktop:left-6 top-1/2 z-[5] !h-14 !w-14 !min-h-14 !rounded-full !border-0 !bg-transparent !text-white -translate-y-1/2 !opacity-80 transition-all duration-300 ease-out hover:scale-110 hover:!bg-transparent hover:!text-white hover:!opacity-100 active:scale-90 [&_svg]:!size-10 [&_svg]:!stroke-[1.5] phone:left-3 phone:!h-10 phone:!w-10 phone:!min-h-10 phone:top-[38%] [&_svg]:phone:!size-7" />
+      <CarouselNext className="!absolute right-4 desktop:right-6 top-1/2 z-[5] !h-14 !w-14 !min-h-14 !rounded-full !border-0 !bg-transparent !text-white -translate-y-1/2 !opacity-80 transition-all duration-300 ease-out hover:scale-110 hover:!bg-transparent hover:!text-white hover:!opacity-100 active:scale-90 [&_svg]:!size-10 [&_svg]:!stroke-[1.5] phone:right-3 phone:!h-10 phone:!w-10 phone:!min-h-10 phone:top-[38%] [&_svg]:phone:!size-7" />
       <div className="absolute bottom-3 left-1/2 flex -translate-x-1/2 items-center gap-2">
         {heroSlides.map((slide, index) => (
           <button

@@ -32,14 +32,16 @@ function ProductCard({ item }: { item: Product }) {
           style={{ objectPosition: item.image.position }}
         />
         <Button
-          variant="inverse"
+          variant="ghost"
           size="icon"
-          className={`absolute right-2 top-2 !min-h-9 !w-9 !rounded-full !bg-white/95 p-0 hover:!bg-white phone:right-1 phone:top-1 [@media(hover:none)]:!min-h-11 [@media(hover:none)]:!w-11 ${wished ? "text-wine" : ""}`}
+          className={`absolute right-2 top-2 !h-9 !min-h-9 !w-9 !rounded-full !border !border-white/25 bg-white/30 backdrop-blur-md p-0 transition-all duration-300 ease-out hover:scale-105 hover:!bg-white/60 hover:!border-white/50 active:scale-95 phone:right-1 phone:top-1 [@media(hover:none)]:!min-h-11 [@media(hover:none)]:!w-11 [&_svg]:transition-transform [&_svg]:duration-300 hover:[&_svg]:scale-110 ${
+            wished ? "!text-wine" : "text-ink/80 hover:!text-wine"
+          }`}
           aria-pressed={wished}
           aria-label={wished ? `Remove ${item.name} from wishlist` : `Add ${item.name} to wishlist`}
           onClick={() => dispatch(toggleWishlist(item.id))}
         >
-          <Heart size={19} fill={wished ? "currentColor" : "none"} />
+          <Heart size={18} fill={wished ? "currentColor" : "none"} />
         </Button>
         <Button
           className="absolute inset-x-0 bottom-0 w-full justify-between translate-y-full transition-[transform,background] duration-200 group-hover:translate-y-0 group-focus-within:translate-y-0 tablet:static tablet:translate-y-0 phone:min-h-11 phone:px-2.5 phone:text-[11px] phone:[&_svg]:w-[14px] [@media(hover:none)]:translate-y-0"
@@ -112,19 +114,19 @@ export function ProductRail({
             </Link>
           )}
         </div>
-        <CarouselContent className="gap-4 phone:gap-3">
-          {products.map((item) => (
-            <CarouselItem
-              className="flex-[0_0_calc((100%-48px)/4)] tablet:flex-[0_0_calc((100%-32px)/3)] phone:flex-[0_0_calc((100%-12px)/2)]"
-              key={item.id}
-            >
-              <ProductCard item={item} />
-            </CarouselItem>
-          ))}
-        </CarouselContent>
-        <div className="mt-[22px] flex justify-center gap-2.5 phone:mt-[18px]">
-          <CarouselPrevious className="!min-h-10 !w-10 !border-0 !bg-transparent" />
-          <CarouselNext className="!min-h-10 !w-10 !border-0 !bg-transparent" />
+        <div className="relative group/carousel-controls">
+          <CarouselContent className="gap-4 phone:gap-3">
+            {products.map((item) => (
+              <CarouselItem
+                className="flex-[0_0_calc((100%-48px)/4)] tablet:flex-[0_0_calc((100%-32px)/3)] phone:flex-[0_0_calc((100%-12px)/2)]"
+                key={item.id}
+              >
+                <ProductCard item={item} />
+              </CarouselItem>
+            ))}
+          </CarouselContent>
+          <CarouselPrevious className="absolute -left-10 top-[40%] -translate-y-1/2 z-10 !h-12 !w-12 !min-h-12 !border-0 !bg-transparent p-0 transition-all duration-300 ease-out !opacity-100 disabled:!opacity-0 disabled:pointer-events-none text-ink/25 group-hover/carousel-controls:text-ink/55 hover:!text-wine hover:scale-110 active:scale-95 [&_svg]:!size-10 tablet:hidden" />
+          <CarouselNext className="absolute -right-10 top-[40%] -translate-y-1/2 z-10 !h-12 !w-12 !min-h-12 !border-0 !bg-transparent p-0 transition-all duration-300 ease-out !opacity-100 disabled:!opacity-0 disabled:pointer-events-none text-ink/25 group-hover/carousel-controls:text-ink/55 hover:!text-wine hover:scale-110 active:scale-95 [&_svg]:!size-10 tablet:hidden" />
         </div>
       </Carousel>
     </section>
