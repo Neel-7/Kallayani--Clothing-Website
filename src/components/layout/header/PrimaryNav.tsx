@@ -35,7 +35,7 @@ export function PrimaryNav({ activeMenu, currentPath, onOpen, onClose }: Primary
       className="h-full w-max max-w-full justify-self-center tablet:hidden"
       aria-label="Primary navigation"
     >
-      <ul className="flex h-full list-none items-center justify-center gap-[clamp(10px,1.2vw,22px)] p-0">
+      <ul className="flex h-full list-none items-center justify-center gap-[clamp(8px,1vw,18px)] p-0">
         {primaryNavItems.map((item, index) => {
           const isOpen = activeMenu === item.id;
           const isCurrent = currentPath === `/${item.id}`;
@@ -45,7 +45,7 @@ export function PrimaryNav({ activeMenu, currentPath, onOpen, onClose }: Primary
                 ref={(element) => {
                   links.current[index] = element;
                 }}
-                className={`group inline-flex h-full items-center whitespace-nowrap p-0 text-sm font-medium uppercase tracking-[.025em] transition-colors duration-[180ms] cursor-pointer hover:text-wine focus-visible:text-wine ${isOpen || isCurrent ? "text-wine" : ""}`}
+                className={`group inline-flex h-full items-center whitespace-nowrap p-0 text-[13px] font-medium uppercase tracking-[.025em] transition-colors duration-[180ms] cursor-pointer hover:text-wine focus-visible:text-wine headerCompact:text-[12px] ${isOpen || isCurrent ? "text-wine" : ""}`}
                 to={item.viewAllHref === "/" ? "/#products" : item.viewAllHref}
                 aria-haspopup="true"
                 aria-expanded={isOpen}

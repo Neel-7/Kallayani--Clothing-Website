@@ -1,5 +1,6 @@
 import { ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
+import { primaryNavItems } from "./mega-menu-data";
 import type { NavItemConfig } from "./types";
 
 type MegaMenuProps = {
@@ -13,7 +14,7 @@ export function MegaMenu({ config, onNavigate }: MegaMenuProps) {
       className="absolute left-0 top-full max-h-[calc(100dvh-96px)] w-full overflow-y-auto bg-white shadow-[0_12px_22px_#17141214] animate-menuIn"
       id={`mega-menu-${config.id}`}
     >
-      <div className="mx-auto grid min-h-[330px] max-w-[1520px] grid-cols-[minmax(0,1fr)_minmax(220px,280px)] gap-6 px-gutter py-8 compact:grid-cols-1 compact:gap-0">
+      <div className="mx-auto grid min-h-[330px] max-w-[1520px] grid-cols-[minmax(0,1fr)_minmax(220px,280px)] gap-6 px-gutter py-7 compact:grid-cols-1 compact:gap-0">
         <div
           className="grid min-w-0 grid-rows-[1fr_auto]"
           aria-label={`${config.label} categories`}

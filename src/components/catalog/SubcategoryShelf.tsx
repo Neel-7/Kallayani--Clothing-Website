@@ -27,7 +27,7 @@ export function SubcategoryShelf({ name, items }: { name: string; items: Subcate
                 style={{ objectPosition: item.image.position }}
               />
             </div>
-            <span className="block px-1 pt-3 text-center text-[15px] font-medium group-hover:underline group-hover:underline-offset-4 phone:pt-2.5 phone:text-sm">
+            <span className="block px-1 pt-3 text-center text-[17px] font-medium group-hover:underline group-hover:underline-offset-4 phone:pt-2.5 phone:text-[15px]">
               {item.name}
             </span>
           </a>

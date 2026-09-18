@@ -2,51 +2,6 @@ import type { NavItemConfig } from "./types";
 
 export const primaryNavItems: NavItemConfig[] = [
   {
-    id: "new-in",
-    label: "New in",
-    viewAllHref: "/",
-    columns: [
-      {
-        heading: "Women",
-        links: [
-          { label: "New sarees", href: "/women#products" },
-          { label: "Kurta sets", href: "/women#shop-category" },
-          { label: "The Bengal edit", href: "/women" },
-        ],
-      },
-      {
-        heading: "Men",
-        links: [
-          { label: "New panjabis", href: "/men#products" },
-          { label: "Relaxed kurtas", href: "/men#shop-category" },
-          { label: "Indigo stories", href: "/men" },
-        ],
-      },
-      {
-        heading: "Living",
-        links: [
-          { label: "New bedding", href: "/home#products" },
-          { label: "Table linens", href: "/home#shop-category" },
-          { label: "Objects", href: "/home" },
-        ],
-      },
-      {
-        heading: "Adornment",
-        links: [
-          { label: "New jewellery", href: "/jewellery#products" },
-          { label: "Temple forms", href: "/jewellery#shop-category" },
-          { label: "Silver", href: "/jewellery" },
-        ],
-      },
-    ],
-    promo: {
-      image: "/images/women-campaign-v2.webp",
-      alt: "Two women in red and ivory sarees in a sunlit courtyard",
-      caption: "Just arrived",
-      href: "/women#products",
-    },
-  },
-  {
     id: "women",
     label: "Women",
     viewAllHref: "/women",
@@ -145,7 +100,7 @@ export const primaryNavItems: NavItemConfig[] = [
   },
   {
     id: "kids",
-    label: "Kids'",
+    label: "Kids",
     viewAllHref: "/kids",
     columns: [
       {
@@ -190,7 +145,7 @@ export const primaryNavItems: NavItemConfig[] = [
   },
   {
     id: "home",
-    label: "Home décor",
+    label: "Home Decor",
     viewAllHref: "/home",
     columns: [
       {
@@ -243,6 +198,94 @@ export const primaryNavItems: NavItemConfig[] = [
     },
   },
   {
+    id: "traditional",
+    label: "Traditional",
+    viewAllHref: "/women",
+    columns: [
+      {
+        heading: "Sarees",
+        links: [
+          { label: "Jamdani", href: "/women#shop-category" },
+          { label: "Kanjeevaram", href: "/women#shop-category" },
+          { label: "Tant", href: "/women#shop-category" },
+        ],
+      },
+      {
+        heading: "Panjabis",
+        links: [
+          { label: "Handloom cotton", href: "/men#products" },
+          { label: "Festive wear", href: "/men#shop-category" },
+          { label: "Kurtas", href: "/men#shop-category" },
+        ],
+      },
+      {
+        heading: "For children",
+        links: [
+          { label: "Girls' festive wear", href: "/kids#shop-category" },
+          { label: "Boys' panjabis", href: "/kids#products" },
+        ],
+      },
+      {
+        heading: "Handcrafted",
+        links: [
+          { label: "Bengal edit", href: "/women" },
+          { label: "Temple jewellery", href: "/jewellery" },
+        ],
+      },
+    ],
+    promo: {
+      image: "/images/three_girl_traditional.png",
+      alt: "Three women wearing traditional sarees",
+      caption: "Traditional forms",
+      href: "/women",
+    },
+  },
+  {
+    id: "gifts",
+    label: "Gifts & Crafts",
+    viewAllHref: "/home",
+    columns: [
+      {
+        heading: "For her",
+        links: [
+          { label: "Jewellery", href: "/jewellery" },
+          { label: "Silk scarves", href: "/women#products" },
+          { label: "Sarees", href: "/women" },
+        ],
+      },
+      {
+        heading: "For him",
+        links: [
+          { label: "Panjabis", href: "/men" },
+          { label: "Shirts", href: "/men#shop-category" },
+          { label: "Accessories", href: "/men#products" },
+        ],
+      },
+      {
+        heading: "For home",
+        links: [
+          { label: "Table", href: "/home#shop-category" },
+          { label: "Cushions", href: "/home#shop-category" },
+          { label: "Objects", href: "/home" },
+        ],
+      },
+      {
+        heading: "Services",
+        links: [
+          { label: "Gift cards", href: "/home" },
+          { label: "Gift notes", href: "/home" },
+          { label: "Private appointments", href: "/#newsletter" },
+        ],
+      },
+    ],
+    promo: {
+      image: "/images/jewellery-ring.webp",
+      alt: "Gold filigree ring with an oval garnet",
+      caption: "Gifts with a story",
+      href: "/jewellery",
+    },
+  },
+  {
     id: "jewellery",
     label: "Jewellery",
     viewAllHref: "/jewellery",
@@ -290,48 +333,46 @@ export const primaryNavItems: NavItemConfig[] = [
     },
   },
   {
-    id: "gifts",
-    label: "Gifts",
-    viewAllHref: "/home",
+    id: "wedding",
+    label: "Wedding",
+    viewAllHref: "/women",
     columns: [
       {
         heading: "For her",
         links: [
-          { label: "Jewellery", href: "/jewellery" },
-          { label: "Silk scarves", href: "/women#products" },
-          { label: "Sarees", href: "/women" },
+          { label: "Silk sarees", href: "/women#shop-category" },
+          { label: "Jamdani", href: "/women#shop-category" },
+          { label: "Wedding guest", href: "/women#products" },
         ],
       },
       {
         heading: "For him",
         links: [
-          { label: "Panjabis", href: "/men" },
-          { label: "Shirts", href: "/men#shop-category" },
-          { label: "Accessories", href: "/men#products" },
+          { label: "Panjabis", href: "/men#shop-category" },
+          { label: "Festive sets", href: "/men#products" },
         ],
       },
       {
-        heading: "For home",
+        heading: "Jewellery",
         links: [
-          { label: "Table", href: "/home#shop-category" },
-          { label: "Cushions", href: "/home#shop-category" },
-          { label: "Objects", href: "/home" },
+          { label: "Necklaces", href: "/jewellery#shop-category" },
+          { label: "Earrings", href: "/jewellery#shop-category" },
+          { label: "Heirloom pieces", href: "/jewellery#products" },
         ],
       },
       {
-        heading: "Services",
+        heading: "Gifts",
         links: [
-          { label: "Gift cards", href: "/home" },
-          { label: "Gift notes", href: "/home" },
-          { label: "Private appointments", href: "/#newsletter" },
+          { label: "For the couple", href: "/home#products" },
+          { label: "For the home", href: "/home#shop-category" },
         ],
       },
     ],
     promo: {
-      image: "/images/jewellery-ring.webp",
-      alt: "Gold filigree ring with an oval garnet",
-      caption: "Gifts with a story",
-      href: "/jewellery",
+      image: "/images/heritage_travels_beauty.png",
+      alt: "Couple wearing traditional dress outdoors",
+      caption: "For the celebration",
+      href: "/women",
     },
   },
 ];

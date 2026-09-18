@@ -3,10 +3,10 @@ import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { BrandMark } from "./BrandMark";
 
-export function Newsletter() {
+export function Newsletter({ showTopBorder = true }: { showTopBorder?: boolean }) {
   return (
     <section
-      className="mx-gutter grid grid-cols-2 items-center gap-16 border-t border-line py-10 compact:gap-8 phone:grid-cols-1 phone:gap-6 phone:py-[30px]"
+      className={`mx-gutter grid grid-cols-2 items-center gap-16 py-10 compact:gap-8 phone:grid-cols-1 phone:gap-6 phone:py-[30px] ${showTopBorder ? "border-t border-line" : ""}`}
       id="newsletter"
     >
       <div>

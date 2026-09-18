@@ -1,6 +1,6 @@
 import { ProductRail } from "@/components/catalog/ProductRail";
 import { Newsletter } from "@/components/layout/Footer";
-import { CategoryBento } from "@/components/home/CategoryBento";
+import { CategoryGrid } from "@/components/home/CategoryGrid";
 import { EditorialImages } from "@/components/home/EditorialImages";
 import { HeroCarousel } from "@/components/home/HeroCarousel";
 import { BrandSignature } from "@/components/home/BrandSignature";
@@ -10,15 +10,16 @@ export function HomePage() {
   return (
     <>
       <HeroCarousel />
-      <CategoryBento />
+      <CategoryGrid />
       <ProductRail
         title="New & noteworthy"
         viewAllHref="/women#products"
         products={featuredProducts}
+        showTopBorder={false}
       />
       <EditorialImages />
       <BrandSignature />
-      <Newsletter />
+      <Newsletter showTopBorder={false} />
     </>
   );
 }

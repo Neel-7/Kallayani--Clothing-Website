@@ -50,14 +50,14 @@ function ProductCard({ item }: { item: Product }) {
       </div>
       <div className="pt-3">
         <div className="flex items-baseline justify-between gap-3 tablet:block">
-          <h3 className="font-display text-[15px] font-normal leading-[1.35] phone:text-sm">
+          <h3 className="font-display text-[17px] font-medium leading-[1.35] phone:text-[15px]">
             {item.name}
           </h3>
-          <span className="whitespace-nowrap text-sm font-medium tablet:mt-[5px] tablet:block">
+          <span className="whitespace-nowrap text-[15px] font-medium tablet:mt-[5px] tablet:block phone:text-[14px]">
             {dollars.format(item.price)}
           </span>
         </div>
-        <p className="mt-[5px] text-xs leading-[1.4] text-muted phone:text-[11px]">
+        <p className="mt-[5px] text-[13px] leading-[1.4] text-muted phone:text-[12px]">
           {item.craft} · {item.region}
         </p>
       </div>
@@ -70,15 +70,17 @@ export function ProductRail({
   eyebrow,
   products,
   viewAllHref,
+  showTopBorder = true,
 }: {
   title: string;
   eyebrow?: string;
   products: Product[];
   viewAllHref?: string;
+  showTopBorder?: boolean;
 }) {
   return (
     <section
-      className="border-t border-line pb-10 pt-7 phone:pb-7 phone:pt-[22px]"
+      className={`pb-10 pt-7 phone:pb-7 phone:pt-[22px] ${showTopBorder ? "border-t border-line" : ""}`}
       id="products"
       aria-labelledby={`rail-${title.replace(/\s/g, "-").toLowerCase()}`}
     >
