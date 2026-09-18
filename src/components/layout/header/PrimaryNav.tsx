@@ -35,7 +35,7 @@ export function PrimaryNav({ activeMenu, currentPath, onOpen, onClose }: Primary
       className="h-full w-max max-w-full justify-self-center tablet:hidden"
       aria-label="Primary navigation"
     >
-      <ul className="flex h-full list-none items-center justify-center gap-[clamp(8px,1vw,18px)] p-0">
+      <ul className="flex h-full list-none items-center justify-center gap-[clamp(10px,1.25vw,22px)] p-0">
         {primaryNavItems.map((item, index) => {
           const isOpen = activeMenu === item.id;
           const isCurrent = currentPath === `/${item.id}`;
