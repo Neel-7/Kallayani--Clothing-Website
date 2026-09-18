@@ -79,7 +79,7 @@ const Carousel = React.forwardRef<
     >
       <div
         ref={ref}
-        className={cn("carousel", className)}
+        className={cn("relative", className)}
         role="region"
         aria-roledescription="carousel"
         {...props}
@@ -95,12 +95,12 @@ const CarouselContent = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HT
   ({ className, ...props }, ref) => {
     const { carouselRef, orientation } = useCarousel();
     return (
-      <div ref={carouselRef} className="carousel__viewport">
+      <div ref={carouselRef} className="overflow-hidden h-full">
         <div
           ref={ref}
           className={cn(
-            "carousel__content",
-            orientation === "vertical" && "carousel__content--vertical",
+            "flex touch-[pan-y_pinch-zoom]",
+            orientation === "vertical" && "flex-col",
             className,
           )}
           {...props}
@@ -117,7 +117,7 @@ const CarouselItem = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLD
       ref={ref}
       role="group"
       aria-roledescription="slide"
-      className={cn("carousel__item", className)}
+      className={cn("min-w-0 flex-[0_0_100%]", className)}
       {...props}
     />
   ),
@@ -132,7 +132,10 @@ const CarouselPrevious = React.forwardRef<HTMLButtonElement, React.ComponentProp
         ref={ref}
         variant={variant}
         size="icon"
-        className={cn("carousel__previous", className)}
+        className={cn(
+          "opacity-[.65] shadow-none transition-[opacity,background-color,border-color] duration-[180ms] hover:enabled:opacity-100 [&_svg]:size-5",
+          className,
+        )}
         disabled={!canScrollPrev}
         onClick={scrollPrev}
         {...props}
@@ -153,7 +156,10 @@ const CarouselNext = React.forwardRef<HTMLButtonElement, React.ComponentProps<ty
         ref={ref}
         variant={variant}
         size="icon"
-        className={cn("carousel__next", className)}
+        className={cn(
+          "opacity-[.65] shadow-none transition-[opacity,background-color,border-color] duration-[180ms] hover:enabled:opacity-100 [&_svg]:size-5",
+          className,
+        )}
         disabled={!canScrollNext}
         onClick={scrollNext}
         {...props}

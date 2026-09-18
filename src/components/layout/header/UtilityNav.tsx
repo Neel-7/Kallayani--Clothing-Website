@@ -20,7 +20,13 @@ function IconAction({
   ...props
 }: React.ComponentProps<typeof Button> & { label: string }) {
   return (
-    <Button {...props} variant="ghost" size="icon" className="icon-action" aria-label={label}>
+    <Button
+      {...props}
+      variant="ghost"
+      size="icon"
+      className={`relative ${label === "Account" || label === "Wishlist" ? "tablet:hidden" : ""} phone:w-10`}
+      aria-label={label}
+    >
       {children}
     </Button>
   );
@@ -28,10 +34,13 @@ function IconAction({
 
 export function DesktopUtilityNav() {
   return (
-    <div className="header-main__side header-main__side--left desktop-only">
+    <div className="flex w-full items-center gap-1 compact:max-w-[300px] compact:justify-self-end tablet:hidden">
       <SearchSheet
         trigger={
-          <Button variant="ghost" className="header-search">
+          <Button
+            variant="ghost"
+            className="w-full justify-start !border-x-0 !border-t-0 border-b border-ink px-0 pl-1 text-[13px] font-normal normal-case tracking-normal hover:border-b-wine"
+          >
             <Search size={20} />
             <span>Search the collection</span>
           </Button>
@@ -44,9 +53,9 @@ export function DesktopUtilityNav() {
 export function UtilityNav() {
   const bagCount = useSelector((state: RootState) => state.shop.bagCount);
   return (
-    <div className="header-main__side header-main__side--right">
-      <span className="header-currency desktop-only">USD</span>
-      <span className="mobile-only">
+    <div className="flex items-center justify-self-end gap-1 tablet:gap-0">
+      <span className="mr-2 text-xs tablet:hidden">USD</span>
+      <span className="hidden tablet:block">
         <SearchSheet
           trigger={
             <IconAction label="Search">
@@ -63,7 +72,11 @@ export function UtilityNav() {
       </IconAction>
       <IconAction label={`Shopping bag with ${bagCount} ${bagCount === 1 ? "item" : "items"}`}>
         <ShoppingBag size={19} />
-        {bagCount > 0 && <span className="bag-count">{bagCount}</span>}
+        {bagCount > 0 && (
+          <span className="absolute right-px top-[2px] grid h-[17px] min-w-[17px] place-items-center rounded-full bg-wine px-[3px] text-[10px] text-white">
+            {bagCount}
+          </span>
+        )}
       </IconAction>
     </div>
   );
@@ -79,26 +92,38 @@ function SearchSheet({ trigger }: { trigger: React.ReactElement }) {
   return (
     <Sheet>
       <SheetTrigger asChild>{trigger}</SheetTrigger>
-      <SheetContent side="right" className="search-sheet">
-        <SheetTitle>Search the collection</SheetTitle>
-        <SheetDescription>Try a garment, weave, region, or technique.</SheetDescription>
-        <label className="search-field">
+      <SheetContent side="right">
+        <SheetTitle className="mb-3 mt-10 font-serif text-[32px] leading-[1.1]">
+          Search the collection
+        </SheetTitle>
+        <SheetDescription className="mb-6 text-sm text-muted">
+          Try a garment, weave, region, or technique.
+        </SheetDescription>
+        <label className="flex items-center gap-3 border-b border-ink py-3">
           <Search size={21} />
           <input
+            className="min-h-7 w-full border-0"
             aria-label="Search collections"
             value={query}
             onChange={(event) => setQuery(event.target.value)}
             placeholder="Sarees, panjabis, jewellery…"
           />
         </label>
-        <div className="search-suggestions">
-          <span>{query ? "Matching collections" : "Explore the collections"}</span>
+        <div className="mt-7 flex flex-col">
+          <span className="mb-3 text-xs uppercase tracking-[.05em] text-muted">
+            {query ? "Matching collections" : "Explore the collections"}
+          </span>
           {results.map((item) => (
             <SheetClose asChild key={item.slug}>
-              <Link className="search-result" to={`/${item.slug}`}>
-                <img src={item.hero.src} alt="" />
+              <Link
+                className="flex min-h-20 items-center gap-[18px] border-b border-line py-2.5"
+                to={`/${item.slug}`}
+              >
+                <img className="size-16 object-cover" src={item.hero.src} alt="" />
                 <span>{item.name}</span>
-                <span aria-hidden="true">→</span>
+                <span className="ml-auto" aria-hidden="true">
+                  →
+                </span>
               </Link>
             </SheetClose>
           ))}

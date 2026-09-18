@@ -1,8 +1,8 @@
 import type { SVGProps } from "react";
 
-type MotifProps = SVGProps<SVGSVGElement>;
+type MotifProps = SVGProps<SVGSVGElement> & { cutout?: string };
 
-export function LotusMark({ className = "", ...props }: MotifProps) {
+export function LotusMark({ className = "", cutout = "#fff", ...props }: MotifProps) {
   return (
     <svg
       className={className}
@@ -15,10 +15,7 @@ export function LotusMark({ className = "", ...props }: MotifProps) {
       <circle cx="70" cy="17" r="3.25" fill="currentColor" />
       <circle cx="90" cy="17" r="3.25" fill="currentColor" />
       <path d="M80 27C66 43 63 65 80 84C97 65 94 43 80 27Z" fill="currentColor" />
-      <path
-        d="M80 45C70 58 69 71 80 84C91 71 90 58 80 45Z"
-        fill="var(--brand-cutout, var(--paper))"
-      />
+      <path d="M80 45C70 58 69 71 80 84C91 71 90 58 80 45Z" fill={cutout} />
       <path d="M80 53C74 64 74 73 80 83C86 73 86 64 80 53Z" fill="currentColor" />
       <path d="M62 33C50 50 52 72 77 85C67 67 69 48 62 33Z" fill="currentColor" />
       <path d="M98 33C110 50 108 72 83 85C93 67 91 48 98 33Z" fill="currentColor" />

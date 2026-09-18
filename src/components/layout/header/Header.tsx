@@ -70,7 +70,7 @@ export function Header() {
     const onKeyDown = (event: KeyboardEvent) => {
       if (event.key === "Escape") {
         const openButton = headerRef.current?.querySelector<HTMLAnchorElement>(
-          ".primary-nav a[aria-expanded='true']",
+          "[data-primary-nav] a[aria-expanded='true']",
         );
         closeMenu(true);
         openButton?.focus();
@@ -85,7 +85,7 @@ export function Header() {
 
   return (
     <header
-      className="site-header"
+      className="sticky top-0 z-50 border-b border-line bg-white"
       ref={headerRef}
       onMouseEnter={() => closeTimer.current && clearTimeout(closeTimer.current)}
       onMouseLeave={() => closeMenu()}
@@ -94,12 +94,12 @@ export function Header() {
       }}
     >
       {showAnnouncement && (
-        <div className="announcement">
+        <div className="relative flex h-[22px] items-center justify-center gap-[clamp(48px,12vw,192px)] bg-ink text-[10px] tracking-[.035em] text-white phone:h-[26px]">
           <span>Complimentary US shipping over $150</span>
-          <span>New York appointments now open</span>
+          <span className="text-[#d9b491] tablet:hidden">New York appointments now open</span>
           <button
             type="button"
-            className="announcement__close"
+            className="absolute right-gutter top-0 grid size-[22px] place-items-center bg-transparent p-0 text-white opacity-[.78] hover:opacity-100 focus-visible:outline-white focus-visible:outline-offset-[-2px] phone:h-[26px]"
             aria-label="Dismiss announcement"
             onClick={() => setShowAnnouncement(false)}
           >
@@ -107,10 +107,12 @@ export function Header() {
           </button>
         </div>
       )}
-      <div className="header-main shell">
+      <div className="mx-gutter grid h-[54px] grid-cols-[auto_1fr_minmax(220px,290px)_auto] items-center gap-6 compact:grid-cols-[auto_1fr_auto] tablet:h-[68px] tablet:grid-cols-[76px_1fr_88px] tablet:gap-0 phone:h-16 phone:grid-cols-[52px_1fr_80px] [&>a]:tablet:justify-self-center phone:[&>a_span]:text-[27px] phone:[&>a_svg]:h-[23px] phone:[&>a_svg]:w-[29px]">
         <MobileNavigation />
         <BrandMark />
-        <span className="header-tagline desktop-only">Heritage in every thread</span>
+        <span className="border-l border-line pl-5 font-serif text-[13px] italic text-muted compact:hidden">
+          Heritage in every thread
+        </span>
         <DesktopUtilityNav />
         <UtilityNav />
       </div>

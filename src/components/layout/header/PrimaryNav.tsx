@@ -31,8 +31,8 @@ export function PrimaryNav({ activeMenu, currentPath, onOpen, onClose }: Primary
   };
 
   return (
-    <nav className="primary-nav desktop-only" aria-label="Primary navigation">
-      <ul className="shell">
+    <nav data-primary-nav className="h-9 tablet:hidden" aria-label="Primary navigation">
+      <ul className="mx-gutter flex h-full list-none items-center gap-[clamp(24px,3vw,48px)] p-0">
         {primaryNavItems.map((item, index) => {
           const isOpen = activeMenu === item.id;
           const isCurrent = currentPath === `/${item.id}`;
@@ -42,7 +42,7 @@ export function PrimaryNav({ activeMenu, currentPath, onOpen, onClose }: Primary
                 ref={(element) => {
                   links.current[index] = element;
                 }}
-                className={`${isOpen ? "is-open" : ""} ${isCurrent ? "is-current" : ""}`}
+                className={`relative inline-flex h-9 items-center gap-[5px] p-0 text-[clamp(12px,.76vw,14px)] font-medium uppercase tracking-[.025em] cursor-pointer after:absolute after:inset-x-0 after:bottom-0 after:h-[2px] after:origin-left after:scale-x-0 after:bg-wine after:transition-transform after:duration-[180ms] hover:after:scale-x-100 [&_svg]:w-3 [&_svg]:transition-transform [&_svg]:duration-[180ms] ${isOpen || isCurrent ? "after:scale-x-100" : ""} ${isOpen ? "[&_svg]:rotate-180" : ""}`}
                 to={item.viewAllHref === "/" ? "/#products" : item.viewAllHref}
                 aria-haspopup="true"
                 aria-expanded={isOpen}

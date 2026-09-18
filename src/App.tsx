@@ -17,12 +17,15 @@ function App() {
   }, [pathname, hash]);
 
   return (
-    <div className="app">
-      <a className="skip-link" href="#main-content">
+    <div className="w-full overflow-x-clip">
+      <a
+        className="fixed left-2 top-2 z-[80] -translate-y-[150%] bg-ink px-4 py-3 text-white focus:translate-y-0"
+        href="#main-content"
+      >
         Skip to content
       </a>
       <Header />
-      <main id="main-content" className="site-main">
+      <main id="main-content" className="min-h-[70vh]">
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/:slug" element={<CollectionPage />} />

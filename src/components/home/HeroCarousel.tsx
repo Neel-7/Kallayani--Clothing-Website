@@ -39,7 +39,7 @@ export function HeroCarousel() {
 
   return (
     <Carousel
-      className="hero-carousel"
+      className="h-[min(50vw,calc(100svh-130px))] min-h-[420px] max-h-[1020px] overflow-hidden bg-soft tablet:h-[62vw] tablet:min-h-[460px] tablet:max-h-[620px] phone:h-[min(68svh,580px)] phone:min-h-[450px]"
       opts={{ loop: true }}
       setApi={setApi}
       aria-label="Kallayani campaign stories"
@@ -50,48 +50,64 @@ export function HeroCarousel() {
         if (!event.currentTarget.contains(event.relatedTarget)) setPaused(false);
       }}
     >
-      <CarouselContent className="hero-carousel__content">
+      <CarouselContent className="h-full">
         {heroSlides.map((slide, index) => (
           <CarouselItem
             key={slide.id}
-            className="hero-slide"
+            className="relative h-full"
             inert={index !== active}
             aria-hidden={index !== active}
             aria-label={`${index + 1} of ${heroSlides.length}`}
           >
             <img
-              className="hero-slide__image"
+              className="h-full w-full object-cover desktop:!object-top"
               fetchPriority={index === 0 ? "high" : "auto"}
               src={slide.image.src}
               alt={slide.image.alt}
               style={{ objectPosition: slide.image.position }}
             />
-            <div className="hero-slide__shade" />
-            <div className="hero-slide__copy">
-              {index === 0 ? <h1>{slide.title}</h1> : <h2>{slide.title}</h2>}
-              <p>{slide.description}</p>
-              <Button asChild>
+            <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(transparent_42%,#17141208_58%,#17141299)] phone:bg-[linear-gradient(transparent_38%,#17141226_52%,#171412b3)]" />
+            <div className="absolute bottom-[68px] left-1/2 z-[2] w-[min(88%,1100px)] -translate-x-1/2 text-center text-white phone:bottom-[62px] phone:w-[calc(100%-40px)]">
+              {index === 0 ? (
+                <h1 className="m-0 font-serif text-[clamp(38px,4.2vw,68px)] font-normal leading-[1.06] tracking-[-.025em] [text-wrap:balance] shadow-none [text-shadow:0_2px_12px_#0003] tablet:text-[46px] phone:text-[clamp(32px,9vw,42px)]">
+                  {slide.title}
+                </h1>
+              ) : (
+                <h2 className="m-0 font-serif text-[clamp(38px,4.2vw,68px)] font-normal leading-[1.06] tracking-[-.025em] [text-wrap:balance] [text-shadow:0_2px_12px_#0003] tablet:text-[46px] phone:text-[clamp(32px,9vw,42px)]">
+                  {slide.title}
+                </h2>
+              )}
+              <p className="mx-auto mb-[21px] mt-3 text-base leading-[1.4] [text-wrap:balance] phone:mb-[18px] phone:max-w-[300px] phone:text-sm">
+                {slide.description}
+              </p>
+              <Button
+                asChild
+                className="min-w-[174px] border-white bg-white text-ink hover:border-wine hover:bg-wine hover:text-white"
+              >
                 <Link to={slide.href}>{slide.cta}</Link>
               </Button>
             </div>
           </CarouselItem>
         ))}
       </CarouselContent>
-      <CarouselPrevious className="hero-carousel__previous" />
-      <CarouselNext className="hero-carousel__next" />
-      <div className="hero-carousel__pagination">
+      <CarouselPrevious className="!absolute left-gutter top-1/2 z-[5] !size-11 !rounded-full !border-0 !bg-transparent !text-white -translate-y-1/2 !opacity-60 hover:!bg-transparent hover:!text-white hover:!opacity-100 [&_svg]:!size-[27px] [&_svg]:!stroke-[2.5] phone:left-3 phone:top-[38%] phone:!size-9" />
+      <CarouselNext className="!absolute right-gutter top-1/2 z-[5] !size-11 !rounded-full !border-0 !bg-transparent !text-white -translate-y-1/2 !opacity-60 hover:!bg-transparent hover:!text-white hover:!opacity-100 [&_svg]:!size-[27px] [&_svg]:!stroke-[2.5] phone:right-3 phone:top-[38%] phone:!size-9" />
+      <div className="absolute bottom-3 left-1/2 flex -translate-x-1/2 items-center gap-2">
         {heroSlides.map((slide, index) => (
           <button
             key={slide.id}
             aria-label={`Show campaign ${index + 1}: ${slide.title}`}
             aria-current={index === active ? "true" : undefined}
             onClick={() => api?.scrollTo(index)}
+            className="grid h-11 w-10 place-items-center border-0 bg-transparent p-0 text-white cursor-pointer"
           >
-            <span />
+            <span
+              className={`block h-[2px] w-8 transition-colors duration-200 ${index === active ? "bg-white" : "bg-white/40"}`}
+            />
           </button>
         ))}
         <button
-          className="hero-carousel__pause"
+          className="ml-1 grid h-11 w-8 place-items-center border-0 bg-transparent p-0 text-white cursor-pointer"
           onClick={() => setStopped(!stopped)}
           aria-label={stopped ? "Play campaigns" : "Pause campaigns"}
         >
