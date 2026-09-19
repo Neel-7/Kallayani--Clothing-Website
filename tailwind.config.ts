@@ -16,7 +16,8 @@ export default {
       fontFamily: {
         brand: ["Cormorant Garamond", "Georgia", "Times New Roman", "serif"],
         editorial: ["Cormorant Garamond", "Georgia", "Times New Roman", "serif"],
-        ui: ["Instrument Sans", "Arial", "sans-serif"],
+        nav: ["Jost", "Arial", "sans-serif"],
+        ui: ["Jost", "Arial", "sans-serif"],
       },
       spacing: { gutter: "clamp(16px,2vw,40px)" },
       screens: {

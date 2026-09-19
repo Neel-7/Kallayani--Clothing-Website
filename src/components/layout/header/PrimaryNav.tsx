@@ -45,7 +45,7 @@ export function PrimaryNav({ activeMenu, currentPath, onOpen, onClose }: Primary
                 ref={(element) => {
                   links.current[index] = element;
                 }}
-                className={`group inline-flex h-full items-center whitespace-nowrap p-0 text-[13px] font-medium uppercase tracking-[.025em] transition-colors duration-[180ms] cursor-pointer hover:text-wine focus-visible:text-wine headerCompact:text-[12px] ${isOpen || isCurrent ? "text-wine" : ""}`}
+                className={`group inline-flex h-full cursor-pointer items-center whitespace-nowrap p-0 font-nav text-[14px] font-medium uppercase leading-none tracking-[.07em] transition-colors duration-[180ms] hover:text-wine focus-visible:text-wine headerCompact:text-[13px] ${isOpen || isCurrent ? "text-wine" : ""}`}
                 to={item.viewAllHref === "/" ? "/#products" : item.viewAllHref}
                 aria-haspopup="true"
                 aria-expanded={isOpen}
