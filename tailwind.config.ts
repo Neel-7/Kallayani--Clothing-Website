@@ -14,12 +14,14 @@ export default {
         wine: "#4a1116",
       },
       fontFamily: {
-        display: ["Outfit", "Arial", "sans-serif"],
-        serif: ["Georgia", "Times New Roman", "serif"],
+        brand: ["Cormorant Garamond", "Georgia", "Times New Roman", "serif"],
+        editorial: ["Cormorant Garamond", "Georgia", "Times New Roman", "serif"],
+        ui: ["Instrument Sans", "Arial", "sans-serif"],
       },
       spacing: { gutter: "clamp(16px,2vw,40px)" },
       screens: {
         headerCompact: { max: "1320px" },
+        navCompact: { max: "1050px" },
         compact: { max: "1150px" },
         tablet: { max: "900px" },
         phone: { max: "600px" },

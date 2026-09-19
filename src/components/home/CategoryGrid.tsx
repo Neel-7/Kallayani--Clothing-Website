@@ -54,7 +54,7 @@ export function CategoryGrid() {
       <div className="w-full">
         <h2
           id="ways-title"
-          className="mb-7 text-center font-display text-[clamp(25px,2.15vw,34px)] font-semibold uppercase leading-[1.2] tracking-[-.015em] phone:mb-5 phone:text-[23px]"
+          className="mb-7 text-center font-editorial text-[clamp(30px,2.5vw,42px)] font-semibold leading-[1.1] tracking-[-.02em] phone:mb-5 phone:text-[28px]"
         >
           Shop by category
         </h2>
@@ -76,7 +76,7 @@ export function CategoryGrid() {
                     style={{ objectPosition: image.position }}
                   />
                 </div>
-                <span className="flex min-h-[48px] items-center justify-center px-2 py-2 text-center font-display text-[16px] font-medium uppercase leading-[1.25] tracking-[.025em] group-hover:text-wine phone:min-h-[45px] phone:text-[14px]">
+                <span className="flex min-h-[50px] items-center justify-center px-2 py-2 text-center font-ui text-[17px] font-medium leading-[1.3] tracking-[.005em] group-hover:text-wine phone:min-h-[48px] phone:text-[16px]">
                   {item.label}
                 </span>
               </Link>

@@ -11,7 +11,7 @@ export function CollectionBanner({ collection }: { collection: Collection }) {
         style={{ objectPosition: collection.hero.position }}
       />
       <div className="absolute bottom-[50px] left-1/2 z-[2] w-[90%] -translate-x-1/2 text-center text-white phone:bottom-[30px]">
-        <h1 className="mb-[14px] font-display text-[clamp(46px,5vw,78px)] font-normal uppercase leading-none tracking-[.025em] [text-shadow:0_1px_15px_#0003] phone:text-[42px]">
+        <h1 className="mb-[14px] font-editorial text-[clamp(52px,5.4vw,82px)] font-medium leading-[.98] tracking-[-.025em] [text-shadow:0_1px_15px_#0003] phone:text-[44px]">
           {collection.name}
         </h1>
         <a

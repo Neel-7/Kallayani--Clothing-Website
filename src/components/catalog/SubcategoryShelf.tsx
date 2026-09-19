@@ -12,7 +12,7 @@ export function SubcategoryShelf({ items }: { items: Subcategory[] }) {
       <div className="text-center">
         <h2
           id="subcategory-title"
-          className="mb-[22px] font-display text-[clamp(24px,2.15vw,34px)] font-semibold uppercase leading-[1.2] tracking-[-.015em] phone:mb-[18px] phone:text-[22px]"
+          className="mb-[22px] font-editorial text-[clamp(30px,2.5vw,42px)] font-semibold leading-[1.1] tracking-[-.02em] phone:mb-[18px] phone:text-[28px]"
         >
           Shop by category
         </h2>
@@ -39,7 +39,7 @@ export function SubcategoryShelf({ items }: { items: Subcategory[] }) {
                 style={{ objectPosition: item.image.position }}
               />
             </div>
-            <span className="block px-1 pt-3 text-center text-[17px] font-medium group-hover:underline group-hover:underline-offset-4 phone:pt-2.5 phone:text-[15px]">
+            <span className="block px-1 pt-3 text-center font-ui text-[17px] font-medium leading-[1.35] group-hover:underline group-hover:underline-offset-4 phone:pt-2.5 phone:text-[16px]">
               {item.name}
             </span>
           </a>

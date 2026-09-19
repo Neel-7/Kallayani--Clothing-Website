@@ -69,11 +69,11 @@ export function HeroCarousel() {
             <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(transparent_42%,#17141208_58%,#17141299)] phone:bg-[linear-gradient(transparent_38%,#17141226_52%,#171412b3)]" />
             <div className="absolute bottom-[68px] left-1/2 z-[2] w-[min(88%,1100px)] -translate-x-1/2 text-center text-white phone:bottom-[62px] phone:w-[calc(100%-40px)]">
               {index === 0 ? (
-                <h1 className="m-0 font-serif text-[clamp(38px,4.2vw,68px)] font-normal leading-[1.06] tracking-[-.025em] [text-wrap:balance] shadow-none [text-shadow:0_2px_12px_#0003] tablet:text-[46px] phone:text-[clamp(32px,9vw,42px)]">
+                <h1 className="m-0 font-editorial text-[clamp(52px,5vw,76px)] font-medium leading-[1.02] tracking-[-.025em] [text-wrap:balance] shadow-none [text-shadow:0_2px_12px_#0003] tablet:text-[52px] phone:text-[clamp(36px,10vw,48px)]">
                   {slide.title}
                 </h1>
               ) : (
-                <h2 className="m-0 font-serif text-[clamp(38px,4.2vw,68px)] font-normal leading-[1.06] tracking-[-.025em] [text-wrap:balance] [text-shadow:0_2px_12px_#0003] tablet:text-[46px] phone:text-[clamp(32px,9vw,42px)]">
+                <h2 className="m-0 font-editorial text-[clamp(52px,5vw,76px)] font-medium leading-[1.02] tracking-[-.025em] [text-wrap:balance] [text-shadow:0_2px_12px_#0003] tablet:text-[52px] phone:text-[clamp(36px,10vw,48px)]">
                   {slide.title}
                 </h2>
               )}

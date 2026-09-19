@@ -24,7 +24,7 @@ function IconAction({
       {...props}
       variant="ghost"
       size="icon"
-      className={`relative ${label === "Account" || label === "Wishlist" ? "tablet:hidden" : ""} phone:w-10`}
+      className={`relative ${label === "Account" || label === "Wishlist" ? "navCompact:hidden" : ""} phone:w-10`}
       aria-label={label}
     >
       {children}
@@ -34,7 +34,7 @@ function IconAction({
 
 export function DesktopUtilityNav() {
   return (
-    <div className="shrink-0 tablet:hidden">
+    <div className="shrink-0 navCompact:hidden">
       <SearchSheet
         trigger={
           <IconAction label="Search collections">
@@ -49,8 +49,8 @@ export function DesktopUtilityNav() {
 export function UtilityNav() {
   const bagCount = useSelector((state: RootState) => state.shop.bagCount);
   return (
-    <div className="flex items-center justify-self-end gap-1 tablet:gap-0">
-      <span className="hidden tablet:block">
+    <div className="flex items-center justify-self-end gap-1 navCompact:gap-0">
+      <span className="hidden navCompact:block">
         <SearchSheet
           trigger={
             <IconAction label="Search">
@@ -88,7 +88,7 @@ function SearchSheet({ trigger }: { trigger: React.ReactElement }) {
     <Sheet>
       <SheetTrigger asChild>{trigger}</SheetTrigger>
       <SheetContent side="right">
-        <SheetTitle className="mb-3 mt-10 font-serif text-[32px] leading-[1.1]">
+        <SheetTitle className="mb-3 mt-10 font-editorial text-[36px] font-semibold leading-[1.05] tracking-[-.02em]">
           Search the collection
         </SheetTitle>
         <SheetDescription className="mb-6 text-sm text-muted">

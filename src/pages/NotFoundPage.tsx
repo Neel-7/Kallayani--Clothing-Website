@@ -8,7 +8,7 @@ export function NotFoundPage() {
       <p className="mb-2.5 text-xs font-semibold uppercase tracking-[.12em] text-wine">
         Page not found
       </p>
-      <h1 className="mb-8 font-serif text-[clamp(48px,7vw,96px)] font-normal leading-none tracking-[-.03em]">
+      <h1 className="mb-8 font-editorial text-[clamp(48px,7vw,96px)] font-medium leading-none tracking-[-.03em]">
         This thread ends here.
         <br />
         <em className="text-red">Let’s find another.</em>

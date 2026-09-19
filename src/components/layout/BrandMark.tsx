@@ -13,7 +13,7 @@ export function BrandMark({ light = false }: { light?: boolean }) {
         cutout={light ? "#171412" : "#fff"}
         aria-hidden="true"
       />
-      <span className="font-serif text-[clamp(29px,1.75vw,34px)] leading-none tracking-[-.045em] tablet:text-[30px]">
+      <span className="font-brand text-[clamp(32px,1.9vw,37px)] font-semibold leading-none tracking-[-.035em] tablet:text-[32px]">
         Kallayani
       </span>
     </Link>

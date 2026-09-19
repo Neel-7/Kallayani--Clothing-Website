@@ -21,7 +21,7 @@ function EditorialCopy({
           : "px-4 pb-6 pt-5 text-center phone:py-[18px] phone:pb-5"
       }
     >
-      <h2 className="font-serif text-[clamp(26px,2.5vw,38px)] font-normal leading-[1.15] tracking-[-.025em] phone:text-[30px]">
+      <h2 className="font-editorial text-[clamp(30px,2.7vw,42px)] font-semibold leading-[1.1] tracking-[-.025em] phone:text-[30px]">
         {title}
       </h2>
       <p className="mb-3 mt-2 text-sm text-muted">{description}</p>

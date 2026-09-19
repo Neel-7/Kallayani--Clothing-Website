@@ -107,7 +107,7 @@ export function Header() {
           </button>
         </div>
       )}
-      <div className="grid h-[72px] w-full grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] items-center px-[clamp(12px,1.25vw,24px)] headerCompact:[&>a_span]:text-[27px] tablet:h-[68px] tablet:grid-cols-[76px_1fr_88px] phone:h-16 phone:grid-cols-[52px_1fr_80px] [&>a]:tablet:justify-self-center phone:[&>a_span]:text-[27px] phone:[&>a_svg]:h-[23px] phone:[&>a_svg]:w-[29px]">
+      <div className="grid h-[72px] w-full grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] items-center px-[clamp(12px,1.25vw,24px)] headerCompact:[&>a_span]:text-[30px] navCompact:h-[68px] navCompact:grid-cols-[76px_1fr_88px] phone:h-16 phone:grid-cols-[52px_1fr_80px] [&>a]:navCompact:justify-self-center phone:[&>a_span]:text-[29px] phone:[&>a_svg]:h-[23px] phone:[&>a_svg]:w-[29px]">
         <MobileNavigation />
         <BrandMark />
         <PrimaryNav

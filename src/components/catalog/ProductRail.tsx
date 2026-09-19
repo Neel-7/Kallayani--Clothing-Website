@@ -52,10 +52,10 @@ function ProductCard({ item }: { item: Product }) {
       </div>
       <div className="pt-3">
         <div className="flex items-baseline justify-between gap-3 tablet:block">
-          <h3 className="font-display text-[17px] font-medium leading-[1.35] phone:text-[15px]">
+          <h3 className="font-ui text-[17px] font-medium leading-[1.35] phone:text-[16px]">
             {item.name}
           </h3>
-          <span className="whitespace-nowrap text-[15px] font-medium tablet:mt-[5px] tablet:block phone:text-[14px]">
+          <span className="whitespace-nowrap text-[15px] font-medium tabular-nums tablet:mt-[5px] tablet:block phone:text-[14px]">
             {dollars.format(item.price)}
           </span>
         </div>
@@ -99,7 +99,7 @@ export function ProductRail({
               </p>
             )}
             <h2
-              className="font-display text-[clamp(24px,2.15vw,34px)] font-semibold uppercase leading-[1.2] tracking-[-.015em] phone:text-[22px]"
+              className="font-editorial text-[clamp(30px,2.5vw,42px)] font-semibold leading-[1.1] tracking-[-.02em] phone:text-[28px]"
               id={`rail-${title.replace(/\s/g, "-").toLowerCase()}`}
             >
               {title}

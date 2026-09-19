@@ -32,7 +32,7 @@ export function PrimaryNav({ activeMenu, currentPath, onOpen, onClose }: Primary
   return (
     <nav
       data-primary-nav
-      className="h-full w-max max-w-full justify-self-center tablet:hidden"
+      className="h-full w-max max-w-full justify-self-center navCompact:hidden"
       aria-label="Primary navigation"
     >
       <ul className="flex h-full list-none items-center justify-center gap-[clamp(10px,1.25vw,22px)] p-0">

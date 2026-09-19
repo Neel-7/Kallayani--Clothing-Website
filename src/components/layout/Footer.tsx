@@ -13,7 +13,7 @@ export function Newsletter({ showTopBorder = true }: { showTopBorder?: boolean }
         <p className="mb-2.5 text-xs font-semibold uppercase tracking-[.12em] text-wine">
           Notes from the loom
         </p>
-        <h2 className="font-serif text-[38px] font-normal leading-[1.05] tracking-[-.03em] tablet:text-[32px] phone:text-[34px]">
+        <h2 className="font-editorial text-[42px] font-medium leading-[1.02] tracking-[-.03em] tablet:text-[36px] phone:text-[36px]">
           A slower kind <em className="font-normal text-wine">of inbox.</em>
         </h2>
       </div>

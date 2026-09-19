@@ -15,7 +15,7 @@ import { primaryNavItems } from "./mega-menu-data";
 export function MobileNavigation() {
   const [open, setOpen] = useState(false);
   return (
-    <div className="hidden tablet:block">
+    <div className="hidden navCompact:block">
       <Sheet open={open} onOpenChange={setOpen}>
         <SheetTrigger asChild>
           <Button variant="ghost" size="icon" className="relative" aria-label="Open navigation">
