@@ -415,7 +415,14 @@ const menProducts = [
     172,
     media.winePanjabi,
   ),
-  product("kaash-kurta", "Kaash relaxed kurta", "Textured handloom", "Shantipur", 154, media.menKaash),
+  product(
+    "kaash-kurta",
+    "Kaash relaxed kurta",
+    "Textured handloom",
+    "Shantipur",
+    154,
+    media.menKaash,
+  ),
   product(
     "indigo-longline",
     "Indigo longline panjabi",
@@ -448,13 +455,41 @@ const womenProducts = [
   ),
   product("rani-zari", "Rani zari saree", "Kanjeevaram silk", "Tamil Nadu", 348, media.womenRani),
   product("shada-tant", "Shada Tant saree", "Handloom cotton", "Phulia", 168, media.womenShada),
-  product("neel-formal", "Neel formal dress", "Handloom cotton", "Dhaka", 188, media.womenNeelDress),
-  product("mati-trousers", "Mati wide-leg pants", "Textured handloom", "Bengal", 154, media.womenMatiPants),
+  product(
+    "neel-formal",
+    "Neel formal dress",
+    "Handloom cotton",
+    "Dhaka",
+    188,
+    media.womenNeelDress,
+  ),
+  product(
+    "mati-trousers",
+    "Mati wide-leg pants",
+    "Textured handloom",
+    "Bengal",
+    154,
+    media.womenMatiPants,
+  ),
 ];
 
 const kidsProducts = [
-  product("ranga-cotton", "Ranga cotton dress", "Block-print cotton", "Bengal", 96, media.kidsRanga),
-  product("shada-festive", "Shada festive set", "Embroidered cotton", "Bengal", 114, media.kidsShada),
+  product(
+    "ranga-cotton",
+    "Ranga cotton dress",
+    "Block-print cotton",
+    "Bengal",
+    96,
+    media.kidsRanga,
+  ),
+  product(
+    "shada-festive",
+    "Shada festive set",
+    "Embroidered cotton",
+    "Bengal",
+    114,
+    media.kidsShada,
+  ),
   product("aalor-kurta", "Aalor cotton kurta", "Handloom cotton", "Bengal", 132, media.kidsAalor),
   product(
     "khela-dress",
@@ -464,9 +499,23 @@ const kidsProducts = [
     150,
     media.kidsKhela,
   ),
-  product("chhoto-panjabi", "Chhoto panjabi", "Soft handloom cotton", "Bengal", 128, media.kidsChhoto),
+  product(
+    "chhoto-panjabi",
+    "Chhoto panjabi",
+    "Soft handloom cotton",
+    "Bengal",
+    128,
+    media.kidsChhoto,
+  ),
   product("tara-jumpsuit", "Tara junior jumpsuit", "Handloom cotton", "Dhaka", 148, media.kidsTara),
-  product("megh-overshirt", "Megh junior overshirt", "Textured cotton", "Bengal", 136, media.kidsMegh),
+  product(
+    "megh-overshirt",
+    "Megh junior overshirt",
+    "Textured cotton",
+    "Bengal",
+    136,
+    media.kidsMegh,
+  ),
 ];
 
 const homeProducts = [
@@ -713,6 +762,14 @@ export const collections: Collection[] = [
 ];
 
 export const collectionBySlug = Object.fromEntries(collections.map((entry) => [entry.slug, entry]));
+export const productById = Object.fromEntries(
+  collections.flatMap((collection) => collection.products.map((entry) => [entry.id, entry])),
+) as Record<string, Product>;
+export const productCollectionById = Object.fromEntries(
+  collections.flatMap((collection) =>
+    collection.products.map((entry) => [entry.id, collection] as const),
+  ),
+) as Record<string, Collection>;
 export const featuredProducts = [
   womenProducts[0],
   menProducts[0],

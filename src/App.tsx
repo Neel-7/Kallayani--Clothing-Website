@@ -5,6 +5,7 @@ import { Header } from "@/components/layout/header/Header";
 import { CollectionPage } from "@/pages/CollectionPage";
 import { HomePage } from "@/pages/HomePage";
 import { NotFoundPage } from "@/pages/NotFoundPage";
+import { ProductPage } from "@/pages/ProductPage";
 
 function App() {
   const { pathname, hash } = useLocation();
@@ -28,6 +29,7 @@ function App() {
       <main id="main-content" className="min-h-[70vh]">
         <Routes>
           <Route path="/" element={<HomePage />} />
+          <Route path="/product/:productId" element={<ProductPage />} />
           <Route path="/:slug" element={<CollectionPage />} />
           <Route path="*" element={<NotFoundPage />} />
         </Routes>

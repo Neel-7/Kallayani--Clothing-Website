@@ -24,13 +24,19 @@ function ProductCard({ item }: { item: Product }) {
   return (
     <article className="group">
       <div className="relative aspect-[3/4] overflow-hidden bg-[#f0f1f2] tablet:aspect-auto">
-        <img
-          className="h-full w-full object-cover transition-transform duration-[450ms] group-hover:scale-[1.02] tablet:aspect-[3/4] tablet:h-auto"
-          loading="lazy"
-          src={item.image.src}
-          alt={item.image.alt}
-          style={{ objectPosition: item.image.position }}
-        />
+        <Link
+          className="block h-full overflow-hidden focus-visible:outline-offset-[-3px]"
+          to={`/product/${item.id}`}
+          aria-label={`View ${item.name}`}
+        >
+          <img
+            className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105 tablet:aspect-[3/4] tablet:h-auto"
+            loading="lazy"
+            src={item.image.src}
+            alt={item.image.alt}
+            style={{ objectPosition: item.image.position }}
+          />
+        </Link>
         <Button
           variant="ghost"
           size="icon"
@@ -53,7 +59,9 @@ function ProductCard({ item }: { item: Product }) {
       <div className="pt-3">
         <div className="flex items-baseline justify-between gap-3 tablet:block">
           <h3 className="font-ui text-[17px] font-medium leading-[1.35] phone:text-[16px]">
-            {item.name}
+            <Link className="transition-colors hover:text-wine" to={`/product/${item.id}`}>
+              {item.name}
+            </Link>
           </h3>
           <span className="whitespace-nowrap text-[15px] font-medium tabular-nums tablet:mt-[5px] tablet:block phone:text-[14px]">
             {dollars.format(item.price)}
