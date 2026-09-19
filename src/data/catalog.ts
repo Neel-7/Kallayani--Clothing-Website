@@ -267,14 +267,14 @@ const media = {
     position: "50% 40%",
   },
   jewelleryBanner: {
-    src: "/images/jewellery-campaign-v3.webp",
-    alt: "Woman wearing an antique gold and garnet necklace in a sunlit colonnade",
-    position: "50% 15%",
+    src: "/images/jewellery/collection-hero.webp",
+    alt: "Woman wearing a sculptural antique-gold collar and wine silk in a sunlit stone gallery",
+    position: "50% 28%",
   },
-  jewelleryPortrait: {
-    src: "/images/jewellery-campaign-v2.webp",
-    alt: "Woman wearing a garnet necklace and wine silk saree in a stone colonnade",
-    position: "50% 15%",
+  jewelleryNecklaces: {
+    src: "/images/jewellery/subcategory-necklaces.webp",
+    alt: "Woman wearing a modern gold and oxblood enamel collar necklace",
+    position: "50% 38%",
   },
   wineSaree: {
     src: "/images/women/editorial-wine-saree.webp",
@@ -296,15 +296,65 @@ const media = {
     alt: "Vermilion block-printed tablecloth on a teak dining table",
     position: "50% 45%",
   },
-  earrings: {
-    src: "/images/jewellery-earrings.webp",
-    alt: "Antique gold and garnet drop earrings on pale stone",
-    position: "50% 42%",
+  jewelleryEarrings: {
+    src: "/images/jewellery/subcategory-earrings.webp",
+    alt: "Woman wearing modern sculptural gold and garnet earrings",
+    position: "50% 36%",
   },
-  ring: {
-    src: "/images/jewellery-ring.webp",
-    alt: "Antique gold filigree ring with an oval garnet stone",
-    position: "50% 45%",
+  jewelleryBracelets: {
+    src: "/images/jewellery/subcategory-bracelets-bangles.webp",
+    alt: "Hands styled with modern gold bangles, a silver cuff, and garnet bracelet",
+    position: "50% 50%",
+  },
+  jewelleryRings: {
+    src: "/images/jewellery/subcategory-rings.webp",
+    alt: "Hand wearing an organic gold garnet ring and sculptural band",
+    position: "50% 48%",
+  },
+  jewelleryAnklets: {
+    src: "/images/jewellery/subcategory-anklets.webp",
+    alt: "Modern silver and gold charm anklet worn beside a reflecting pool",
+    position: "50% 52%",
+  },
+  jewelleryLockets: {
+    src: "/images/jewellery/subcategory-lockets.webp",
+    alt: "Brushed-gold lotus locket with a garnet detail on ivory silk",
+    position: "50% 50%",
+  },
+  jewelleryKiran: {
+    src: "/images/jewellery/product-kiran-earrings.webp",
+    alt: "Kiran brushed-gold and garnet drop earrings on limestone",
+    position: "50% 50%",
+  },
+  jewelleryNeel: {
+    src: "/images/jewellery/product-neel-necklace.webp",
+    alt: "Neel architectural gold and indigo enamel collar necklace",
+    position: "50% 50%",
+  },
+  jewellerySona: {
+    src: "/images/jewellery/product-sona-cuff.webp",
+    alt: "Sona hand-hammered sculptural gold cuff",
+    position: "50% 50%",
+  },
+  jewelleryRaat: {
+    src: "/images/jewellery/product-raat-ring.webp",
+    alt: "Raat organic gold signet ring with an oval garnet",
+    position: "50% 50%",
+  },
+  jewelleryChandra: {
+    src: "/images/jewellery/product-chandra-anklet.webp",
+    alt: "Chandra silver anklet with small gold charms",
+    position: "50% 50%",
+  },
+  jewellerySmriti: {
+    src: "/images/jewellery/product-smriti-locket.webp",
+    alt: "Smriti brushed-gold lotus locket and fine chain",
+    position: "50% 50%",
+  },
+  jewelleryRekha: {
+    src: "/images/jewellery/product-rekha-bracelet.webp",
+    alt: "Rekha mixed gold, silver, and garnet link bracelet",
+    position: "50% 50%",
   },
   women: {
     src: "/images/women/editorial-bengal.webp",
@@ -335,11 +385,6 @@ const media = {
     src: "/images/home-edit.webp",
     alt: "White bedroom layered with vermilion and ink hand-blocked textiles",
     position: "50% 60%",
-  },
-  jewellery: {
-    src: "/images/jewellery-edit.webp",
-    alt: "Handcrafted gold and garnet jewellery arranged on black silk",
-    position: "center",
   },
 } as const;
 
@@ -462,24 +507,61 @@ const homeProducts = [
 
 const jewelleryProducts = [
   product(
-    "rakta-collar",
-    "Rakta garnet collar",
-    "Hand-finished metal",
+    "kiran-drops",
+    "Kiran sculptural drops",
+    "Brushed brass & garnet",
     "Kolkata",
-    248,
-    media.jewelleryPortrait,
+    138,
+    media.jewelleryKiran,
   ),
   product(
-    "golap-drops",
-    "Golap garnet drops",
-    "Hand-finished metal",
-    "Kolkata",
-    132,
-    media.earrings,
+    "neel-collar",
+    "Neel enamel collar",
+    "Gold-plated brass & enamel",
+    "Jaipur",
+    228,
+    media.jewelleryNeel,
   ),
-  product("temple-bangle", "Temple bangle", "Hand-finished metal", "Kolkata", 186, media.jewellery),
-  product("kajal-ring", "Kajal garnet ring", "Hand-finished metal", "Kolkata", 154, media.ring),
-  product("moti-pendant", "Moti pendant", "Hand-finished metal", "Kolkata", 168, media.jewellery),
+  product(
+    "sona-cuff",
+    "Sona hammered cuff",
+    "Hand-hammered brass",
+    "Kolkata",
+    176,
+    media.jewellerySona,
+  ),
+  product(
+    "raat-ring",
+    "Raat garnet signet",
+    "Gold-plated brass & garnet",
+    "Jaipur",
+    162,
+    media.jewelleryRaat,
+  ),
+  product(
+    "chandra-anklet",
+    "Chandra charm anklet",
+    "Sterling silver & brass",
+    "Jaipur",
+    118,
+    media.jewelleryChandra,
+  ),
+  product(
+    "smriti-locket",
+    "Smriti lotus locket",
+    "Brushed brass & garnet",
+    "Kolkata",
+    146,
+    media.jewellerySmriti,
+  ),
+  product(
+    "rekha-bracelet",
+    "Rekha link bracelet",
+    "Brass & silver plate",
+    "Kolkata",
+    154,
+    media.jewelleryRekha,
+  ),
 ];
 
 export const heroSlides: HeroSlide[] = [
@@ -613,15 +695,18 @@ export const collections: Collection[] = [
   {
     slug: "jewellery",
     name: "Jewellery",
-    headline: "Adornment with a point of view.",
-    description: "Sculptural pieces shaped by regional motifs and finished by hand.",
+    headline: "Modern forms, finished by hand.",
+    description:
+      "Sculptural pieces that translate familiar motifs into a cleaner, contemporary language.",
     hero: media.jewelleryBanner,
-    categoryImage: media.jewellery,
+    categoryImage: media.jewelleryEarrings,
     subcategories: [
-      { name: "Necklaces", image: media.jewelleryPortrait },
-      { name: "Earrings", image: media.earrings },
-      { name: "Bangles", image: media.jewellery },
-      { name: "Rings", image: media.ring },
+      { name: "Earrings", image: media.jewelleryEarrings },
+      { name: "Necklaces", image: media.jewelleryNecklaces },
+      { name: "Bracelets & Bangles", image: media.jewelleryBracelets },
+      { name: "Rings", image: media.jewelleryRings },
+      { name: "Anklets", image: media.jewelleryAnklets },
+      { name: "Lockets", image: media.jewelleryLockets },
     ],
     products: jewelleryProducts,
   },

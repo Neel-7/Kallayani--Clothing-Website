@@ -271,44 +271,39 @@ export const primaryNavItems: NavItemConfig[] = [
     viewAllHref: "/jewellery",
     columns: [
       {
-        heading: "Shop by type",
+        heading: "Ears & neck",
         links: [
-          { label: "Necklaces", href: "/jewellery#shop-category" },
           { label: "Earrings", href: "/jewellery#shop-category" },
-          { label: "Bangles", href: "/jewellery#shop-category" },
+          { label: "Necklaces", href: "/jewellery#shop-category" },
+        ],
+      },
+      {
+        heading: "Wrist & ankle",
+        links: [
+          { label: "Bracelets & Bangles", href: "/jewellery#shop-category" },
+          { label: "Anklets", href: "/jewellery#shop-category" },
+        ],
+      },
+      {
+        heading: "Details",
+        links: [
           { label: "Rings", href: "/jewellery#shop-category" },
+          { label: "Lockets", href: "/jewellery#shop-category" },
         ],
       },
       {
-        heading: "Materials",
+        heading: "Discover",
         links: [
-          { label: "Antique gold", href: "/jewellery#products" },
-          { label: "Silver", href: "/jewellery#shop-category" },
-          { label: "Garnet", href: "/jewellery#products" },
-          { label: "Pearl", href: "/jewellery#products" },
-        ],
-      },
-      {
-        heading: "Stories",
-        links: [
-          { label: "Temple forms", href: "/jewellery" },
-          { label: "Modern heirlooms", href: "/jewellery" },
-          { label: "Everyday pieces", href: "/jewellery#products" },
-        ],
-      },
-      {
-        heading: "Gifting",
-        links: [
+          { label: "New arrivals", href: "/jewellery#products" },
+          { label: "Modern heirlooms", href: "/jewellery#products" },
           { label: "Under $150", href: "/jewellery#products" },
-          { label: "Wedding gifts", href: "/jewellery#products" },
-          { label: "Gift cards", href: "/jewellery" },
         ],
       },
     ],
     promo: {
-      image: "/images/jewellery-earrings.webp",
-      alt: "Gold and garnet drop earrings on pale stone",
-      caption: "Adornment, considered",
+      image: "/images/jewellery/mega-menu.webp",
+      alt: "Woman wearing modern geometric gold and garnet earrings",
+      caption: "The modern jewellery edit",
       href: "/jewellery",
     },
   },
