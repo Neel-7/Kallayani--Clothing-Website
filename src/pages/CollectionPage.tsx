@@ -20,7 +20,7 @@ export function CollectionPage() {
   return (
     <>
       <CollectionBanner collection={collection} />
-      <SubcategoryShelf name={collection.name} items={collection.subcategories} />
+      <SubcategoryShelf items={collection.subcategories} />
       <ProductRail key={collection.slug} title="Trending now" products={collection.products} />
       <Newsletter />
     </>

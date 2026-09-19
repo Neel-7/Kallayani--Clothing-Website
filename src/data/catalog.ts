@@ -2,9 +2,99 @@ import type { Collection, EditorialFeature, HeroSlide, Product } from "@/types/c
 
 const media = {
   womenBanner: {
-    src: "/images/women-campaign-v2.webp",
-    alt: "Two women in red Jamdani and ivory striped sarees in a sunlit Bengali courtyard",
+    src: "/images/women/collection-hero.webp",
+    alt: "Two women in ivory Jamdani and indigo handloom dress at a textile atelier",
     position: "50% 38%",
+  },
+  womenHomeCampaign: {
+    src: "/images/women/home-campaign.webp",
+    alt: "Woman in an oxblood and ivory handwoven dress walking through a colonnade",
+    position: "50% 44%",
+  },
+  womenCategory: {
+    src: "/images/women/home-category.webp",
+    alt: "Two women in contemporary and traditional handwoven clothing by a teal doorway",
+    position: "50% 36%",
+  },
+  womenNewArrivals: {
+    src: "/images/women/subcategory-new-arrivals.webp",
+    alt: "Woman wearing a mineral-teal embroidered handwoven dress on a veranda",
+    position: "50% 34%",
+  },
+  womenFormalDresses: {
+    src: "/images/women/subcategory-formal-dresses.webp",
+    alt: "Woman wearing an ink-black formal dress in a modern gallery",
+    position: "50% 35%",
+  },
+  womenCasualDresses: {
+    src: "/images/women/subcategory-casual-dresses.webp",
+    alt: "Woman wearing a terracotta block-print casual dress in a garden courtyard",
+    position: "50% 34%",
+  },
+  womenPartywear: {
+    src: "/images/women/subcategory-partywear.webp",
+    alt: "Woman wearing an oxblood silk party dress beside a heritage staircase",
+    position: "50% 32%",
+  },
+  womenTops: {
+    src: "/images/women/subcategory-tops.webp",
+    alt: "Woman wearing an ivory and indigo handloom top in a textile studio",
+    position: "50% 28%",
+  },
+  womenPants: {
+    src: "/images/women/subcategory-pants.webp",
+    alt: "Woman wearing rust wide-leg handloom pants in a colonnade",
+    position: "50% 50%",
+  },
+  womenNightwear: {
+    src: "/images/women/subcategory-nightwear.webp",
+    alt: "Woman wearing indigo block-print cotton nightwear in a bright bedroom",
+    position: "50% 36%",
+  },
+  womenTraditionals: {
+    src: "/images/women/subcategory-traditionals.webp",
+    alt: "Woman wearing an ivory and vermilion Jamdani saree in a heritage courtyard",
+    position: "50% 34%",
+  },
+  womenAccessories: {
+    src: "/images/women/subcategory-accessories.webp",
+    alt: "Oxblood handbag, indigo scarf, jewellery, belt and hair pin arranged on stone",
+    position: "50% 50%",
+  },
+  womenRakta: {
+    src: "/images/women/product-rakta.webp",
+    alt: "Woman wearing an ivory Jamdani saree with vermilion floral motifs",
+    position: "50% 50%",
+  },
+  womenNila: {
+    src: "/images/women/product-nila.webp",
+    alt: "Woman wearing an indigo Kanjeevaram saree with antique-gold border",
+    position: "50% 50%",
+  },
+  womenSindoor: {
+    src: "/images/women/product-sindoor.webp",
+    alt: "Woman wearing a deep red tonal silk saree",
+    position: "50% 50%",
+  },
+  womenRani: {
+    src: "/images/women/product-rani.webp",
+    alt: "Woman wearing a rani-pink silk saree with muted-gold zari border",
+    position: "50% 50%",
+  },
+  womenShada: {
+    src: "/images/women/product-shada.webp",
+    alt: "Woman wearing a white Tant cotton saree with fine black and rust stripes",
+    position: "50% 50%",
+  },
+  womenNeelDress: {
+    src: "/images/women/product-neel-dress.webp",
+    alt: "Woman wearing an ink-blue formal handloom dress",
+    position: "50% 50%",
+  },
+  womenMatiPants: {
+    src: "/images/women/product-mati-pants.webp",
+    alt: "Woman wearing rust wide-leg handloom pants and an ivory top",
+    position: "50% 50%",
   },
   bengaliGirls: {
     src: "images/three_girl_traditional.png",
@@ -87,9 +177,89 @@ const media = {
     position: "50% 50%",
   },
   kidsBanner: {
-    src: "/images/kids-campaign-v2.webp",
-    alt: "Two smiling children in coral and turquoise cotton clothing playing with a paper kite",
-    position: "50% 35%",
+    src: "/images/kids/collection-hero.webp",
+    alt: "Four children carrying a handmade fabric fish through an outdoor art festival",
+    position: "50% 42%",
+  },
+  kidsHomeCampaign: {
+    src: "/images/kids/home-campaign.webp",
+    alt: "Two children running through a field with a patchwork kite at sunset",
+    position: "50% 45%",
+  },
+  kidsCategory: {
+    src: "/images/kids/home-category.webp",
+    alt: "Three children laughing through a blue and yellow cardboard playhouse",
+    position: "50% 42%",
+  },
+  kidsNewArrivals: {
+    src: "/images/kids/subcategory-new-arrivals.webp",
+    alt: "Two children making colorful paper birds and a kite in an art studio",
+    position: "50% 34%",
+  },
+  kidsPartywear: {
+    src: "/images/kids/subcategory-partywear.webp",
+    alt: "Three children in festive clothing celebrating at a garden birthday table",
+    position: "50% 38%",
+  },
+  kidsJuniorGirls: {
+    src: "/images/kids/subcategory-junior-girls.webp",
+    alt: "Junior girl in an indigo jumpsuit painting a colorful kite on a rooftop",
+    position: "50% 36%",
+  },
+  kidsJuniorBoys: {
+    src: "/images/kids/subcategory-junior-boys.webp",
+    alt: "Junior boy in a green handloom overshirt repairing a bicycle",
+    position: "50% 40%",
+  },
+  kidsGirls: {
+    src: "/images/kids/subcategory-girls.webp",
+    alt: "Two girls in cotton dresses playing hopscotch in a garden courtyard",
+    position: "50% 36%",
+  },
+  kidsBoys: {
+    src: "/images/kids/subcategory-boys.webp",
+    alt: "Two boys in handloom clothing floating paper boats after rain",
+    position: "50% 32%",
+  },
+  kidsToysBooks: {
+    src: "/images/kids/subcategory-toys-books.webp",
+    alt: "Illustrated books, wooden toys and a cloth elephant in a sunny reading nook",
+    position: "50% 50%",
+  },
+  kidsRanga: {
+    src: "/images/kids/product-ranga.webp",
+    alt: "Girl wearing a coral block-print cotton dress",
+    position: "50% 50%",
+  },
+  kidsShada: {
+    src: "/images/kids/product-shada.webp",
+    alt: "Boy wearing an ivory embroidered festive kurta set",
+    position: "50% 50%",
+  },
+  kidsAalor: {
+    src: "/images/kids/product-aalor.webp",
+    alt: "Boy wearing a mustard striped handloom kurta and cream trousers",
+    position: "50% 50%",
+  },
+  kidsKhela: {
+    src: "/images/kids/product-khela.webp",
+    alt: "Girl wearing a turquoise cotton dress with coral embroidery",
+    position: "50% 50%",
+  },
+  kidsChhoto: {
+    src: "/images/kids/product-chhoto.webp",
+    alt: "Boy wearing a rust handloom panjabi and ivory trousers",
+    position: "50% 50%",
+  },
+  kidsTara: {
+    src: "/images/kids/product-tara.webp",
+    alt: "Junior girl wearing an indigo handloom jumpsuit",
+    position: "50% 50%",
+  },
+  kidsMegh: {
+    src: "/images/kids/product-megh.webp",
+    alt: "Junior boy wearing a green handloom overshirt and navy trousers",
+    position: "50% 50%",
   },
   homeBanner: {
     src: "/images/home-indigo-campaign.webp",
@@ -107,7 +277,7 @@ const media = {
     position: "50% 15%",
   },
   wineSaree: {
-    src: "/images/saree-wine-editorial.webp",
+    src: "/images/women/editorial-wine-saree.webp",
     alt: "Woman wearing a wine silk saree with antique gold zari border",
     position: "50% 25%",
   },
@@ -115,16 +285,6 @@ const media = {
     src: "/images/men/product-rong.webp",
     alt: "Man wearing a wine handloom panjabi and cream trousers in a studio",
     position: "50% 50%",
-  },
-  kidsDress: {
-    src: "/images/kids-teal-dress.webp",
-    alt: "Girl wearing a teal and cream embroidered cotton dress",
-    position: "50% 20%",
-  },
-  kidsPanjabi: {
-    src: "/images/kids-ochre-panjabi.webp",
-    alt: "Boy wearing an ochre cotton panjabi with indigo trousers",
-    position: "50% 18%",
   },
   cushions: {
     src: "/images/home-cushions.webp",
@@ -147,17 +307,17 @@ const media = {
     position: "50% 45%",
   },
   women: {
-    src: "/images/bengal-edit.webp",
+    src: "/images/women/editorial-bengal.webp",
     alt: "Woman wearing an ivory and vermilion handwoven saree",
     position: "50% 24%",
   },
   south: {
-    src: "/images/south-edit.webp",
+    src: "/images/women/editorial-south.webp",
     alt: "Woman wearing an ink-black silk saree with antique gold border",
     position: "50% 20%",
   },
   womenCampaign: {
-    src: "/images/kallayani-hero.webp",
+    src: "/images/women/editorial-hero.webp",
     alt: "Two women in handwoven red and black sarees in a bright colonnade",
     position: "center top",
   },
@@ -170,11 +330,6 @@ const media = {
     src: "/images/men/product-sada.webp",
     alt: "Man wearing an ivory handloom kurta with indigo motifs",
     position: "50% 18%",
-  },
-  kids: {
-    src: "/images/kids-edit.webp",
-    alt: "Two children in vermilion and ivory festive clothing",
-    position: "50% 25%",
   },
   home: {
     src: "/images/home-edit.webp",
@@ -229,14 +384,14 @@ const menProducts = [
 ];
 
 const womenProducts = [
-  product("rakta-jamdani", "Rakta Jamdani saree", "Jamdani", "Bengal", 248, media.women),
+  product("rakta-jamdani", "Rakta Jamdani saree", "Jamdani", "Bengal", 248, media.womenRakta),
   product(
     "nila-kanjeevaram",
     "Nila Kanjeevaram saree",
     "Pure silk · Korvai border",
     "Kanchipuram",
     320,
-    media.south,
+    media.womenNila,
   ),
   product(
     "sindoor-silk",
@@ -244,31 +399,29 @@ const womenProducts = [
     "Supplementary-weft silk",
     "Bengal",
     286,
-    media.womenCampaign,
+    media.womenSindoor,
   ),
-  product("rani-zari", "Rani zari saree", "Kanjeevaram silk", "Tamil Nadu", 348, media.wineSaree),
-  product("shada-tant", "Shada Tant saree", "Handloom cotton", "Phulia", 168, {
-    ...media.womenBanner,
-    position: "69% 35%",
-  }),
+  product("rani-zari", "Rani zari saree", "Kanjeevaram silk", "Tamil Nadu", 348, media.womenRani),
+  product("shada-tant", "Shada Tant saree", "Handloom cotton", "Phulia", 168, media.womenShada),
+  product("neel-formal", "Neel formal dress", "Handloom cotton", "Dhaka", 188, media.womenNeelDress),
+  product("mati-trousers", "Mati wide-leg pants", "Textured handloom", "Bengal", 154, media.womenMatiPants),
 ];
 
 const kidsProducts = [
-  product("ranga-cotton", "Ranga cotton set", "Handloom cotton", "Bengal", 96, media.kidsBanner),
-  product("shada-festive", "Shada festive set", "Festive cotton", "Bengal", 114, media.kids),
-  product("aalor-kurta", "Aalor cotton kurta", "Handloom cotton", "Bengal", 132, media.kidsPanjabi),
+  product("ranga-cotton", "Ranga cotton dress", "Block-print cotton", "Bengal", 96, media.kidsRanga),
+  product("shada-festive", "Shada festive set", "Embroidered cotton", "Bengal", 114, media.kidsShada),
+  product("aalor-kurta", "Aalor cotton kurta", "Handloom cotton", "Bengal", 132, media.kidsAalor),
   product(
     "khela-dress",
     "Khela cotton dress",
     "Embroidered cotton",
     "Bengal",
     150,
-    media.kidsDress,
+    media.kidsKhela,
   ),
-  product("chhoto-panjabi", "Chhoto panjabi", "Soft cotton", "Bengal", 168, {
-    ...media.kidsBanner,
-    position: "68% 30%",
-  }),
+  product("chhoto-panjabi", "Chhoto panjabi", "Soft handloom cotton", "Bengal", 128, media.kidsChhoto),
+  product("tara-jumpsuit", "Tara junior jumpsuit", "Handloom cotton", "Dhaka", 148, media.kidsTara),
+  product("megh-overshirt", "Megh junior overshirt", "Textured cotton", "Bengal", 136, media.kidsMegh),
 ];
 
 const homeProducts = [
@@ -336,7 +489,7 @@ export const heroSlides: HeroSlide[] = [
     description: "Handwoven sarees. Made for the moments that stay.",
     href: "/women",
     cta: "Discover women",
-    image: media.womenBanner,
+    image: media.womenHomeCampaign,
   },
   {
     id: "men",
@@ -352,7 +505,7 @@ export const heroSlides: HeroSlide[] = [
     description: "Soft cotton and colours made for play.",
     href: "/kids",
     cta: "Discover kids",
-    image: media.kidsBanner,
+    image: media.kidsHomeCampaign,
   },
   {
     id: "heritage-travel",
@@ -392,15 +545,17 @@ export const collections: Collection[] = [
     headline: "Woven to move with you.",
     description: "Sarees and separates chosen for their clarity of craft and ease of wear.",
     hero: media.womenBanner,
-    categoryImage: media.women,
+    categoryImage: media.womenCategory,
     subcategories: [
-      { name: "Jamdani", image: media.women },
-      { name: "Kanjeevaram", image: media.wineSaree },
-      {
-        name: "New arrivals",
-        image: { ...media.womenBanner, position: "36% 30%" },
-      },
-      { name: "Silk sarees", image: media.womenCampaign },
+      { name: "New Arrivals", image: media.womenNewArrivals },
+      { name: "Formal Dresses", image: media.womenFormalDresses },
+      { name: "Casual Dresses", image: media.womenCasualDresses },
+      { name: "Partywear", image: media.womenPartywear },
+      { name: "Tops", image: media.womenTops },
+      { name: "Pants", image: media.womenPants },
+      { name: "Nightwear", image: media.womenNightwear },
+      { name: "Traditionals", image: media.womenTraditionals },
+      { name: "Accessories", image: media.womenAccessories },
     ],
     products: womenProducts,
   },
@@ -428,12 +583,15 @@ export const collections: Collection[] = [
     headline: "Made for movement.",
     description: "Soft handloom cotton and celebration clothes that still feel like play.",
     hero: media.kidsBanner,
-    categoryImage: media.kids,
+    categoryImage: media.kidsCategory,
     subcategories: [
-      { name: "Girls", image: media.kidsDress },
-      { name: "Boys", image: media.kidsPanjabi },
-      { name: "Festive", image: media.kids },
-      { name: "Everyday", image: media.kidsBanner },
+      { name: "New Arrivals", image: media.kidsNewArrivals },
+      { name: "Kids Partywear", image: media.kidsPartywear },
+      { name: "Junior Girls", image: media.kidsJuniorGirls },
+      { name: "Junior Boys", image: media.kidsJuniorBoys },
+      { name: "Girls", image: media.kidsGirls },
+      { name: "Boys", image: media.kidsBoys },
+      { name: "Toys & Books", image: media.kidsToysBooks },
     ],
     products: kidsProducts,
   },

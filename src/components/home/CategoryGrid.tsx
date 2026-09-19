@@ -3,9 +3,9 @@ import { primaryNavItems } from "@/components/layout/header/mega-menu-data";
 
 const categoryImages: Record<string, { src: string; alt: string; position: string }> = {
   women: {
-    src: "/images/women-campaign-v2.webp",
-    alt: "Two women wearing handwoven sarees in a courtyard",
-    position: "50% 42%",
+    src: "/images/women/home-category.webp",
+    alt: "Two women wearing a rust handwoven dress and an ivory Jamdani saree",
+    position: "50% 36%",
   },
   men: {
     src: "/images/men/home-category.webp",
@@ -13,9 +13,9 @@ const categoryImages: Record<string, { src: string; alt: string; position: strin
     position: "50% 32%",
   },
   kids: {
-    src: "/images/kids-edit.webp",
-    alt: "Two children in festive cotton clothing",
-    position: "50% 34%",
+    src: "/images/kids/home-category.webp",
+    alt: "Three children laughing through the windows of a colorful cardboard playhouse",
+    position: "50% 42%",
   },
   home: {
     src: "/images/home-edit.webp",

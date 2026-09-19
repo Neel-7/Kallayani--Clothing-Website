@@ -1,7 +1,7 @@
 import type { Subcategory } from "@/types/catalog";
 
-export function SubcategoryShelf({ name, items }: { name: string; items: Subcategory[] }) {
-  const isMen = name === "Men";
+export function SubcategoryShelf({ items }: { items: Subcategory[] }) {
+  const hasIncompleteRow = items.length % 4 !== 0;
 
   return (
     <section
@@ -14,19 +14,19 @@ export function SubcategoryShelf({ name, items }: { name: string; items: Subcate
           id="subcategory-title"
           className="mb-[22px] font-display text-[clamp(24px,2.15vw,34px)] font-semibold uppercase leading-[1.2] tracking-[-.015em] phone:mb-[18px] phone:text-[22px]"
         >
-          Shop {name.toLowerCase()} by category
+          Shop by category
         </h2>
       </div>
       <div
         className={
-          isMen
+          hasIncompleteRow
             ? "flex flex-wrap justify-center gap-4 tablet:gap-y-6 phone:gap-x-3 phone:gap-y-[22px]"
             : "grid grid-cols-4 gap-4 tablet:grid-cols-2 tablet:gap-x-4 tablet:gap-y-6 phone:gap-x-3 phone:gap-y-[22px]"
         }
       >
         {items.map((item) => (
           <a
-            className={`group block min-w-0 ${isMen ? "w-[calc((100%-48px)/4)] tablet:w-[calc((100%-16px)/2)] phone:w-[calc((100%-12px)/2)]" : ""}`}
+            className={`group block min-w-0 ${hasIncompleteRow ? "w-[calc((100%-48px)/4)] tablet:w-[calc((100%-16px)/2)] phone:w-[calc((100%-12px)/2)]" : ""}`}
             href="#products"
             key={item.name}
           >
