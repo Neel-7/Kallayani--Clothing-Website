@@ -16,7 +16,8 @@ export function ProductPurchasePanel({
 }) {
   const dispatch = useDispatch();
   const wished = useSelector((state: RootState) => state.shop.wishlist.includes(product.id));
-  const sizes = sizesByCollection[collection.slug] ?? [];
+  const sizes = product.sizes ?? sizesByCollection[collection.slug] ?? [];
+  const isHomeDecor = collection.slug === "home";
   const [selectedSize, setSelectedSize] = useState(sizes[0] ?? "");
   const [quantity, setQuantity] = useState(1);
   const [openSection, setOpenSection] = useState("Details");
@@ -101,7 +102,11 @@ export function ProductPurchasePanel({
           }`}
         >
           <p className="overflow-hidden text-[12px] leading-5 text-muted">
-            Choose your usual size for a relaxed fit. Size up if you prefer more ease.
+            {sizes.length === 1 && sizes[0] === "One size"
+              ? "This piece is offered in one standard size. Detailed garment measurements are available with your order confirmation."
+              : isHomeDecor
+              ? "Choose the size that matches your mattress. Kantha dimensions are listed by their closest bed size."
+              : "Choose your usual size for a relaxed fit. Size up if you prefer more ease."}
           </p>
         </div>
       </div>
@@ -154,16 +159,17 @@ export function ProductPurchasePanel({
           open={openSection === "Care"}
           onToggle={() => setOpenSection(openSection === "Care" ? "" : "Care")}
         >
-          Air between wears and store away from direct light. Gentle specialist cleaning is
-          recommended.
+          {isHomeDecor
+            ? "Air regularly and keep away from prolonged direct light. Use a gentle cold wash and dry flat; specialist cleaning is recommended for hand-quilted pieces."
+            : "Air between wears and store away from direct light. Gentle specialist cleaning is recommended."}
         </ProductDisclosure>
         <ProductDisclosure
           title="Delivery & returns"
           open={openSection === "Delivery"}
           onToggle={() => setOpenSection(openSection === "Delivery" ? "" : "Delivery")}
         >
-          Dispatches in 2–3 working days. Return unworn pieces within 14 days in their original
-          condition.
+          Dispatches in 2–3 working days. Return unused pieces within 14 days in their original
+          condition and packaging.
         </ProductDisclosure>
       </div>
     </aside>

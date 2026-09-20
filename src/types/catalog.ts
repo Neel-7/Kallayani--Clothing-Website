@@ -2,6 +2,7 @@ export type MediaAsset = {
   src: string;
   alt: string;
   position?: string;
+  label?: string;
 };
 
 export type Product = {
@@ -11,6 +12,8 @@ export type Product = {
   region: string;
   price: number;
   image: MediaAsset;
+  gallery?: MediaAsset[];
+  sizes?: string[];
 };
 
 export type Subcategory = {

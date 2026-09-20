@@ -3,12 +3,15 @@ import { Route, Routes, useLocation } from "react-router-dom";
 import { Footer } from "@/components/layout/Footer";
 import { Header } from "@/components/layout/header/Header";
 import { CollectionPage } from "@/pages/CollectionPage";
+import { AuthPage } from "@/pages/AuthPage";
 import { HomePage } from "@/pages/HomePage";
 import { NotFoundPage } from "@/pages/NotFoundPage";
 import { ProductPage } from "@/pages/ProductPage";
 
 function App() {
   const { pathname, hash } = useLocation();
+  const normalizedPath = pathname.replace(/\/+$/, "") || "/";
+  const isAuthPage = normalizedPath === "/login" || normalizedPath === "/signup";
 
   useEffect(() => {
     const target = hash && document.getElementById(hash.slice(1));
@@ -16,6 +19,23 @@ function App() {
     else window.scrollTo({ top: 0, behavior: "instant" });
     if (pathname === "/") document.title = "Kallayani — Heritage in Every Thread";
   }, [pathname, hash]);
+
+  if (isAuthPage) {
+    return (
+      <div className="w-full overflow-x-clip">
+        <a
+          className="fixed left-2 top-2 z-[80] -translate-y-[150%] bg-ink px-4 py-3 text-white focus:translate-y-0"
+          href="#auth-form"
+        >
+          Skip to form
+        </a>
+        <Routes>
+          <Route path="/login" element={<AuthPage mode="login" />} />
+          <Route path="/signup" element={<AuthPage mode="signup" />} />
+        </Routes>
+      </div>
+    );
+  }
 
   return (
     <div className="w-full overflow-x-clip">
@@ -29,6 +49,8 @@ function App() {
       <main id="main-content" className="min-h-[70vh]">
         <Routes>
           <Route path="/" element={<HomePage />} />
+          <Route path="/login" element={<AuthPage mode="login" />} />
+          <Route path="/signup" element={<AuthPage mode="signup" />} />
           <Route path="/product/:productId" element={<ProductPage />} />
           <Route path="/:slug" element={<CollectionPage />} />
           <Route path="*" element={<NotFoundPage />} />

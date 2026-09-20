@@ -8,9 +8,7 @@ export const primaryNavItems: NavItemConfig[] = [
     columns: [
       {
         heading: "Discover",
-        links: [
-          { label: "New Arrivals", href: "/women#shop-category" },
-        ],
+        links: [{ label: "New Arrivals", href: "/women#shop-category" }],
       },
       {
         heading: "Dresses",
@@ -50,9 +48,7 @@ export const primaryNavItems: NavItemConfig[] = [
     columns: [
       {
         heading: "Discover",
-        links: [
-          { label: "New Arrivals", href: "/men#shop-category" },
-        ],
+        links: [{ label: "New Arrivals", href: "/men#shop-category" }],
       },
       {
         heading: "Clothing",
@@ -65,15 +61,11 @@ export const primaryNavItems: NavItemConfig[] = [
       },
       {
         heading: "Finishing touches",
-        links: [
-          { label: "Accessories", href: "/men#shop-category" },
-        ],
+        links: [{ label: "Accessories", href: "/men#shop-category" }],
       },
       {
         heading: "Heritage",
-        links: [
-          { label: "Traditionals", href: "/men#shop-category" },
-        ],
+        links: [{ label: "Traditionals", href: "/men#shop-category" }],
       },
     ],
     promo: {
@@ -111,9 +103,7 @@ export const primaryNavItems: NavItemConfig[] = [
       },
       {
         heading: "Play",
-        links: [
-          { label: "Toys & Books", href: "/kids#shop-category" },
-        ],
+        links: [{ label: "Toys & Books", href: "/kids#shop-category" }],
       },
     ],
     promo: {
@@ -129,51 +119,41 @@ export const primaryNavItems: NavItemConfig[] = [
     viewAllHref: "/home",
     columns: [
       {
-        heading: "Living",
+        heading: "Shop by category",
         links: [
-          { label: "Cushions", href: "/home#shop-category" },
-          { label: "Throws", href: "/home#shop-category" },
-          { label: "Floor textiles", href: "/home#products" },
+          { label: "Beddings", href: "/home#shop-category" },
+          { label: "Nakshi Kantha", href: "/home#shop-category" },
         ],
       },
       {
-        heading: "Dining",
+        heading: "Bedding edits",
         links: [
-          { label: "Table linen", href: "/home#shop-category" },
-          { label: "Serveware", href: "/home#products" },
-          { label: "Glassware", href: "/home#products" },
+          { label: "Mineral blues", href: "/home#products" },
+          { label: "Botanical print", href: "/home#products" },
+          { label: "Modern stripe", href: "/home#products" },
         ],
       },
       {
-        heading: "Bed",
+        heading: "Nakshi Kantha",
         links: [
-          { label: "Bedding", href: "/home#shop-category" },
-          { label: "Coverlets", href: "/home#products" },
-          { label: "Pillow covers", href: "/home#products" },
+          { label: "River stitch", href: "/home#products" },
+          { label: "Sun stitch", href: "/home#products" },
+          { label: "Meet the makers", href: "/home" },
         ],
       },
       {
-        heading: "Décor",
+        heading: "Discover",
         links: [
-          { label: "Objects", href: "/home#shop-category" },
-          { label: "Lighting", href: "/home#products" },
-          { label: "Baskets", href: "/home#products" },
-          { label: "Wall pieces", href: "/home#products" },
-        ],
-      },
-      {
-        heading: "Kids home",
-        links: [
-          { label: "Bedding", href: "/home#products" },
-          { label: "Soft furnishings", href: "/home#products" },
-          { label: "Gifts", href: "/home" },
+          { label: "New arrivals", href: "/home#products" },
+          { label: "The bedroom edit", href: "/home" },
+          { label: "Gifts for home", href: "/home#products" },
         ],
       },
     ],
     promo: {
-      image: "/images/home-cushions.webp",
-      alt: "Block-printed cushions in rust and indigo",
-      caption: "A quieter room",
+      image: "/images/home-decor/mega-menu.webp",
+      alt: "Mineral blue bedding with a folded hand-stitched kantha",
+      caption: "Rest, shaped by hand",
       href: "/home",
     },
   },
@@ -310,44 +290,46 @@ export const primaryNavItems: NavItemConfig[] = [
   {
     id: "wedding",
     label: "Wedding",
-    viewAllHref: "/women",
+    viewAllHref: "/wedding",
     columns: [
       {
-        heading: "For her",
+        heading: "Women",
         links: [
-          { label: "Silk sarees", href: "/women#shop-category" },
-          { label: "Jamdani", href: "/women#shop-category" },
-          { label: "Wedding guest", href: "/women#products" },
+          { label: "Bengali brides", href: "/wedding#shop-category" },
+          { label: "South Indian silks", href: "/wedding#products" },
+          { label: "Reception sarees", href: "/wedding#products" },
         ],
       },
       {
-        heading: "For him",
+        heading: "Men",
         links: [
-          { label: "Panjabis", href: "/men#shop-category" },
-          { label: "Festive sets", href: "/men#products" },
+          { label: "Wedding panjabis", href: "/wedding#shop-category" },
+          { label: "Sherwanis", href: "/wedding#products" },
+          { label: "Veshti sets", href: "/wedding#products" },
         ],
       },
       {
-        heading: "Jewellery",
+        heading: "Occasion",
         links: [
-          { label: "Necklaces", href: "/jewellery#shop-category" },
-          { label: "Earrings", href: "/jewellery#shop-category" },
-          { label: "Heirloom pieces", href: "/jewellery#products" },
+          { label: "Ceremony", href: "/wedding#products" },
+          { label: "Reception", href: "/wedding#products" },
+          { label: "Wedding guests", href: "/wedding#products" },
         ],
       },
       {
-        heading: "Gifts",
+        heading: "Discover",
         links: [
-          { label: "For the couple", href: "/home#products" },
-          { label: "For the home", href: "/home#shop-category" },
+          { label: "New arrivals", href: "/wedding#products" },
+          { label: "The couple edit", href: "/wedding" },
+          { label: "Wedding gifts", href: "/home#products" },
         ],
       },
     ],
     promo: {
-      image: "/images/heritage_travels_beauty.png",
-      alt: "Couple wearing traditional dress outdoors",
-      caption: "For the celebration",
-      href: "/women",
+      image: "/images/wedding/mega-menu.webp",
+      alt: "Bengali wedding couple in red Benarasi and ivory sherwani",
+      caption: "Tradition, composed for now",
+      href: "/wedding",
     },
   },
 ];

@@ -59,9 +59,17 @@ export function UtilityNav() {
           }
         />
       </span>
-      <IconAction label="Account">
-        <UserRound size={19} />
-      </IconAction>
+      <Button
+        asChild
+        variant="ghost"
+        size="icon"
+        className="relative navCompact:hidden"
+        aria-label="Account"
+      >
+        <Link to="/login">
+          <UserRound size={19} />
+        </Link>
+      </Button>
       <IconAction label="Wishlist">
         <Heart size={19} />
       </IconAction>

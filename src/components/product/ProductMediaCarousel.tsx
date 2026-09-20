@@ -9,7 +9,7 @@ import {
 } from "@/components/ui/carousel";
 import type { Product } from "@/types/catalog";
 
-const views = [
+const fallbackViews = [
   { label: "Full view", position: "50% 50%", scale: "scale-100" },
   { label: "Textile detail", position: "50% 34%", scale: "scale-[1.42]" },
   { label: "Drape detail", position: "50% 68%", scale: "scale-[1.28]" },
@@ -18,6 +18,17 @@ const views = [
 export function ProductMediaCarousel({ product }: { product: Product }) {
   const [api, setApi] = useState<CarouselApi>();
   const [active, setActive] = useState(0);
+  const views = product.gallery?.length
+    ? product.gallery.map((image, index) => ({
+        ...image,
+        label: image.label ?? `View ${index + 1}`,
+        scale: "scale-100",
+      }))
+    : fallbackViews.map((view, index) => ({
+        ...product.image,
+        ...view,
+        alt: index === 0 ? product.image.alt : `${view.label} of ${product.name}`,
+      }));
 
   const updateActive = useCallback((carouselApi: NonNullable<CarouselApi>) => {
     setActive(carouselApi.selectedScrollSnap());
@@ -46,9 +57,9 @@ export function ProductMediaCarousel({ product }: { product: Product }) {
               <figure className="aspect-[4/5] overflow-hidden bg-soft">
                 <img
                   className={`h-full w-full object-cover transition-transform duration-700 ease-out ${view.scale}`}
-                  src={product.image.src}
-                  alt={index === 0 ? product.image.alt : `${view.label} of ${product.name}`}
-                  style={{ objectPosition: index === 0 ? product.image.position : view.position }}
+                  src={view.src}
+                  alt={view.alt}
+                  style={{ objectPosition: view.position }}
                   fetchPriority={index === 0 ? "high" : "auto"}
                 />
               </figure>
@@ -60,7 +71,7 @@ export function ProductMediaCarousel({ product }: { product: Product }) {
       </Carousel>
 
       <div className="mt-3 flex items-center justify-between text-[11px] text-muted">
-        <span>{views[active].label}</span>
+        <span>{views[active]?.label}</span>
         <div
           className="flex items-center gap-2"
           aria-label={`View ${active + 1} of ${views.length}`}

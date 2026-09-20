@@ -2,14 +2,14 @@
 
 All active Men photography lives in this directory. New photographs were generated for this gallery and converted to WebP; the two original studio product photographs remain in use. Superseded images are in `legacy/`.
 
-| Placement | File | Art direction |
-| --- | --- | --- |
-| Home category card | `home-category.webp` | Rust panjabi against an indigo doorway; square crop. |
-| Home campaign slide | `home-campaign.webp` | Ivory panjabi and indigo waistcoat in a Kolkata colonnade; wide crop. |
-| Mega menu | `mega-menu.webp` | Olive panjabi at a textile table; square crop with clear headroom. |
-| Men page banner | `collection-hero.webp` | Two clearly different models in indigo and ivory at a handloom atelier; wide and phone crops. |
-| Men subcategories | `subcategory-*.webp` | Seven category photographs for New Arrivals, Shirts, Pants, T-Shirts, Polo, Accessories, and Traditionals; 4:5 crops. |
-| Men products | `product-*.webp` | Full-body garment photographs with restrained studio lighting and solid pale backgrounds; 3:4 crops. |
+| Placement           | File                   | Art direction                                                                                                         |
+| ------------------- | ---------------------- | --------------------------------------------------------------------------------------------------------------------- |
+| Home category card  | `home-category.webp`   | Rust panjabi against an indigo doorway; square crop.                                                                  |
+| Home campaign slide | `home-campaign.webp`   | Ivory panjabi and indigo waistcoat in a Kolkata colonnade; wide crop.                                                 |
+| Mega menu           | `mega-menu.webp`       | Olive panjabi at a textile table; square crop with clear headroom.                                                    |
+| Men page banner     | `collection-hero.webp` | Two clearly different models in indigo and ivory at a handloom atelier; wide and phone crops.                         |
+| Men subcategories   | `subcategory-*.webp`   | Seven category photographs for New Arrivals, Shirts, Pants, T-Shirts, Polo, Accessories, and Traditionals; 4:5 crops. |
+| Men products        | `product-*.webp`       | Full-body garment photographs with restrained studio lighting and solid pale backgrounds; 3:4 crops.                  |
 
 ## Generation prompt set
 

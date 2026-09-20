@@ -18,9 +18,9 @@ const categoryImages: Record<string, { src: string; alt: string; position: strin
     position: "50% 42%",
   },
   home: {
-    src: "/images/home-edit.webp",
-    alt: "Bedroom with hand-block printed bedding and cushions",
-    position: "50% 55%",
+    src: "/images/home-decor/mega-menu.webp",
+    alt: "Modern mineral blue bedding with a folded hand-stitched kantha",
+    position: "50% 50%",
   },
   traditional: {
     src: "/images/three_girl_traditional.png",
@@ -38,9 +38,9 @@ const categoryImages: Record<string, { src: string; alt: string; position: strin
     position: "50% 34%",
   },
   wedding: {
-    src: "/images/heritage_travels_beauty.png",
-    alt: "Couple wearing traditional dress outdoors",
-    position: "50% 42%",
+    src: "/images/wedding/home-category.webp",
+    alt: "South Indian wedding couple in maroon silk and ivory traditional dress",
+    position: "50% 44%",
   },
 };
 
