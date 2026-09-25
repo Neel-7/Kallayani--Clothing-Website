@@ -1,4 +1,13 @@
-import { Archive, LayoutDashboard, LogOut, Package, Store } from "lucide-react";
+import {
+  Archive,
+  Images,
+  LayoutDashboard,
+  LayoutTemplate,
+  LibraryBig,
+  LogOut,
+  Package,
+  Store,
+} from "lucide-react";
 import { NavLink, Outlet } from "react-router-dom";
 import { BrandMark } from "@/components/layout/BrandMark";
 import { useAdminAuth } from "./AdminAuthContext";
@@ -6,6 +15,9 @@ import { useAdminAuth } from "./AdminAuthContext";
 const navigation = [
   { to: "/admin", label: "Overview", icon: LayoutDashboard, end: true },
   { to: "/admin/products", label: "Products", icon: Package, end: false },
+  { to: "/admin/collections", label: "Collections", icon: LibraryBig, end: false },
+  { to: "/admin/homepage", label: "Homepage", icon: LayoutTemplate, end: false },
+  { to: "/admin/media", label: "Media", icon: Images, end: false },
 ];
 
 export function AdminLayout() {
@@ -21,7 +33,10 @@ export function AdminLayout() {
           </p>
         </div>
 
-        <nav className="mt-6 flex gap-2 lg:mt-12 lg:block lg:space-y-1" aria-label="Administration">
+        <nav
+          className="mt-6 flex gap-2 overflow-x-auto lg:mt-12 lg:block lg:space-y-1 lg:overflow-visible"
+          aria-label="Administration"
+        >
           {navigation.map(({ to, label, icon: Icon, end }) => (
             <NavLink
               className={({ isActive }) =>

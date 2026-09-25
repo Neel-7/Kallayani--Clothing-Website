@@ -49,6 +49,17 @@ The admin bundle uses a separately named Firebase client instance. Its staff ses
 
 Public storefront queries continue to require `status == "published"`. Draft and archived documents therefore remain unavailable to public clients.
 
+## Admin routes
+
+- `/admin`: catalogue counts and workflow overview.
+- `/admin/products`: product search, filters, duplication, archive, and editor access.
+- `/admin/products/new` and `/admin/products/:id`: product drafting, variants, media, SEO, validation, and publishing.
+- `/admin/collections`: collection creation, landing-page copy, ordering, imagery, subcategories, and status.
+- `/admin/homepage`: hero banners, category tiles, and editorial-feature content.
+- `/admin/media`: searchable referenced-media inventory with Storage-versus-migration status and links back to each product.
+
+Collection and homepage editors update Firestore directly through the claim-protected admin client. Media deletion and replacement remain inside the owning product editor so an asset cannot be detached from its catalogue record accidentally.
+
 ## Existing media migration
 
 The migration command is dry-run by default:
