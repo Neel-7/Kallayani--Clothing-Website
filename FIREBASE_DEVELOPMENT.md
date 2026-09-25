@@ -61,8 +61,9 @@ This command performs the complete startup sequence:
 
 1. Starts the local Firestore emulator on `127.0.0.1:8080`.
 2. Starts the local Authentication emulator on `127.0.0.1:9099`.
-3. Seeds the local Firestore emulator with the current catalogue.
-4. Starts Vite at `http://localhost:5173`.
+3. Starts the local Storage emulator on `127.0.0.1:9199`.
+4. Seeds the local Firestore emulator with the current catalogue.
+5. Starts Vite at `http://localhost:5173`.
 
 The Emulator Suite interface is available at:
 
@@ -120,7 +121,7 @@ At this stage, the repository's catalogue modules remain the seed source:
 - `src/data/home-seed.ts`
 - `src/components/product/product-config.ts`
 
-The seed script converts this source data into the Firestore document structure. After seeding, storefront pages read from Firestore rather than importing those modules directly.
+The seed script converts this source data into the Firestore document structure. After seeding, storefront pages read from Firestore rather than importing those modules directly. The script now refuses cloud targets by default so admin-managed catalogue content cannot be overwritten accidentally.
 
 This is an intentional migration stage: it allows the existing UI and assets to remain unchanged while the data-access layer moves to Firebase. Once an administration workflow exists, Firestore can become the primary source of truth and the repository seed can be retained only for fixtures, testing, and disaster recovery.
 
@@ -164,9 +165,9 @@ Files intended for version control include:
 - Firebase integration and seed scripts
 - This architecture document
 
-## Moving images to Firebase Storage later
+## Moving images to Firebase Storage
 
-Keeping images in `public/images/` is suitable while the catalogue is maintained through code and deployed as a single storefront build. Move images to Firebase Storage when non-developers need to add or replace product media without deploying the frontend.
+Existing images remain in `public/images/` as migration and rollback assets. New admin-managed product media is stored in Firebase Storage. See [`FIREBASE_ADMIN.md`](./FIREBASE_ADMIN.md) for the admin workflow and guarded migration command.
 
 A future Storage-based flow would be:
 
@@ -183,7 +184,7 @@ Firestore primaryImageUrl: https://firebasestorage.googleapis.com/...
 React renders the remote Storage URL
 ```
 
-That migration will require Storage security rules, upload validation, image-size limits, naming conventions, deletion handling, and an administration interface. It is not necessary for the current frontend integration.
+The admin upload flow now provides Storage security rules, browser validation, a 10 MB limit, UUID naming, deletion handling, upload progress, and Firestore metadata updates. The storefront mapper supports both legacy image paths and the new media objects during migration.
 
 ## Useful commands
 

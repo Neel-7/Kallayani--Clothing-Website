@@ -4,6 +4,7 @@ import { applicationDefault, getApps, initializeApp } from "firebase-admin/app";
 import { getFirestore } from "firebase-admin/firestore";
 
 const projectId = process.env.VITE_FIREBASE_PROJECT_ID;
+const requireStorageMedia = process.argv.includes("--require-storage-media");
 if (!projectId) throw new Error("VITE_FIREBASE_PROJECT_ID is missing.");
 
 const app =
@@ -39,6 +40,7 @@ for (const [collectionName, expected] of Object.entries(expectedCounts)) {
 }
 
 const products = await db.collection("products").get();
+const mediaUrls = new Set<string>();
 for (const product of products.docs) {
   const data = product.data();
   for (const field of ["id", "slug", "title", "primaryImageUrl", "priceFrom", "collectionSlug"]) {
@@ -48,10 +50,35 @@ for (const product of products.docs) {
   }
   if (String(data.primaryImageUrl).startsWith("/")) {
     const imagePath = resolve(process.cwd(), "public", String(data.primaryImageUrl).slice(1));
-    if (!existsSync(imagePath)) throw new Error(`Missing local image for products/${product.id}: ${imagePath}`);
+    if (!existsSync(imagePath))
+      throw new Error(`Missing local image for products/${product.id}: ${imagePath}`);
   }
   if (!Array.isArray(data.variants) || data.variants.length === 0) {
     throw new Error(`products/${product.id} has no purchasable variants.`);
+  }
+
+  if (requireStorageMedia) {
+    const images = [data.primaryImage, ...(data.gallery ?? [])];
+    if (!data.primaryImage?.storagePath || !data.primaryImage?.url) {
+      throw new Error(`products/${product.id} has no migrated primary media object.`);
+    }
+    for (const image of images) {
+      if (!image?.url || !image?.storagePath) {
+        throw new Error(`products/${product.id} contains incomplete migrated media.`);
+      }
+      if (String(image.url).startsWith("/images/")) {
+        throw new Error(`products/${product.id} still references local media: ${image.url}`);
+      }
+      mediaUrls.add(String(image.url));
+    }
+  }
+}
+
+if (requireStorageMedia) {
+  for (const url of mediaUrls) {
+    const response = await fetch(url, { headers: { Range: "bytes=0-0" } });
+    if (!response.ok) throw new Error(`Storage media returned ${response.status}: ${url}`);
+    await response.body?.cancel();
   }
 }
 
@@ -66,6 +93,7 @@ console.log(
       counts: actualCounts,
       storeContent: "ok",
       productImages: "ok",
+      storageMedia: requireStorageMedia ? `${mediaUrls.size} URLs verified` : "not required",
       productVariants: "ok",
     },
     null,

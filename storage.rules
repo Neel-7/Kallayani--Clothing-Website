@@ -2,9 +2,30 @@ rules_version = '2';
 
 service firebase.storage {
   match /b/{bucket}/o {
-    // Phase 1 secure baseline: Storage is not part of the storefront yet.
-    // Phase 4 will replace this with claim-, path-, size-, and MIME-aware rules
-    // before Phase 7 enables catalogue uploads.
+    function isStaff() {
+      return request.auth != null
+        && request.auth.token.role in ["admin", "manager"];
+    }
+
+    function productIsPublished(productId) {
+      return firestore.get(
+        /databases/(default)/documents/products/$(productId)
+      ).data.status == "published";
+    }
+
+    function validImage() {
+      return request.resource.size <= 10 * 1024 * 1024
+        && request.resource.contentType.matches("image/(jpeg|png|webp)");
+    }
+
+    match /catalog/products/{productId}/{rendition}/{imageId} {
+      allow read: if isStaff() || productIsPublished(productId);
+      allow create, update: if isStaff()
+        && rendition in ["original", "large", "card", "thumbnail"]
+        && validImage();
+      allow delete: if isStaff();
+    }
+
     match /{allPaths=**} {
       allow read, write: if false;
     }

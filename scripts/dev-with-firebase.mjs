@@ -28,7 +28,7 @@ async function emulatorIsReady() {
     const response = await fetch(emulatorHubUrl);
     if (!response.ok) return false;
     const emulators = await response.json();
-    return Boolean(emulators.firestore && emulators.auth);
+    return Boolean(emulators.firestore && emulators.auth && emulators.storage);
   } catch {
     return false;
   }
@@ -68,7 +68,7 @@ process.once("exit", () => stopChildren());
 try {
   let emulator;
   if (!(await emulatorIsReady())) {
-    console.log("Starting the local Firebase Auth and Firestore emulators...");
+    console.log("Starting the local Firebase Auth, Firestore, and Storage emulators...");
     emulator = start(firebaseBin, emulatorArguments, {
       env: firebaseProcessEnvironment(),
     });
@@ -90,6 +90,8 @@ try {
     {
       env: firebaseProcessEnvironment({
         FIRESTORE_EMULATOR_HOST: "127.0.0.1:8080",
+        FIREBASE_AUTH_EMULATOR_HOST: "127.0.0.1:9099",
+        FIREBASE_STORAGE_EMULATOR_HOST: "127.0.0.1:9199",
       }),
     },
   );

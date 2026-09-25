@@ -37,10 +37,15 @@ type StoredProduct = {
   badges?: string[];
   ratingAverage?: number | null;
   ratingCount?: number;
-  primaryImageUrl: string;
-  imageAlt: string;
+  primaryImageUrl?: string;
+  imageAlt?: string;
   imagePosition?: string;
-  gallery?: Array<{ url: string; alt: string; position?: string; label?: string }>;
+  primaryImage?: {
+    url: string;
+    alt: string;
+    position?: string | null;
+  } | null;
+  gallery?: Array<{ url: string; alt: string; position?: string | null; label?: string }>;
   sizes?: string[];
   variants?: ProductVariant[];
   collectionSlug: string;
@@ -58,6 +63,7 @@ function asMedia(value: unknown): MediaAsset {
 }
 
 function mapProductData(data: StoredProduct): Product {
+  const primaryImage = data.primaryImage;
   return {
     id: data.id,
     slug: data.slug,
@@ -72,14 +78,14 @@ function mapProductData(data: StoredProduct): Product {
     ratingAverage: data.ratingAverage ?? null,
     ratingCount: data.ratingCount ?? 0,
     image: {
-      src: data.primaryImageUrl,
-      alt: data.imageAlt || data.title,
-      position: data.imagePosition,
+      src: primaryImage?.url ?? data.primaryImageUrl ?? "",
+      alt: primaryImage?.alt || data.imageAlt || data.title,
+      position: primaryImage?.position ?? data.imagePosition,
     },
     gallery: data.gallery?.map((asset) => ({
       src: asset.url,
       alt: asset.alt,
-      position: asset.position,
+      position: asset.position ?? undefined,
       label: asset.label,
     })),
     sizes: data.sizes ?? [],
@@ -147,12 +153,8 @@ async function getHomePage(): Promise<HomePageData> {
             where("placement", "==", "HOME_HERO"),
           ),
         ),
-        getDocs(
-          query(collection(db, "homeCategories"), where("status", "==", "published")),
-        ),
-        getDocs(
-          query(collection(db, "editorialFeatures"), where("status", "==", "published")),
-        ),
+        getDocs(query(collection(db, "homeCategories"), where("status", "==", "published"))),
+        getDocs(query(collection(db, "editorialFeatures"), where("status", "==", "published"))),
         getDocs(
           query(
             collection(db, "products"),
@@ -258,7 +260,8 @@ async function getCollections(): Promise<Collection[]> {
 async function getCollection(slug: string): Promise<Collection | null> {
   try {
     const collectionSnapshot = await getDoc(doc(db, "collections", slug));
-    if (!collectionSnapshot.exists() || collectionSnapshot.data().status !== "published") return null;
+    if (!collectionSnapshot.exists() || collectionSnapshot.data().status !== "published")
+      return null;
 
     const productSnapshot = await getDocs(
       query(
@@ -289,7 +292,10 @@ async function getProduct(productId: string): Promise<ProductPageData | null> {
     const collectionData = await getCollection(storedProduct.collectionSlug);
     if (!collectionData) return null;
 
-    const product = mapProductData({ ...storedProduct, id: storedProduct.id || productSnapshot.id });
+    const product = mapProductData({
+      ...storedProduct,
+      id: storedProduct.id || productSnapshot.id,
+    });
     return {
       product,
       collection: collectionData,

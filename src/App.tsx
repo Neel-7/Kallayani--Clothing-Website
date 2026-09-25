@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { lazy, Suspense, useEffect } from "react";
 import { Route, Routes, useLocation } from "react-router-dom";
 import { Footer } from "@/components/layout/Footer";
 import { Header } from "@/components/layout/header/Header";
@@ -7,11 +7,15 @@ import { AuthPage } from "@/pages/AuthPage";
 import { HomePage } from "@/pages/HomePage";
 import { NotFoundPage } from "@/pages/NotFoundPage";
 import { ProductPage } from "@/pages/ProductPage";
+import { FirebaseShopSync } from "@/components/FirebaseShopSync";
+
+const AdminApp = lazy(() => import("@/admin/AdminApp"));
 
 function App() {
   const { pathname, hash } = useLocation();
   const normalizedPath = pathname.replace(/\/+$/, "") || "/";
   const isAuthPage = normalizedPath === "/login" || normalizedPath === "/signup";
+  const isAdminPage = normalizedPath === "/admin" || normalizedPath.startsWith("/admin/");
 
   useEffect(() => {
     const target = hash && document.getElementById(hash.slice(1));
@@ -19,6 +23,20 @@ function App() {
     else window.scrollTo({ top: 0, behavior: "instant" });
     if (pathname === "/") document.title = "Kallayani — Heritage in Every Thread";
   }, [pathname, hash]);
+
+  if (isAdminPage) {
+    return (
+      <Suspense
+        fallback={
+          <main className="grid min-h-screen place-items-center bg-[#f3f0ea] text-sm text-muted">
+            Opening catalogue studio…
+          </main>
+        }
+      >
+        <AdminApp />
+      </Suspense>
+    );
+  }
 
   if (isAuthPage) {
     return (
@@ -39,6 +57,7 @@ function App() {
 
   return (
     <div className="w-full overflow-x-clip">
+      <FirebaseShopSync />
       <a
         className="fixed left-2 top-2 z-[80] -translate-y-[150%] bg-ink px-4 py-3 text-white focus:translate-y-0"
         href="#main-content"

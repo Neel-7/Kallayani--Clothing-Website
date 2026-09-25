@@ -12,6 +12,12 @@ if (!projectId) {
   throw new Error("VITE_FIREBASE_PROJECT_ID is missing. Run the script with .env.local loaded.");
 }
 
+if (!process.env.FIRESTORE_EMULATOR_HOST && process.env.ALLOW_CLOUD_SEED !== "true") {
+  throw new Error(
+    "Cloud catalogue seeding is disabled now that Firestore is admin-managed. Use the emulator, or set ALLOW_CLOUD_SEED=true only for a reviewed recovery operation.",
+  );
+}
+
 if (!projectId.includes("dev") && process.env.ALLOW_PRODUCTION_SEED !== "true") {
   throw new Error(
     `Refusing to seed non-development Firebase project ${projectId}. Set ALLOW_PRODUCTION_SEED=true only when intentional.`,
@@ -53,11 +59,12 @@ function productDocument(product: Product, collectionSlug: string, position: num
     id: product.id,
     slug: product.id,
     title: product.name,
-    description: null,
+    description: `${product.name} is a considered Kallayani piece rooted in ${product.craft.toLowerCase()} and the textile traditions of ${product.region}.`,
     craft: product.craft,
     region: product.region,
     primaryCategorySlug: collectionSlug,
     collectionSlug,
+    collectionSlugs: [collectionSlug],
     priceFrom: product.price,
     priceTo: product.price,
     listPriceFrom: null,
@@ -75,17 +82,35 @@ function productDocument(product: Product, collectionSlug: string, position: num
     primaryImageUrl: product.image.src,
     imageAlt: product.image.alt,
     imagePosition: product.image.position ?? null,
+    primaryImage: {
+      id: `${product.id}-primary`,
+      storagePath: "",
+      url: product.image.src,
+      alt: product.image.alt,
+      position: product.image.position ?? null,
+      width: 0,
+      height: 0,
+    },
     gallery: (product.gallery ?? []).map((asset, index) => ({
+      id: `${product.id}-gallery-${index + 1}`,
+      storagePath: "",
       url: asset.src,
       alt: asset.alt,
       position: asset.position ?? null,
-      label: asset.label ?? `View ${index + 1}`,
+      width: 0,
+      height: 0,
     })),
     sizes,
     variants,
     position,
     status: "published",
+    seoTitle: product.name,
+    seoDescription: `${product.name} by Kallayani. ${product.craft} from ${product.region}.`,
+    createdAt: FieldValue.serverTimestamp(),
+    createdBy: "development-seed",
     updatedAt: FieldValue.serverTimestamp(),
+    updatedBy: "development-seed",
+    publishedAt: FieldValue.serverTimestamp(),
   };
 }
 

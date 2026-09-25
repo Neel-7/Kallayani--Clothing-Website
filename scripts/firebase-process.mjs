@@ -32,7 +32,7 @@ export function firebaseProcessEnvironment(overrides = {}) {
 export const emulatorArguments = [
   "emulators:start",
   "--only",
-  "auth,firestore",
+  "auth,firestore,storage",
   "--project",
   process.env.VITE_FIREBASE_PROJECT_ID || "kallayani-storefront-dev",
 ];
