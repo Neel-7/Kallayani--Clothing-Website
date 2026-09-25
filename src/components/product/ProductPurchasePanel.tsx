@@ -33,7 +33,14 @@ export function ProductPurchasePanel({
   );
 
   const handleAdd = () => {
-    for (let count = 0; count < quantity; count += 1) dispatch(addToBag());
+    const selectedVariant = product.variants?.find((variant) => variant.size === selectedSize);
+    dispatch(
+      addToBag({
+        productId: product.id,
+        variantId: selectedVariant?.id ?? `${product.id}-${selectedSize || "default"}`,
+        quantity,
+      }),
+    );
     setAdded(true);
     resetTimer.current = window.setTimeout(() => setAdded(false), 1800);
   };

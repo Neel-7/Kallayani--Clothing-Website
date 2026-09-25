@@ -2,8 +2,10 @@ import { useEffect, useRef, useState } from "react";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ArrowLeft, ArrowRight, Check, Eye, EyeOff, LockKeyhole, Mail } from "lucide-react";
-import { Link } from "react-router-dom";
+import { FirebaseError } from "firebase/app";
+import { Link, useNavigate } from "react-router-dom";
 import { BrandMark } from "@/components/layout/BrandMark";
+import { authRepository } from "@/data/auth";
 
 type AuthMode = "login" | "signup";
 
@@ -84,6 +86,7 @@ function PasswordField({
           autoComplete={autoComplete}
           className="min-w-0 flex-1 border-0 bg-transparent py-3 text-[15px] text-ink outline-none placeholder:text-[#aaa198]"
           id={id}
+          name="password"
           minLength={8}
           onChange={onChange ? (event) => onChange(event.target.value) : undefined}
           placeholder="At least 8 characters"
@@ -106,8 +109,13 @@ function PasswordField({
 
 export function AuthPage({ mode }: { mode: AuthMode }) {
   const pageRef = useRef<HTMLElement>(null);
+  const navigate = useNavigate();
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [submitted, setSubmitted] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [feedback, setFeedback] = useState("");
+  const [formError, setFormError] = useState("");
   const copy = authCopy[mode];
   const isSignup = mode === "signup";
 
@@ -118,8 +126,12 @@ export function AuthPage({ mode }: { mode: AuthMode }) {
       window.scrollTo({ top: 0, behavior: "instant" }),
     );
     document.title = `${isSignup ? "Create account" : "Sign in"} — Kallayani`;
+    setEmail("");
     setPassword("");
     setSubmitted(false);
+    setSubmitting(false);
+    setFeedback("");
+    setFormError("");
     return () => window.cancelAnimationFrame(frame);
   }, [isSignup]);
 
@@ -163,6 +175,47 @@ export function AuthPage({ mode }: { mode: AuthMode }) {
       (/[A-Z]/.test(password) ? 1 : 0) +
       (/\d|[^A-Za-z]/.test(password) ? 1 : 0),
   );
+
+  const readableAuthError = (error: unknown) => {
+    if (!(error instanceof FirebaseError)) return "We could not complete that request. Please try again.";
+    if (error.code === "auth/invalid-credential") return "The email or password is incorrect.";
+    if (error.code === "auth/email-already-in-use") return "An account already exists for this email.";
+    if (error.code === "auth/weak-password") return "Use a stronger password with at least eight characters.";
+    if (error.code === "auth/popup-closed-by-user") return "The Google sign-in window was closed.";
+    if (error.code === "auth/operation-not-allowed") return "This sign-in method is not enabled yet.";
+    return error.message;
+  };
+
+  const handleGoogleSignIn = async () => {
+    setSubmitting(true);
+    setFormError("");
+    try {
+      await authRepository.loginWithGoogle();
+      navigate("/");
+    } catch (error) {
+      setFormError(readableAuthError(error));
+    } finally {
+      setSubmitting(false);
+    }
+  };
+
+  const handlePasswordReset = async () => {
+    if (!email) {
+      setFormError("Enter your email address first.");
+      return;
+    }
+    setSubmitting(true);
+    setFormError("");
+    try {
+      await authRepository.sendPasswordReset(email);
+      setSubmitted(true);
+      setFeedback("If an account exists for this email, a password-reset message has been sent.");
+    } catch (error) {
+      setFormError(readableAuthError(error));
+    } finally {
+      setSubmitting(false);
+    }
+  };
 
   return (
     <main
@@ -234,6 +287,8 @@ export function AuthPage({ mode }: { mode: AuthMode }) {
             <button
               className="group flex min-h-12 w-full items-center justify-center gap-3 border border-[#c9c0b7] bg-white/55 px-5 text-[13px] font-medium tracking-[.02em] text-ink transition-all duration-300 hover:border-[#9f9388] hover:bg-white"
               type="button"
+              disabled={submitting}
+              onClick={handleGoogleSignIn}
             >
               <GoogleMark /> Continue with Google
             </button>
@@ -245,9 +300,32 @@ export function AuthPage({ mode }: { mode: AuthMode }) {
 
             <form
               className="space-y-6"
-              onSubmit={(event) => {
+              onSubmit={async (event) => {
                 event.preventDefault();
-                setSubmitted(true);
+                setSubmitting(true);
+                setSubmitted(false);
+                setFeedback("");
+                setFormError("");
+                const form = new FormData(event.currentTarget);
+                try {
+                  if (isSignup) {
+                    await authRepository.register({
+                      email,
+                      password,
+                      firstName: String(form.get("firstName") ?? ""),
+                      lastName: String(form.get("lastName") ?? ""),
+                    });
+                    setFeedback("Your account is ready. Check your inbox to verify your email address.");
+                    setSubmitted(true);
+                  } else {
+                    await authRepository.login(email, password);
+                    navigate("/");
+                  }
+                } catch (error) {
+                  setFormError(readableAuthError(error));
+                } finally {
+                  setSubmitting(false);
+                }
               }}
             >
               {isSignup && (
@@ -291,9 +369,12 @@ export function AuthPage({ mode }: { mode: AuthMode }) {
                     autoComplete="email"
                     className="min-w-0 flex-1 border-0 bg-transparent py-3 text-[15px] text-ink outline-none placeholder:text-[#aaa198]"
                     id={`${mode}-email`}
+                    name="email"
+                    onChange={(event) => setEmail(event.target.value)}
                     placeholder="you@example.com"
                     required
                     type="email"
+                    value={email}
                   />
                 </div>
               </div>
@@ -302,8 +383,8 @@ export function AuthPage({ mode }: { mode: AuthMode }) {
                 autoComplete={isSignup ? "new-password" : "current-password"}
                 id={`${mode}-password`}
                 label="Password"
-                onChange={isSignup ? setPassword : undefined}
-                value={isSignup ? password : undefined}
+                onChange={setPassword}
+                value={password}
               />
 
               {isSignup && password.length > 0 && (
@@ -331,20 +412,22 @@ export function AuthPage({ mode }: { mode: AuthMode }) {
                   {isSignup ? "I agree to the terms" : "Remember me"}
                 </label>
                 {!isSignup && (
-                  <a
+                  <button
                     className="border-b border-transparent transition-colors hover:border-wine hover:text-wine"
-                    href="mailto:care@kallayani.com?subject=Password%20reset"
+                    onClick={handlePasswordReset}
+                    type="button"
                   >
                     Forgot password?
-                  </a>
+                  </button>
                 )}
               </div>
 
               <button
                 className="group flex min-h-[52px] w-full items-center justify-between bg-wine px-5 text-[12px] font-semibold uppercase tracking-[.13em] text-white transition-colors duration-300 hover:bg-[#681b20]"
+                disabled={submitting}
                 type="submit"
               >
-                {copy.submit}
+                {submitting ? "Please wait" : copy.submit}
                 <span className="grid size-7 place-items-center rounded-full bg-white/10 transition-transform duration-300 group-hover:translate-x-1">
                   <ArrowRight aria-hidden="true" size={15} />
                 </span>
@@ -355,7 +438,16 @@ export function AuthPage({ mode }: { mode: AuthMode }) {
                   aria-live="polite"
                   className="border-l-2 border-wine bg-white/50 px-4 py-3 text-[12px] leading-relaxed text-[#574f48]"
                 >
-                  Your details look good. Secure account services can now be connected to this form.
+                  {feedback}
+                </p>
+              )}
+
+              {formError && (
+                <p
+                  aria-live="assertive"
+                  className="border-l-2 border-wine bg-white/50 px-4 py-3 text-[12px] leading-relaxed text-[#574f48]"
+                >
+                  {formError}
                 </p>
               )}
             </form>

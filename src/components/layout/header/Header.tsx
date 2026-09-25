@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { X } from "lucide-react";
 import { useLocation } from "react-router-dom";
+import { useGetStorefrontInfoQuery } from "@/store/storefront-api";
 import { BrandMark } from "../BrandMark";
 import { MegaMenu } from "./MegaMenu";
 import { MobileNavigation } from "./MobileNavigation";
@@ -19,6 +20,7 @@ export function Header() {
   const headerRef = useRef<HTMLElement>(null);
   const focusMenu = useRef(false);
   const location = useLocation();
+  const { data: storeInfo } = useGetStorefrontInfoQuery();
   const menuConfig = useMemo(
     () => primaryNavItems.find((item) => item.id === activeMenu),
     [activeMenu],
@@ -95,8 +97,10 @@ export function Header() {
     >
       {showAnnouncement && (
         <div className="relative flex h-[22px] items-center justify-center gap-[clamp(48px,12vw,192px)] bg-ink text-[10px] tracking-[.035em] text-white phone:h-[26px]">
-          <span>Complimentary US shipping over $150</span>
-          <span className="text-[#d9b491] tablet:hidden">New York appointments now open</span>
+          <span>{storeInfo?.announcementBarText ?? "Complimentary US shipping over $150"}</span>
+          <span className="text-[#d9b491] tablet:hidden">
+            {storeInfo?.secondaryAnnouncementText ?? "New York appointments now open"}
+          </span>
           <button
             type="button"
             className="absolute right-gutter top-0 grid size-[22px] place-items-center bg-transparent p-0 text-white opacity-[.78] hover:opacity-100 focus-visible:outline-white focus-visible:outline-offset-[-2px] phone:h-[26px]"

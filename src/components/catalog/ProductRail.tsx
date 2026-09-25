@@ -51,7 +51,14 @@ function ProductCard({ item }: { item: Product }) {
         </Button>
         <Button
           className="absolute inset-x-0 bottom-0 w-full justify-between translate-y-full transition-[transform,background] duration-200 group-hover:translate-y-0 group-focus-within:translate-y-0 tablet:static tablet:translate-y-0 phone:min-h-11 phone:px-2.5 phone:text-[11px] phone:[&_svg]:w-[14px] [@media(hover:none)]:translate-y-0"
-          onClick={() => dispatch(addToBag())}
+          onClick={() =>
+            dispatch(
+              addToBag({
+                productId: item.id,
+                variantId: item.variants?.[0]?.id ?? `${item.id}-default`,
+              }),
+            )
+          }
         >
           Add to bag <Plus size={16} />
         </Button>

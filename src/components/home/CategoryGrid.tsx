@@ -1,50 +1,7 @@
 import { Link } from "react-router-dom";
-import { primaryNavItems } from "@/components/layout/header/mega-menu-data";
+import type { HomeCategory } from "@/types/catalog";
 
-const categoryImages: Record<string, { src: string; alt: string; position: string }> = {
-  women: {
-    src: "/images/women/home-category.webp",
-    alt: "Two women wearing a rust handwoven dress and an ivory Jamdani saree",
-    position: "50% 36%",
-  },
-  men: {
-    src: "/images/men/home-category.webp",
-    alt: "Man wearing a rust handwoven panjabi beside an indigo doorway",
-    position: "50% 32%",
-  },
-  kids: {
-    src: "/images/kids/home-category.webp",
-    alt: "Three children laughing through the windows of a colorful cardboard playhouse",
-    position: "50% 42%",
-  },
-  home: {
-    src: "/images/home-decor/mega-menu.webp",
-    alt: "Modern mineral blue bedding with a folded hand-stitched kantha",
-    position: "50% 50%",
-  },
-  traditional: {
-    src: "/images/three_girl_traditional.png",
-    alt: "Three women wearing traditional sarees",
-    position: "50% 45%",
-  },
-  gifts: {
-    src: "/images/home-tablecloth.webp",
-    alt: "Hand-block printed tablecloth on a set dining table",
-    position: "50% 46%",
-  },
-  jewellery: {
-    src: "/images/jewellery-campaign-v3.webp",
-    alt: "Woman wearing handcrafted gold and garnet jewellery",
-    position: "50% 34%",
-  },
-  wedding: {
-    src: "/images/wedding/home-category.webp",
-    alt: "South Indian wedding couple in maroon silk and ivory traditional dress",
-    position: "50% 44%",
-  },
-};
-
-export function CategoryGrid() {
+export function CategoryGrid({ categories }: { categories: HomeCategory[] }) {
   return (
     <section
       className="px-[clamp(8px,1vw,18px)] pb-11 pt-9 phone:pb-8 phone:pt-7"
@@ -59,21 +16,20 @@ export function CategoryGrid() {
           Shop by category
         </h2>
         <div className="grid grid-cols-4 gap-x-4 gap-y-5 tablet:grid-cols-2 phone:gap-x-3 phone:gap-y-4">
-          {primaryNavItems.map((item) => {
-            const image = categoryImages[item.id];
+          {categories.map((item) => {
             return (
               <Link
                 key={item.id}
-                to={item.viewAllHref}
+                to={item.href}
                 className="group block min-w-0 bg-white shadow-[0_2px_8px_rgba(44,30,25,0.11)] transition-shadow duration-200 hover:shadow-[0_4px_13px_rgba(44,30,25,0.15)] focus-visible:outline-offset-4"
               >
                 <div className="aspect-[1.06/1] overflow-hidden bg-soft">
                   <img
                     className="h-full w-full object-cover transition-transform duration-[450ms] group-hover:scale-[1.025]"
                     loading="lazy"
-                    src={image.src}
-                    alt={image.alt}
-                    style={{ objectPosition: image.position }}
+                    src={item.image.src}
+                    alt={item.image.alt}
+                    style={{ objectPosition: item.image.position }}
                   />
                 </div>
                 <span className="flex min-h-[50px] items-center justify-center px-2 py-2 text-center font-ui text-[17px] font-medium leading-[1.3] tracking-[.005em] group-hover:text-wine phone:min-h-[48px] phone:text-[16px]">

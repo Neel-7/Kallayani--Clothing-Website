@@ -1,7 +1,50 @@
-node_modules
-dist
-.DS_Store
-*.tgz
+# Dependencies
+node_modules/
+
+# Production builds and test output
+dist/
+coverage/
+.vite/
 *.tsbuildinfo
 vite.config.js
 vite.config.d.ts
+
+# Local environment configuration
+# Keep real Firebase configuration and future private server credentials local.
+.env
+.env.*
+!.env.example
+*.env
+
+# Firebase CLI and Emulator Suite output
+.firebase/
+.firebase-config/
+.firebase-tools/
+.firebaserc
+!.firebaserc.example
+firebase-export/
+emulator-data/
+firebase-debug*.log
+firestore-debug*.log
+ui-debug*.log
+
+# Firebase Admin/service-account credentials must never be committed
+service-account*.json
+*-firebase-adminsdk-*.json
+google-application-credentials*.json
+
+# Logs and temporary files
+*.log
+*.tgz
+*.tmp
+*.temp
+.cache/
+tmp/
+
+# Editors and operating systems
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
+*.swo

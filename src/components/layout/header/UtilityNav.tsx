@@ -11,8 +11,8 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
-import { collections } from "@/data/catalog";
 import type { RootState } from "@/store/store";
+import { useGetCollectionsQuery } from "@/store/storefront-api";
 
 function IconAction({
   label,
@@ -87,6 +87,7 @@ export function UtilityNav() {
 
 function SearchSheet({ trigger }: { trigger: React.ReactElement }) {
   const [query, setQuery] = useState("");
+  const { data: collections = [], isLoading } = useGetCollectionsQuery();
   const results = collections.filter((collection) =>
     `${collection.name} ${collection.subcategories.map((item) => item.name).join(" ")} ${collection.products.map((item) => `${item.name} ${item.craft} ${item.region}`).join(" ")}`
       .toLowerCase()
@@ -114,7 +115,7 @@ function SearchSheet({ trigger }: { trigger: React.ReactElement }) {
         </label>
         <div className="mt-7 flex flex-col">
           <span className="mb-3 text-xs uppercase tracking-[.05em] text-muted">
-            {query ? "Matching collections" : "Explore the collections"}
+            {isLoading ? "Loading the collection" : query ? "Matching collections" : "Explore the collections"}
           </span>
           {results.map((item) => (
             <SheetClose asChild key={item.slug}>

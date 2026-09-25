@@ -1,25 +1,32 @@
-import { useEffect, useMemo } from "react";
+import { useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import { ProductRail } from "@/components/catalog/ProductRail";
 import { Newsletter } from "@/components/layout/Footer";
 import { ProductMediaCarousel } from "@/components/product/ProductMediaCarousel";
 import { ProductPurchasePanel } from "@/components/product/ProductPurchasePanel";
-import { productById, productCollectionById } from "@/data/catalog";
+import { useGetProductQuery } from "@/store/storefront-api";
 import { NotFoundPage } from "./NotFoundPage";
 
 export function ProductPage() {
   const { productId = "" } = useParams();
-  const product = productById[productId];
-  const collection = productCollectionById[productId];
-  const similarProducts = useMemo(
-    () => collection?.products.filter((entry) => entry.id !== productId) ?? [],
-    [collection, productId],
-  );
+  const { data, error, isLoading, refetch } = useGetProductQuery(productId);
+  const product = data?.product;
+  const collection = data?.collection;
+  const similarProducts = data?.similarProducts ?? [];
 
   useEffect(() => {
     if (product) document.title = `${product.name} — Kallayani`;
   }, [product]);
 
+  if (isLoading) return <div className="min-h-[70vh] animate-pulse bg-soft" aria-label="Loading product" />;
+  if (error) {
+    return (
+      <section className="mx-auto flex min-h-[60vh] max-w-xl flex-col items-center justify-center px-gutter text-center">
+        <h1 className="font-editorial text-5xl font-medium">This piece could not be loaded.</h1>
+        <button className="mt-6 min-h-11 bg-ink px-6 text-sm text-white" onClick={refetch} type="button">Try again</button>
+      </section>
+    );
+  }
   if (!product || !collection) return <NotFoundPage />;
 
   return (

@@ -1,6 +1,7 @@
 import { ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
+import { useGetStorefrontInfoQuery } from "@/store/storefront-api";
 import { BrandMark } from "./BrandMark";
 
 export function Newsletter({ showTopBorder = true }: { showTopBorder?: boolean }) {
@@ -39,6 +40,8 @@ export function Newsletter({ showTopBorder = true }: { showTopBorder?: boolean }
 }
 
 export function Footer() {
+  const { data: storeInfo } = useGetStorefrontInfoQuery();
+
   return (
     <footer className="bg-ink text-white [&_a:hover]:underline [&_a:hover]:underline-offset-4">
       <div className="mx-gutter grid grid-cols-[1fr_1.2fr_.8fr] items-start gap-16 py-11 compact:gap-8 tablet:grid-cols-2 phone:gap-6 phone:py-8 phone:[&>a]:col-span-full">
@@ -63,7 +66,7 @@ export function Footer() {
           <a href="/privacy">Privacy</a>
           <a href="/terms">Terms</a>
         </div>
-        <span>New York · Kolkata · Chennai</span>
+        <span>{storeInfo?.addressLine ?? "New York · Kolkata · Chennai"}</span>
       </div>
     </footer>
   );

@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { editorialFeatures } from "@/data/catalog";
+import type { EditorialFeature } from "@/types/catalog";
 
 function EditorialCopy({
   title,
@@ -35,8 +35,10 @@ function EditorialCopy({
   );
 }
 
-export function EditorialImages() {
-  const [left, right, wide] = editorialFeatures;
+export function EditorialImages({ features }: { features: EditorialFeature[] }) {
+  const [left, right, wide] = features;
+
+  if (!left || !right || !wide) return null;
   return (
     <section className="px-gutter pb-7" aria-label="Featured edits">
       <div className="grid grid-cols-2 gap-4 phone:grid-cols-1 phone:gap-2">

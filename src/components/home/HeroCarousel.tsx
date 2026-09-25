@@ -10,11 +10,11 @@ import {
   CarouselPrevious,
   type CarouselApi,
 } from "@/components/ui/carousel";
-import { heroSlides } from "@/data/catalog";
+import type { HeroSlide } from "@/types/catalog";
 
 const AUTOPLAY_MS = 6000;
 
-export function HeroCarousel() {
+export function HeroCarousel({ slides }: { slides: HeroSlide[] }) {
   const [api, setApi] = useState<CarouselApi>();
   const [paused, setPaused] = useState(false);
   const [stopped, setStopped] = useState(false);
@@ -51,13 +51,13 @@ export function HeroCarousel() {
       }}
     >
       <CarouselContent className="h-full">
-        {heroSlides.map((slide, index) => (
+        {slides.map((slide, index) => (
           <CarouselItem
             key={slide.id}
             className="relative h-full"
             inert={index !== active}
             aria-hidden={index !== active}
-            aria-label={`${index + 1} of ${heroSlides.length}`}
+            aria-label={`${index + 1} of ${slides.length}`}
           >
             <img
               className="h-full w-full object-cover desktop:!object-top"
@@ -93,7 +93,7 @@ export function HeroCarousel() {
       <CarouselPrevious className="!absolute left-4 desktop:left-6 top-1/2 z-[5] !h-14 !w-14 !min-h-14 !rounded-full !border-0 !bg-transparent !text-white -translate-y-1/2 !opacity-80 transition-all duration-300 ease-out hover:scale-110 hover:!bg-transparent hover:!text-white hover:!opacity-100 active:scale-90 [&_svg]:!size-10 [&_svg]:!stroke-[1.5] phone:left-3 phone:!h-10 phone:!w-10 phone:!min-h-10 phone:top-[38%] [&_svg]:phone:!size-7" />
       <CarouselNext className="!absolute right-4 desktop:right-6 top-1/2 z-[5] !h-14 !w-14 !min-h-14 !rounded-full !border-0 !bg-transparent !text-white -translate-y-1/2 !opacity-80 transition-all duration-300 ease-out hover:scale-110 hover:!bg-transparent hover:!text-white hover:!opacity-100 active:scale-90 [&_svg]:!size-10 [&_svg]:!stroke-[1.5] phone:right-3 phone:!h-10 phone:!w-10 phone:!min-h-10 phone:top-[38%] [&_svg]:phone:!size-7" />
       <div className="absolute bottom-3 left-1/2 flex -translate-x-1/2 items-center gap-2">
-        {heroSlides.map((slide, index) => (
+        {slides.map((slide, index) => (
           <button
             key={slide.id}
             aria-label={`Show campaign ${index + 1}: ${slide.title}`}
