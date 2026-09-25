@@ -12,6 +12,9 @@
     "firebase:seed": "node --env-file=.env.local --import tsx scripts/seed-firestore.ts",
     "firebase:seed:dry": "node --env-file=.env.local --import tsx scripts/seed-firestore.ts --dry-run",
     "firebase:verify": "node --env-file=.env.local --import tsx scripts/verify-firestore.ts",
+    "firebase:phase1:check": "node scripts/check-firebase-phase-1.mjs",
+    "firebase:deploy:dev": "firebase deploy --only firestore:rules,firestore:indexes,storage --project kallayani-storefront-dev",
+    "firebase:deploy:staging": "firebase deploy --only firestore:rules,firestore:indexes,storage --project kallayani-storefront-staging",
     "lint": "eslint . --max-warnings 0",
     "format": "prettier --write ."
   },

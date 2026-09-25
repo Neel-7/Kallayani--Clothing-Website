@@ -1,5 +1,7 @@
 {
   "projects": {
-    "default": "kallayani-storefront-dev"
+    "default": "kallayani-storefront-dev",
+    "dev": "kallayani-storefront-dev",
+    "staging": "kallayani-storefront-staging"
   }
 }

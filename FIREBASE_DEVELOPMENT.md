@@ -1,6 +1,6 @@
 # Kallayani Firebase Development Architecture
 
-This document describes how the Kallayani storefront currently loads catalogue data and images, how the local Firebase environment differs from the cloud Firebase project, and what must happen before a production deployment.
+This document describes how the Kallayani storefront currently loads catalogue data and images, how the local Firebase environment differs from the cloud Firebase project, and what must happen before a production deployment. The environment-stabilization checklist and deploy commands are maintained in [`FIREBASE_PHASE_1.md`](./FIREBASE_PHASE_1.md).
 
 ## Current architecture
 
@@ -10,7 +10,7 @@ Kallayani currently uses three separate layers:
 2. **The repository stores image files.** Images remain under `public/images/` and are served by Vite during development or by the deployed web host in production.
 3. **React renders the storefront.** The frontend requests documents through the Firebase Web SDK, maps those documents to the existing catalogue types, and gives each image path to the browser.
 
-Firestore does not currently contain image binary data, and Firebase Storage is not currently used.
+Firestore does not currently contain image binary data, and Firebase Storage is not currently used by the application. A deny-by-default Storage ruleset is registered as the secure Phase 1 baseline.
 
 ```text
 Firestore document                    Website host
@@ -160,6 +160,7 @@ Files intended for version control include:
 - `firebase.json`
 - `firestore.rules`
 - `firestore.indexes.json`
+- `storage.rules`
 - Firebase integration and seed scripts
 - This architecture document
 
@@ -204,6 +205,13 @@ npm run firebase:seed:dry
 
 # Verify catalogue structure and image paths
 npm run firebase:verify
+
+# Verify repository-side Phase 1 configuration
+npm run firebase:phase1:check
+
+# Deploy Phase 1 rules and indexes to an explicit environment
+npm run firebase:deploy:dev
+npm run firebase:deploy:staging
 
 # Validate the application
 npm run lint
