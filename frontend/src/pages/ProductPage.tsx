@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import { useDispatch } from "react-redux";
 import { Link, useParams } from "react-router-dom";
 import { ProductRail } from "@/components/catalog/ProductRail";
 import { Newsletter } from "@/components/layout/Footer";
@@ -6,8 +7,11 @@ import { ProductMediaCarousel } from "@/components/product/ProductMediaCarousel"
 import { ProductPurchasePanel } from "@/components/product/ProductPurchasePanel";
 import { useGetProductQuery } from "@/store/storefront-api";
 import { NotFoundPage } from "./NotFoundPage";
+import { recordRecentlyViewed } from "@/store/store";
+import { ApiErrorState, ProductPageSkeleton } from "@/components/commerce/CatalogStates";
 
 export function ProductPage() {
+  const dispatch = useDispatch();
   const { productId = "" } = useParams();
   const { data, error, isLoading, refetch } = useGetProductQuery(productId);
   const product = data?.product;
@@ -15,17 +19,15 @@ export function ProductPage() {
   const similarProducts = data?.similarProducts ?? [];
 
   useEffect(() => {
-    if (product) document.title = `${product.name} — Kallayani`;
-  }, [product]);
+    if (product) {
+      document.title = `${product.name} | Kallayani`;
+      dispatch(recordRecentlyViewed(product.id));
+    }
+  }, [dispatch, product]);
 
-  if (isLoading) return <div className="min-h-[70vh] animate-pulse bg-soft" aria-label="Loading product" />;
+  if (isLoading) return <ProductPageSkeleton />;
   if (error) {
-    return (
-      <section className="mx-auto flex min-h-[60vh] max-w-xl flex-col items-center justify-center px-gutter text-center">
-        <h1 className="font-editorial text-5xl font-medium">This piece could not be loaded.</h1>
-        <button className="mt-6 min-h-11 bg-ink px-6 text-sm text-white" onClick={refetch} type="button">Try again</button>
-      </section>
-    );
+    return <ApiErrorState title="This piece could not be loaded." onRetry={refetch} />;
   }
   if (!product || !collection) return <NotFoundPage />;
 

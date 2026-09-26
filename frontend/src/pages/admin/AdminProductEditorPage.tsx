@@ -106,7 +106,7 @@ export function AdminProductEditorPage() {
   const [uploadProgress, setUploadProgress] = useState(0);
 
   useEffect(() => {
-    document.title = `${isNew ? "New product" : "Edit product"} — Kallayani catalogue`;
+    document.title = `${isNew ? "New product" : "Edit product"} | Kallayani catalogue`;
     setLoading(!isNew);
     setErrors([]);
     setMessage("");

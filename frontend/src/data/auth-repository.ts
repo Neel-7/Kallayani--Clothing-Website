@@ -18,5 +18,8 @@ export interface AuthRepository {
   register(input: RegisterInput): Promise<AuthUser>;
   loginWithGoogle(): Promise<AuthUser>;
   sendPasswordReset(email: string): Promise<void>;
+  sendEmailVerification(): Promise<void>;
+  refreshUser(): Promise<AuthUser>;
+  updateName(firstName: string, lastName: string): Promise<AuthUser>;
   logout(): Promise<void>;
 }

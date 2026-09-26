@@ -5,8 +5,12 @@ import {
   LayoutTemplate,
   LibraryBig,
   LogOut,
+  PackageSearch,
   Package,
+  ReceiptText,
+  Settings,
   Store,
+  UsersRound,
 } from "lucide-react";
 import { NavLink, Outlet } from "react-router-dom";
 import { BrandMark } from "@/components/layout/BrandMark";
@@ -15,9 +19,13 @@ import { useAdminAuth } from "./AdminAuthContext";
 const navigation = [
   { to: "/admin", label: "Overview", icon: LayoutDashboard, end: true },
   { to: "/admin/products", label: "Products", icon: Package, end: false },
+  { to: "/admin/orders", label: "Orders", icon: ReceiptText, end: false },
+  { to: "/admin/customers", label: "Customers", icon: UsersRound, end: false },
+  { to: "/admin/inventory", label: "Low stock", icon: PackageSearch, end: false },
   { to: "/admin/collections", label: "Collections", icon: LibraryBig, end: false },
   { to: "/admin/homepage", label: "Homepage", icon: LayoutTemplate, end: false },
   { to: "/admin/media", label: "Media", icon: Images, end: false },
+  { to: "/admin/settings", label: "Settings", icon: Settings, end: false },
 ];
 
 export function AdminLayout() {

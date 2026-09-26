@@ -13,6 +13,7 @@ import { errorHandler, notFound } from "./middleware/errors.js";
 import { adminRouter } from "./routes/admin-routes.js";
 import { storefrontRouter } from "./routes/storefront-routes.js";
 import { userRouter } from "./routes/user-routes.js";
+import { paymentRouter } from "./routes/payment-routes.js";
 
 export const app = express();
 app.disable("x-powered-by");
@@ -38,6 +39,12 @@ app.use(
     allowedHeaders: ["Authorization", "Content-Type", "X-Request-Id"],
     maxAge: 86_400,
   }),
+);
+// Stripe signature verification requires the untouched request body.
+app.use(
+  "/api/v1/payments",
+  express.raw({ type: "application/json", limit: "1mb" }),
+  paymentRouter,
 );
 app.use(express.json({ limit: "1mb" }));
 app.use(

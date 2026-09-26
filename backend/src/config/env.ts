@@ -16,6 +16,8 @@ const schema = z.object({
   FIREBASE_USE_EMULATORS: booleanFromString,
   VITE_USE_FIREBASE_EMULATORS: z.enum(["true", "false"]).optional(),
   FIREBASE_SERVICE_ACCOUNT_JSON: z.string().optional(),
+  STRIPE_SECRET_KEY: z.string().min(1).optional(),
+  STRIPE_WEBHOOK_SECRET: z.string().min(1).optional(),
 });
 
 const parsed = schema.parse(process.env);
@@ -32,4 +34,6 @@ export const env = {
   useEmulators:
     parsed.FIREBASE_USE_EMULATORS || parsed.VITE_USE_FIREBASE_EMULATORS === "true",
   isProduction: parsed.NODE_ENV === "production",
+  stripeSecretKey: parsed.STRIPE_SECRET_KEY,
+  stripeWebhookSecret: parsed.STRIPE_WEBHOOK_SECRET,
 };

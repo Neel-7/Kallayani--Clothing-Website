@@ -212,6 +212,21 @@ setDocument("system/storefrontSeed", {
   updatedAt: FieldValue.serverTimestamp(),
 });
 
+setDocument("settings/store", {
+  storeName: "Kallayani",
+  supportEmail: "support@kallayani.com",
+  supportPhone: "",
+  currency: "USD",
+  lowStockThreshold: 5,
+  standardShippingThreshold: 150,
+  standardShippingFee: 12,
+  expressShippingFee: 28,
+  reservationMinutes: 30,
+  orderPrefix: "KAL",
+  updatedAt: FieldValue.serverTimestamp(),
+  updatedBy: "development-seed",
+});
+
 pendingBatches.push(batch);
 
 if (dryRun) {

@@ -3,9 +3,11 @@ import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ArrowLeft, ArrowRight, Check, Eye, EyeOff, LockKeyhole, Mail } from "lucide-react";
 import { FirebaseError } from "firebase/app";
-import { Link, useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { BrandMark } from "@/components/layout/BrandMark";
 import { authRepository } from "@/data/auth";
+import { authAuthenticated } from "@/store/customer-auth";
 
 type AuthMode = "login" | "signup";
 
@@ -109,15 +111,19 @@ function PasswordField({
 
 export function AuthPage({ mode }: { mode: AuthMode }) {
   const pageRef = useRef<HTMLElement>(null);
+  const dispatch = useDispatch();
+  const location = useLocation();
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [submitted, setSubmitted] = useState(false);
   const [submitting, setSubmitting] = useState(false);
-  const [feedback, setFeedback] = useState("");
   const [formError, setFormError] = useState("");
   const copy = authCopy[mode];
   const isSignup = mode === "signup";
+  const requestedReturnTo = new URLSearchParams(location.search).get("returnTo");
+  const returnTo = requestedReturnTo?.startsWith("/") && !requestedReturnTo.startsWith("//")
+    ? requestedReturnTo
+    : "/account";
 
   useEffect(() => {
     window.history.scrollRestoration = "manual";
@@ -125,12 +131,10 @@ export function AuthPage({ mode }: { mode: AuthMode }) {
     const frame = window.requestAnimationFrame(() =>
       window.scrollTo({ top: 0, behavior: "instant" }),
     );
-    document.title = `${isSignup ? "Create account" : "Sign in"} — Kallayani`;
+    document.title = `${isSignup ? "Create account" : "Sign in"} | Kallayani`;
     setEmail("");
     setPassword("");
-    setSubmitted(false);
     setSubmitting(false);
-    setFeedback("");
     setFormError("");
     return () => window.cancelAnimationFrame(frame);
   }, [isSignup]);
@@ -190,26 +194,9 @@ export function AuthPage({ mode }: { mode: AuthMode }) {
     setSubmitting(true);
     setFormError("");
     try {
-      await authRepository.loginWithGoogle();
-      navigate("/");
-    } catch (error) {
-      setFormError(readableAuthError(error));
-    } finally {
-      setSubmitting(false);
-    }
-  };
-
-  const handlePasswordReset = async () => {
-    if (!email) {
-      setFormError("Enter your email address first.");
-      return;
-    }
-    setSubmitting(true);
-    setFormError("");
-    try {
-      await authRepository.sendPasswordReset(email);
-      setSubmitted(true);
-      setFeedback("If an account exists for this email, a password-reset message has been sent.");
+      const user = await authRepository.loginWithGoogle();
+      dispatch(authAuthenticated(user));
+      navigate(returnTo);
     } catch (error) {
       setFormError(readableAuthError(error));
     } finally {
@@ -303,23 +290,22 @@ export function AuthPage({ mode }: { mode: AuthMode }) {
               onSubmit={async (event) => {
                 event.preventDefault();
                 setSubmitting(true);
-                setSubmitted(false);
-                setFeedback("");
                 setFormError("");
                 const form = new FormData(event.currentTarget);
                 try {
                   if (isSignup) {
-                    await authRepository.register({
+                    const user = await authRepository.register({
                       email,
                       password,
                       firstName: String(form.get("firstName") ?? ""),
                       lastName: String(form.get("lastName") ?? ""),
                     });
-                    setFeedback("Your account is ready. Check your inbox to verify your email address.");
-                    setSubmitted(true);
+                    dispatch(authAuthenticated(user));
+                    navigate(returnTo === "/account" ? "/account/verify-email" : returnTo);
                   } else {
-                    await authRepository.login(email, password);
-                    navigate("/");
+                    const user = await authRepository.login(email, password);
+                    dispatch(authAuthenticated(user));
+                    navigate(returnTo);
                   }
                 } catch (error) {
                   setFormError(readableAuthError(error));
@@ -412,13 +398,12 @@ export function AuthPage({ mode }: { mode: AuthMode }) {
                   {isSignup ? "I agree to the terms" : "Remember me"}
                 </label>
                 {!isSignup && (
-                  <button
+                  <Link
                     className="border-b border-transparent transition-colors hover:border-wine hover:text-wine"
-                    onClick={handlePasswordReset}
-                    type="button"
+                    to="/forgot-password"
                   >
                     Forgot password?
-                  </button>
+                  </Link>
                 )}
               </div>
 
@@ -432,15 +417,6 @@ export function AuthPage({ mode }: { mode: AuthMode }) {
                   <ArrowRight aria-hidden="true" size={15} />
                 </span>
               </button>
-
-              {submitted && (
-                <p
-                  aria-live="polite"
-                  className="border-l-2 border-wine bg-white/50 px-4 py-3 text-[12px] leading-relaxed text-[#574f48]"
-                >
-                  {feedback}
-                </p>
-              )}
 
               {formError && (
                 <p
@@ -456,7 +432,7 @@ export function AuthPage({ mode }: { mode: AuthMode }) {
               {isSignup ? "Already have an account?" : "New to Kallayani?"}{" "}
               <Link
                 className="font-medium text-wine underline decoration-wine/35 underline-offset-4 transition-colors hover:decoration-wine"
-                to={isSignup ? "/login" : "/signup"}
+                to={`${isSignup ? "/login" : "/signup"}?returnTo=${encodeURIComponent(returnTo)}`}
               >
                 {isSignup ? "Sign in" : "Create an account"}
               </Link>

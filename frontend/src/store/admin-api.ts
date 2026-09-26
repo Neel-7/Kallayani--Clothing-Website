@@ -2,12 +2,18 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { adminAuth } from "@/lib/firebase-admin-client";
 import type {
   AdminCollectionDocument,
+  AdminCustomer,
+  AdminCustomerDetails,
+  AdminDashboardReport,
+  AdminOrder,
   CreateHomepageEntryInput,
   EditableProduct,
   HomepageContentEntry,
   HomepageContentKind,
   ProductDocument,
   ProductImage,
+  LowStockItem,
+  StoreSettings,
 } from "@/types/admin";
 
 type Envelope<T> = { data: T };
@@ -22,8 +28,63 @@ export const adminApi = createApi({
       return headers;
     },
   }),
-  tagTypes: ["Products", "Collections", "Homepage"],
+  tagTypes: ["Products", "Collections", "Homepage", "Orders", "Customers", "Inventory", "Settings", "Dashboard"],
   endpoints: (builder) => ({
+    getDashboard: builder.query<AdminDashboardReport, number | void>({
+      query: (days = 30) => ({ url: "/admin/dashboard", params: { days } }),
+      transformResponse: (response: Envelope<AdminDashboardReport>) => response.data,
+      providesTags: ["Dashboard"],
+    }),
+    listOrders: builder.query<AdminOrder[], void>({
+      query: () => "/admin/orders",
+      transformResponse: (response: Envelope<AdminOrder[]>) => response.data,
+      providesTags: ["Orders"],
+    }),
+    getOrder: builder.query<AdminOrder, string>({
+      query: (id) => `/admin/orders/${encodeURIComponent(id)}`,
+      transformResponse: (response: Envelope<AdminOrder>) => response.data,
+      providesTags: (_result, _error, id) => [{ type: "Orders", id }],
+    }),
+    updateFulfillment: builder.mutation<AdminOrder, { id: string; status: string; carrier: string; trackingNumber: string }>({
+      query: ({ id, ...body }) => ({ url: `/admin/orders/${encodeURIComponent(id)}/fulfillment`, method: "PATCH", body }),
+      transformResponse: (response: Envelope<AdminOrder>) => response.data,
+      invalidatesTags: (_result, _error, { id }) => ["Orders", "Dashboard", { type: "Orders", id }],
+    }),
+    refundOrder: builder.mutation<AdminOrder, { id: string; amount: number; reason: string; restock: boolean; operationId: string }>({
+      query: ({ id, ...body }) => ({ url: `/admin/orders/${encodeURIComponent(id)}/refund`, method: "POST", body }),
+      transformResponse: (response: Envelope<AdminOrder>) => response.data,
+      invalidatesTags: (_result, _error, { id }) => ["Orders", "Dashboard", "Inventory", { type: "Orders", id }],
+    }),
+    cancelOrder: builder.mutation<AdminOrder, { id: string; reason: string; operationId: string }>({
+      query: ({ id, ...body }) => ({ url: `/admin/orders/${encodeURIComponent(id)}/cancel`, method: "POST", body }),
+      transformResponse: (response: Envelope<AdminOrder>) => response.data,
+      invalidatesTags: (_result, _error, { id }) => ["Orders", "Dashboard", "Inventory", { type: "Orders", id }],
+    }),
+    listCustomers: builder.query<AdminCustomer[], string | void>({
+      query: (query = "") => ({ url: "/admin/customers", params: { query } }),
+      transformResponse: (response: Envelope<AdminCustomer[]>) => response.data,
+      providesTags: ["Customers"],
+    }),
+    getCustomer: builder.query<AdminCustomerDetails, string>({
+      query: (id) => `/admin/customers/${encodeURIComponent(id)}`,
+      transformResponse: (response: Envelope<AdminCustomerDetails>) => response.data,
+      providesTags: (_result, _error, id) => [{ type: "Customers", id }],
+    }),
+    listLowStock: builder.query<LowStockItem[], number | void>({
+      query: (threshold) => ({ url: "/admin/inventory/low-stock", params: threshold === undefined ? undefined : { threshold } }),
+      transformResponse: (response: Envelope<LowStockItem[]>) => response.data,
+      providesTags: ["Inventory"],
+    }),
+    getSettings: builder.query<StoreSettings, void>({
+      query: () => "/admin/settings",
+      transformResponse: (response: Envelope<StoreSettings>) => response.data,
+      providesTags: ["Settings"],
+    }),
+    updateSettings: builder.mutation<StoreSettings, StoreSettings>({
+      query: (body) => ({ url: "/admin/settings", method: "PUT", body }),
+      transformResponse: (response: Envelope<StoreSettings>) => response.data,
+      invalidatesTags: ["Settings", "Inventory", "Dashboard"],
+    }),
     listProducts: builder.query<ProductDocument[], void>({
       query: () => "/admin/products",
       transformResponse: (response: Envelope<ProductDocument[]>) => response.data,
@@ -109,3 +170,17 @@ export const adminApi = createApi({
     }),
   }),
 });
+
+export const {
+  useGetDashboardQuery,
+  useListOrdersQuery,
+  useGetOrderQuery,
+  useUpdateFulfillmentMutation,
+  useRefundOrderMutation,
+  useCancelOrderMutation,
+  useListCustomersQuery,
+  useGetCustomerQuery,
+  useListLowStockQuery,
+  useGetSettingsQuery,
+  useUpdateSettingsMutation,
+} = adminApi;

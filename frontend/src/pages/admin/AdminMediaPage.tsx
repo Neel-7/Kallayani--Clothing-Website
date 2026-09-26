@@ -13,7 +13,7 @@ export function AdminMediaPage() {
   const [error, setError] = useState("");
 
   useEffect(() => {
-    document.title = "Media — Kallayani catalogue";
+    document.title = "Media | Kallayani catalogue";
     void listAdminProducts()
       .then(setProducts)
       .catch((reason) => setError(reason.message));

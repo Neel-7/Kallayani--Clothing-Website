@@ -87,3 +87,9 @@
     }
   }
 }
+
+@layer components {
+  .admin-input {
+    @apply min-h-11 w-full border border-[#cfc7bd] bg-white px-3 text-sm text-ink outline-none placeholder:text-[#746d67] focus:border-wine disabled:cursor-not-allowed disabled:bg-[#eeeae4] disabled:text-muted;
+  }
+}

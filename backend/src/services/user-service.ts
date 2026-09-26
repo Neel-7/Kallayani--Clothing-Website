@@ -73,3 +73,36 @@ export async function saveCommerceState(
     { merge: true },
   );
 }
+
+export async function getAddresses(uid: string) {
+  const snapshot = await firestore.doc(`users/${uid}/account/addresses`).get();
+  return snapshot.data()?.addresses ?? [];
+}
+
+export async function saveAddresses(
+  uid: string,
+  addresses: Array<{
+    id: string;
+    label: string;
+    fullName: string;
+    line1: string;
+    line2: string;
+    city: string;
+    region: string;
+    postalCode: string;
+    country: string;
+    phone: string;
+    isDefault: boolean;
+  }>,
+) {
+  const defaultIndex = addresses.findIndex((address) => address.isDefault);
+  const normalized = addresses.map((address, index) => ({
+    ...address,
+    isDefault: defaultIndex >= 0 ? index === defaultIndex : index === 0,
+  }));
+  await firestore.doc(`users/${uid}/account/addresses`).set({
+    addresses: normalized,
+    updatedAt: FieldValue.serverTimestamp(),
+  });
+  return normalized;
+}

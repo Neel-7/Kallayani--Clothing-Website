@@ -4,8 +4,8 @@
   "version": "1.0.0",
   "type": "module",
   "scripts": {
-    "dev": "node --env-file=../frontend/.env.local --import ./scripts/firebase-development-env.mjs --import tsx --watch src/server.ts",
-    "dev:once": "node --env-file=../frontend/.env.local --import ./scripts/firebase-development-env.mjs --import tsx src/server.ts",
+    "dev": "node --env-file=../frontend/.env.local --env-file-if-exists=.env.local --import ./scripts/firebase-development-env.mjs --import tsx --watch src/server.ts",
+    "dev:once": "node --env-file=../frontend/.env.local --env-file-if-exists=.env.local --import ./scripts/firebase-development-env.mjs --import tsx src/server.ts",
     "build": "tsc -p tsconfig.build.json",
     "start": "node dist/server.js",
     "typecheck": "tsc --noEmit",
@@ -15,6 +15,8 @@
     "firebase:seed:dry": "node --env-file=../frontend/.env.local --import ./scripts/firebase-development-env.mjs --import tsx scripts/seed-firestore.ts --dry-run",
     "firebase:verify": "node --env-file=../frontend/.env.local --import ./scripts/firebase-development-env.mjs --import tsx scripts/verify-firestore.ts",
     "firebase:verify:media": "node --env-file=../frontend/.env.local --import ./scripts/firebase-development-env.mjs --import tsx scripts/verify-firestore.ts --require-storage-media",
+    "checkout:verify": "node --env-file=../frontend/.env.local --import ./scripts/firebase-development-env.mjs --import tsx scripts/verify-checkout-flow.ts",
+    "admin:verify": "node --env-file=../frontend/.env.local --import ./scripts/firebase-development-env.mjs --import tsx scripts/verify-admin-flow.ts",
     "firebase:set-role": "node --env-file=../frontend/.env.local --import ./scripts/firebase-development-env.mjs --import tsx scripts/set-firebase-role.ts",
     "firebase:migrate:media": "node --env-file=../frontend/.env.local --import ./scripts/firebase-script-env.mjs --import tsx scripts/migrate-catalog-media.ts",
     "firebase:deploy:dev": "firebase deploy --config ../firebase.json --only firestore:rules,firestore:indexes,storage --project kallayani-storefront-dev",
@@ -31,6 +33,7 @@
     "pino": "^10.1.0",
     "pino-http": "^11.0.0",
     "sharp": "^0.34.4",
+    "stripe": "^22.6.2",
     "zod": "^4.1.12"
   },
   "devDependencies": {

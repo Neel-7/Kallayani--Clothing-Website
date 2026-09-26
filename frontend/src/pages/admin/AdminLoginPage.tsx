@@ -16,7 +16,7 @@ export function AdminLoginPage() {
   const [error, setError] = useState("");
 
   useEffect(() => {
-    document.title = "Catalogue sign in — Kallayani";
+    document.title = "Catalogue sign in | Kallayani";
   }, []);
 
   if (!loading && role) return <Navigate replace to="/admin" />;

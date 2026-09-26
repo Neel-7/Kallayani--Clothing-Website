@@ -13,7 +13,7 @@ export const productCopy: Record<string, string> = {
 export const sizesByCollection: Record<string, string[]> = {
   women: ["XS", "S", "M", "L", "XL"],
   men: ["S", "M", "L", "XL", "XXL"],
-  kids: ["2–3Y", "4–5Y", "6–7Y", "8–9Y"],
+  kids: ["2-3Y", "4-5Y", "6-7Y", "8-9Y"],
   home: ["Twin", "Queen", "King"],
   jewellery: ["One size"],
   wedding: ["S", "M", "L", "XL"],

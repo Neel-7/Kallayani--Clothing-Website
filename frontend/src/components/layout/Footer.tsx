@@ -51,13 +51,17 @@ export function Footer() {
           in the US.
         </p>
         <nav
-          className="grid grid-cols-2 justify-self-end gap-x-10 gap-y-3 tablet:col-start-2 tablet:row-span-2 phone:col-span-full phone:row-auto phone:justify-self-start phone:gap-x-16 phone:gap-y-4"
+          className="grid grid-cols-2 justify-self-end gap-x-10 gap-y-3 tablet:col-start-2 tablet:row-span-2 phone:col-span-full phone:row-auto phone:justify-self-start phone:gap-x-10 phone:gap-y-4"
           aria-label="Footer navigation"
         >
           <Link to="/women">Women</Link>
           <Link to="/men">Men</Link>
           <Link to="/home">Home</Link>
           <Link to="/jewellery">Jewellery</Link>
+          <Link to="/shop">Shop all</Link>
+          <Link to="/wishlist">Wishlist</Link>
+          <Link to="/recently-viewed">Recently viewed</Link>
+          <Link to="/cart">Shopping bag</Link>
         </nav>
       </div>
       <div className="mx-gutter flex justify-between gap-6 border-t border-[#393532] py-5 text-xs text-[#b4afaa] phone:flex-wrap phone:gap-4 phone:text-[11px] phone:[&>span:last-child]:w-full">

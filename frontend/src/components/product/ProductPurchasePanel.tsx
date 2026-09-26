@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { Check, Heart, Minus, Plus, Ruler, Truck } from "lucide-react";
+import { AlertTriangle, Check, Heart, Minus, Plus, Ruler, Truck } from "lucide-react";
 import { useDispatch, useSelector } from "react-redux";
 import { Button } from "@/components/ui/button";
 import { addToBag, toggleWishlist, type RootState } from "@/store/store";
@@ -24,6 +24,19 @@ export function ProductPurchasePanel({
   const [showSizeGuide, setShowSizeGuide] = useState(false);
   const [added, setAdded] = useState(false);
   const resetTimer = useRef<number | null>(null);
+  const selectedVariant = product.variants?.find((variant) => variant.size === selectedSize);
+  const available = product.inStock === false
+    ? 0
+    : product.variants?.length
+      ? selectedVariant?.inStock
+        ? selectedVariant.availableQuantity
+        : 0
+      : 6;
+  const stockError = available === 0
+    ? "This size is currently out of stock. Choose another size to continue."
+    : quantity > available
+      ? `Only ${available} ${available === 1 ? "piece is" : "pieces are"} available in this size.`
+      : "";
 
   useEffect(
     () => () => {
@@ -33,7 +46,7 @@ export function ProductPurchasePanel({
   );
 
   const handleAdd = () => {
-    const selectedVariant = product.variants?.find((variant) => variant.size === selectedSize);
+    if (stockError) return;
     dispatch(
       addToBag({
         productId: product.id,
@@ -87,21 +100,34 @@ export function ProductPurchasePanel({
           role="group"
           aria-label="Available sizes"
         >
-          {sizes.map((size) => (
-            <button
-              className={`min-h-11 border px-1 text-[12px] font-medium transition-[background-color,border-color,color,transform] duration-200 active:scale-[.98] ${
-                selectedSize === size
-                  ? "border-wine bg-wine text-white"
-                  : "border-line bg-white text-ink hover:border-ink"
-              }`}
-              key={size}
-              type="button"
-              aria-pressed={selectedSize === size}
-              onClick={() => setSelectedSize(size)}
-            >
-              {size}
-            </button>
-          ))}
+          {sizes.map((size) => {
+            const variant = product.variants?.find((entry) => entry.size === size);
+            const unavailable =
+              product.inStock === false ||
+              Boolean(
+                product.variants?.length &&
+                  (!variant?.inStock || variant.availableQuantity === 0),
+              );
+            return (
+              <button
+                className={`min-h-11 border px-1 text-[12px] font-medium transition-[background-color,border-color,color,transform] duration-200 active:scale-[.98] ${
+                  selectedSize === size
+                    ? "border-wine bg-wine text-white"
+                    : "border-line bg-white text-ink hover:border-ink disabled:cursor-not-allowed disabled:opacity-35"
+                }`}
+                key={size}
+                type="button"
+                aria-pressed={selectedSize === size}
+                disabled={unavailable}
+                onClick={() => {
+                  setSelectedSize(size);
+                  setQuantity(1);
+                }}
+              >
+                {size}
+              </button>
+            );
+          })}
         </div>
         <div
           className={`grid transition-[grid-template-rows,opacity] duration-300 ${
@@ -137,19 +163,25 @@ export function ProductPurchasePanel({
             className="grid size-9 place-items-center transition-transform active:scale-90"
             type="button"
             aria-label="Increase quantity"
-            onClick={() => setQuantity((value) => Math.min(6, value + 1))}
+            disabled={available === 0 || quantity >= available}
+            onClick={() => setQuantity((value) => Math.min(available, value + 1))}
           >
             <Plus size={14} />
           </button>
         </div>
-        <Button className="min-h-[52px] active:scale-[.99]" type="button" onClick={handleAdd}>
+        <Button className="min-h-[52px] active:scale-[.99]" type="button" onClick={handleAdd} disabled={Boolean(stockError)}>
           {added ? <Check size={16} /> : <Plus size={16} />}
           {added ? "Added to bag" : "Add to bag"}
         </Button>
       </div>
+      {stockError && (
+        <p className="mt-3 flex items-start gap-2 text-xs leading-5 text-red" role="alert">
+          <AlertTriangle className="mt-0.5 shrink-0" size={14} /> {stockError}
+        </p>
+      )}
 
       <div className="mt-4 flex items-center gap-2.5 border-y border-line py-3 text-[12px] text-muted">
-        <Truck size={16} /> Free US delivery over $150 · 14-day returns
+        <Truck size={16} /> Free US delivery over $150, with 14-day returns
       </div>
 
       <div>
@@ -175,7 +207,7 @@ export function ProductPurchasePanel({
           open={openSection === "Delivery"}
           onToggle={() => setOpenSection(openSection === "Delivery" ? "" : "Delivery")}
         >
-          Dispatches in 2–3 working days. Return unused pieces within 14 days in their original
+          Dispatches in 2-3 working days. Return unused pieces within 14 days in their original
           condition and packaging.
         </ProductDisclosure>
       </div>

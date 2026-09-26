@@ -32,7 +32,7 @@ export function AdminProductsPage() {
   };
 
   useEffect(() => {
-    document.title = "Products — Kallayani catalogue";
+    document.title = "Products | Kallayani catalogue";
     void reload().catch((reason) => setError(reason.message));
   }, []);
 
@@ -165,11 +165,11 @@ export function AdminProductsPage() {
                     {product.status}
                   </span>
                 </td>
-                <td className="px-4 py-4 text-muted">{product.primaryCategorySlug || "—"}</td>
+                <td className="px-4 py-4 text-muted">{product.primaryCategorySlug || "Not set"}</td>
                 <td className="px-4 py-4">${product.priceFrom.toFixed(2)}</td>
                 <td className="px-4 py-4 text-muted">{product.inStock ? "In stock" : "Out"}</td>
                 <td className="px-4 py-4 text-xs text-muted">
-                  {product.updatedAt ? new Date(product.updatedAt).toLocaleDateString() : "—"}
+                  {product.updatedAt ? new Date(product.updatedAt).toLocaleDateString() : "Not set"}
                 </td>
                 <td className="px-5 py-4">
                   <div className="flex justify-end gap-1">

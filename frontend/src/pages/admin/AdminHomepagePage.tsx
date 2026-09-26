@@ -42,7 +42,7 @@ export function AdminHomepagePage() {
   };
 
   useEffect(() => {
-    document.title = "Homepage — Kallayani catalogue";
+    document.title = "Homepage | Kallayani catalogue";
     void listHomepageContent()
       .then((next) => {
         setEntries(next);

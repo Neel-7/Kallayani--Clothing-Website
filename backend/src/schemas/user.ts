@@ -18,16 +18,45 @@ export const commerceStateSchema = z.object({
   bagCount: z.number().int().nonnegative().optional(),
 });
 
-export const createOrderSchema = z.object({
+const addressSchema = z.object({
+  id: z.string().trim().min(1).max(160),
+  label: z.string().trim().min(1).max(80),
+  fullName: z.string().trim().min(2).max(180),
+  line1: z.string().trim().min(3).max(240),
+  line2: z.string().trim().max(240).default(""),
+  city: z.string().trim().min(2).max(120),
+  region: z.string().trim().min(1).max(120),
+  postalCode: z.string().trim().min(2).max(40),
+  country: z.string().trim().length(2).transform((value) => value.toUpperCase()),
+  phone: z.string().trim().min(6).max(40),
+  isDefault: z.boolean().default(false),
+});
+
+export const addressesSchema = z.object({
+  addresses: z.array(addressSchema).max(10),
+});
+
+export const shippingAddressSchema = z.object({
+  name: z.string().trim().min(2).max(180),
+  line1: z.string().trim().min(3).max(240),
+  line2: z.string().trim().max(240).default(""),
+  city: z.string().trim().min(2).max(120),
+  region: z.string().trim().max(120),
+  postalCode: z.string().trim().min(2).max(40),
+  country: z.string().trim().length(2).transform((value) => value.toUpperCase()),
+  phone: z.string().trim().min(6).max(40),
+});
+
+export const checkoutQuoteSchema = z.object({
   lines: z.array(cartLineSchema).min(1).max(100),
-  shippingAddress: z.object({
-    name: z.string().trim().min(2).max(180),
-    line1: z.string().trim().min(3).max(240),
-    line2: z.string().trim().max(240).optional(),
-    city: z.string().trim().min(2).max(120),
-    region: z.string().trim().max(120),
-    postalCode: z.string().trim().min(2).max(40),
-    country: z.string().trim().length(2).transform((value) => value.toUpperCase()),
-    phone: z.string().trim().min(6).max(40),
-  }),
+  shippingAddress: shippingAddressSchema,
+  deliveryMethodId: z.enum(["standard", "express"]),
+});
+
+export const checkoutOrderSchema = checkoutQuoteSchema.extend({
+  email: z.string().email().max(254).optional(),
+});
+
+export const checkoutOrderActionSchema = z.object({
+  orderId: z.string().trim().min(1).max(160),
 });

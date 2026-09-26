@@ -40,7 +40,7 @@ export function AdminCollectionsPage() {
   };
 
   useEffect(() => {
-    document.title = "Collections — Kallayani catalogue";
+    document.title = "Collections | Kallayani catalogue";
     void listAdminCollectionDocuments()
       .then((next) => {
         setCollections(next);

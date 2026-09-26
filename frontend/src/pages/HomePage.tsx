@@ -5,26 +5,17 @@ import { EditorialImages } from "@/components/home/EditorialImages";
 import { HeroCarousel } from "@/components/home/HeroCarousel";
 import { BrandSignature } from "@/components/home/BrandSignature";
 import { useGetHomePageQuery } from "@/store/storefront-api";
+import { ApiErrorState, HomePageSkeleton } from "@/components/commerce/CatalogStates";
 
 export function HomePage() {
   const { data, error, isLoading, refetch } = useGetHomePageQuery();
 
   if (isLoading) {
-    return <div className="min-h-[calc(100svh-94px)] animate-pulse bg-soft" aria-label="Loading Kallayani" />;
+    return <HomePageSkeleton />;
   }
 
   if (error || !data) {
-    return (
-      <section className="mx-auto flex min-h-[60vh] max-w-xl flex-col items-center justify-center px-gutter text-center">
-        <h1 className="font-editorial text-5xl font-medium">The collection is resting.</h1>
-        <p className="mt-4 text-sm leading-6 text-muted">
-          We could not reach the Kallayani catalogue. Please try again in a moment.
-        </p>
-        <button className="mt-6 min-h-11 bg-ink px-6 text-sm text-white" onClick={refetch} type="button">
-          Try again
-        </button>
-      </section>
-    );
+    return <ApiErrorState title="The collection is resting." message="We could not reach the Kallayani catalogue. Please try again in a moment." onRetry={refetch} />;
   }
 
   return (
