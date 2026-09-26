@@ -1,7 +1,12 @@
 import { adminApi } from "@/store/admin-api";
 import { apiErrorMessage } from "@/store/api-error";
 import { store } from "@/store/store";
-import type { AdminCollectionDocument, HomepageContentEntry } from "@/types/admin";
+import type {
+  AdminCollectionDocument,
+  CreateHomepageEntryInput,
+  HomepageContentEntry,
+  HomepageContentKind,
+} from "@/types/admin";
 
 async function result<T>(promise: { unwrap(): Promise<T> }, fallback: string) {
   try {
@@ -39,6 +44,13 @@ export async function listHomepageContent() {
   );
 }
 
+export async function createHomepageContent(input: CreateHomepageEntryInput) {
+  return result(
+    store.dispatch(adminApi.endpoints.createHomepage.initiate(input)),
+    "Homepage content could not be created.",
+  );
+}
+
 export async function saveHomepageContent(input: HomepageContentEntry) {
   await result(
     store.dispatch(adminApi.endpoints.updateHomepage.initiate(input)),
@@ -46,8 +58,16 @@ export async function saveHomepageContent(input: HomepageContentEntry) {
   );
 }
 
+export async function deleteHomepageContent(kind: HomepageContentKind, id: string) {
+  await result(
+    store.dispatch(adminApi.endpoints.deleteHomepage.initiate({ kind, id })),
+    "Homepage content could not be deleted.",
+  );
+}
+
 export type {
   AdminCollectionDocument,
+  CreateHomepageEntryInput,
   HomepageContentEntry,
   HomepageContentKind,
 } from "@/types/admin";

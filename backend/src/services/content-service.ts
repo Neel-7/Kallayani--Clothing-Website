@@ -70,6 +70,21 @@ export async function updateCollection(id: string, input: DocumentData, actor: s
 
 type HomepageKind = "banner" | "category" | "editorial";
 
+function resolveHomepageCollection(kind: string) {
+  if (kind === "banner") return "banners";
+  if (kind === "category") return "homeCategories";
+  if (kind === "editorial") return "editorialFeatures";
+  throw new AppError(400, "INVALID_KIND", "Invalid homepage content kind.");
+}
+
+function slugifyId(value: string) {
+  return value
+    .toLowerCase()
+    .normalize("NFKD")
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-|-$/g, "");
+}
+
 function homepageEntry(kind: HomepageKind, id: string, data: DocumentData) {
   return {
     id,
@@ -100,9 +115,53 @@ export async function listHomepageContent() {
   ].sort((a, b) => a.kind.localeCompare(b.kind) || a.position - b.position || a.title.localeCompare(b.title));
 }
 
+export async function createHomepageContent(input: DocumentData, actor: string) {
+  const collectionName = resolveHomepageCollection(input.kind);
+  let id = (input.id as string | undefined)?.trim();
+  if (!id) {
+    const baseSlug = slugifyId(input.title) || `${input.kind}-${Date.now()}`;
+    const candidateDoc = firestore.doc(`${collectionName}/${baseSlug}`);
+    if (!(await candidateDoc.get()).exists) {
+      id = baseSlug;
+    } else {
+      id = `${baseSlug}-${Date.now().toString().slice(-4)}`;
+    }
+  }
+
+  const reference = firestore.doc(`${collectionName}/${id}`);
+  if ((await reference.get()).exists) {
+    throw new AppError(409, "CONTENT_EXISTS", "A homepage content entry with this ID already exists.");
+  }
+
+  const base = {
+    id,
+    status: input.status ?? "draft",
+    position: Number(input.position ?? 0),
+    imageUrl: input.imageUrl ?? "",
+    imageAlt: input.imageAlt ?? "",
+    imagePosition: input.imagePosition || null,
+    createdAt: FieldValue.serverTimestamp(),
+    createdBy: actor,
+    updatedAt: FieldValue.serverTimestamp(),
+    updatedBy: actor,
+  };
+  const fields =
+    input.kind === "banner"
+      ? { ...base, title: input.title, subtitle: input.description ?? "", linkUrl: input.linkUrl ?? "", ctaLabel: input.ctaLabel ?? "", placement: "HOME_HERO" }
+      : input.kind === "category"
+        ? { ...base, label: input.title, href: input.linkUrl ?? "", slug: (input.linkUrl ?? "").replace(/^\//, "") }
+        : { ...base, title: input.title, description: input.description ?? "", href: input.linkUrl ?? "" };
+
+  await reference.set(fields);
+  return id;
+}
+
 export async function updateHomepageContent(input: DocumentData, actor: string) {
-  const collectionName =
-    input.kind === "banner" ? "banners" : input.kind === "category" ? "homeCategories" : "editorialFeatures";
+  const collectionName = resolveHomepageCollection(input.kind);
+  const reference = firestore.doc(`${collectionName}/${input.id}`);
+  if (!(await reference.get()).exists) {
+    throw new AppError(404, "CONTENT_NOT_FOUND", "Homepage content entry not found.");
+  }
   const base = {
     status: input.status,
     position: input.position,
@@ -114,9 +173,18 @@ export async function updateHomepageContent(input: DocumentData, actor: string) 
   };
   const fields =
     input.kind === "banner"
-      ? { ...base, title: input.title, subtitle: input.description, linkUrl: input.linkUrl, ctaLabel: input.ctaLabel, placement: "HOME_HERO" }
+      ? { ...base, title: input.title, subtitle: input.description ?? "", linkUrl: input.linkUrl ?? "", ctaLabel: input.ctaLabel ?? "", placement: "HOME_HERO" }
       : input.kind === "category"
-        ? { ...base, label: input.title, href: input.linkUrl, slug: input.linkUrl.replace(/^\//, "") }
-        : { ...base, title: input.title, description: input.description, href: input.linkUrl };
-  await firestore.doc(`${collectionName}/${input.id}`).update(fields);
+        ? { ...base, label: input.title, href: input.linkUrl ?? "", slug: (input.linkUrl ?? "").replace(/^\//, "") }
+        : { ...base, title: input.title, description: input.description ?? "", href: input.linkUrl ?? "" };
+  await reference.update(fields);
+}
+
+export async function deleteHomepageContent(kind: string, id: string) {
+  const collectionName = resolveHomepageCollection(kind);
+  const reference = firestore.doc(`${collectionName}/${id}`);
+  if (!(await reference.get()).exists) {
+    throw new AppError(404, "CONTENT_NOT_FOUND", "Homepage content entry not found.");
+  }
+  await reference.delete();
 }

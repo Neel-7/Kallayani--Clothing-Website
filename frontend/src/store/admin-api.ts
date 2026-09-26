@@ -2,8 +2,10 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { adminAuth } from "@/lib/firebase-admin-client";
 import type {
   AdminCollectionDocument,
+  CreateHomepageEntryInput,
   EditableProduct,
   HomepageContentEntry,
+  HomepageContentKind,
   ProductDocument,
   ProductImage,
 } from "@/types/admin";
@@ -89,8 +91,20 @@ export const adminApi = createApi({
       transformResponse: (response: Envelope<HomepageContentEntry[]>) => response.data,
       providesTags: ["Homepage"],
     }),
+    createHomepage: builder.mutation<string, CreateHomepageEntryInput>({
+      query: (body) => ({ url: "/admin/homepage", method: "POST", body }),
+      transformResponse: (response: Envelope<{ id: string }>) => response.data.id,
+      invalidatesTags: ["Homepage"],
+    }),
     updateHomepage: builder.mutation<void, HomepageContentEntry>({
       query: (body) => ({ url: `/admin/homepage/${body.kind}/${encodeURIComponent(body.id)}`, method: "PUT", body }),
+      invalidatesTags: ["Homepage"],
+    }),
+    deleteHomepage: builder.mutation<void, { kind: HomepageContentKind; id: string }>({
+      query: ({ kind, id }) => ({
+        url: `/admin/homepage/${kind}/${encodeURIComponent(id)}`,
+        method: "DELETE",
+      }),
       invalidatesTags: ["Homepage"],
     }),
   }),

@@ -5,10 +5,17 @@ import { requireAuth, requireStaff } from "../middleware/auth.js";
 import { validateBody } from "../middleware/validate.js";
 import { asyncHandler } from "../lib/async-handler.js";
 import { AppError } from "../lib/app-error.js";
-import { collectionSchema, createCollectionSchema, homepageEntrySchema } from "../schemas/content.js";
+import {
+  collectionSchema,
+  createCollectionSchema,
+  createHomepageEntrySchema,
+  homepageEntrySchema,
+} from "../schemas/content.js";
 import { editableProductSchema, productMediaSchema, productStatusSchema } from "../schemas/product.js";
 import {
   createCollection,
+  createHomepageContent,
+  deleteHomepageContent,
   listCollections,
   listHomepageContent,
   updateCollection,
@@ -146,6 +153,15 @@ adminRouter.get("/homepage", asyncHandler(async (_request, response) => {
   response.json({ data: await listHomepageContent() });
 }));
 
+adminRouter.post(
+  "/homepage",
+  validateBody(createHomepageEntrySchema),
+  asyncHandler(async (request, response) => {
+    const id = await createHomepageContent(request.body, request.auth!.uid);
+    response.status(201).json({ data: { id } });
+  }),
+);
+
 adminRouter.put(
   "/homepage/:kind/:id",
   validateBody(homepageEntrySchema),
@@ -154,6 +170,14 @@ adminRouter.put(
       throw new AppError(400, "CONTENT_ID_MISMATCH", "Content route and payload do not match.");
     }
     await updateHomepageContent(request.body, request.auth!.uid);
+    response.status(204).send();
+  }),
+);
+
+adminRouter.delete(
+  "/homepage/:kind/:id",
+  asyncHandler(async (request, response) => {
+    await deleteHomepageContent(String(request.params.kind), String(request.params.id));
     response.status(204).send();
   }),
 );

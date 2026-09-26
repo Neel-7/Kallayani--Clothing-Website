@@ -92,3 +92,17 @@ export type HomepageContentEntry = {
   status: CatalogStatus;
   updatedAt: string | null;
 };
+
+export type CreateHomepageEntryInput = {
+  id?: string;
+  kind: HomepageContentKind;
+  title: string;
+  description?: string;
+  imageUrl?: string;
+  imageAlt?: string;
+  imagePosition?: string;
+  linkUrl?: string;
+  ctaLabel?: string;
+  position?: number;
+  status?: CatalogStatus;
+};
