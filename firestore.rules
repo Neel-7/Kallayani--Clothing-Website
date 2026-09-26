@@ -2,68 +2,9 @@ rules_version = '2';
 
 service cloud.firestore {
   match /databases/{database}/documents {
-    function isSignedIn() {
-      return request.auth != null;
-    }
-
-    function isStaff() {
-      return isSignedIn()
-        && request.auth.token.role in ["admin", "manager"];
-    }
-
-    function isAdmin() {
-      return isSignedIn() && request.auth.token.role == "admin";
-    }
-
-    function isPublished() {
-      return resource.data.status == "published";
-    }
-
-    match /products/{productId} {
-      allow read: if isPublished() || isStaff();
-      allow create, update: if isStaff();
-      allow delete: if isAdmin();
-    }
-
-    match /collections/{collectionId} {
-      allow read: if isPublished() || isStaff();
-      allow create, update: if isStaff();
-      allow delete: if isAdmin();
-    }
-
-    match /homeCategories/{categoryId} {
-      allow read: if isPublished() || isStaff();
-      allow create, update: if isStaff();
-      allow delete: if isAdmin();
-    }
-
-    match /banners/{bannerId} {
-      allow read: if isPublished() || isStaff();
-      allow create, update: if isStaff();
-      allow delete: if isAdmin();
-    }
-
-    match /editorialFeatures/{featureId} {
-      allow read: if isPublished() || isStaff();
-      allow create, update: if isStaff();
-      allow delete: if isAdmin();
-    }
-
-    match /siteContent/{documentId} {
-      allow read: if isPublished() || isStaff();
-      allow create, update: if isStaff();
-      allow delete: if isAdmin();
-    }
-
-    match /users/{userId} {
-      allow create, read, update: if isSignedIn() && request.auth.uid == userId;
-      allow delete: if false;
-
-      match /{document=**} {
-        allow read, write: if isSignedIn() && request.auth.uid == userId;
-      }
-    }
-
+    // All application data is accessed through the authenticated Express API.
+    // Firebase Admin SDK calls bypass these rules after the API verifies identity,
+    // validates input, and applies role-based authorization.
     match /{document=**} {
       allow read, write: if false;
     }

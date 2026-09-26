@@ -1,0 +1,51 @@
+{
+  "name": "@kallayani/backend",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "node --env-file=../frontend/.env.local --import ./scripts/firebase-development-env.mjs --import tsx --watch src/server.ts",
+    "dev:once": "node --env-file=../frontend/.env.local --import ./scripts/firebase-development-env.mjs --import tsx src/server.ts",
+    "build": "tsc -p tsconfig.build.json",
+    "start": "node dist/server.js",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint . --max-warnings 0",
+    "firebase:emulators": "node --env-file=../frontend/.env.local scripts/start-firebase-emulators.mjs",
+    "firebase:seed": "node --env-file=../frontend/.env.local --import ./scripts/firebase-development-env.mjs --import tsx scripts/seed-firestore.ts",
+    "firebase:seed:dry": "node --env-file=../frontend/.env.local --import ./scripts/firebase-development-env.mjs --import tsx scripts/seed-firestore.ts --dry-run",
+    "firebase:verify": "node --env-file=../frontend/.env.local --import ./scripts/firebase-development-env.mjs --import tsx scripts/verify-firestore.ts",
+    "firebase:verify:media": "node --env-file=../frontend/.env.local --import ./scripts/firebase-development-env.mjs --import tsx scripts/verify-firestore.ts --require-storage-media",
+    "firebase:set-role": "node --env-file=../frontend/.env.local --import ./scripts/firebase-development-env.mjs --import tsx scripts/set-firebase-role.ts",
+    "firebase:migrate:media": "node --env-file=../frontend/.env.local --import ./scripts/firebase-script-env.mjs --import tsx scripts/migrate-catalog-media.ts",
+    "firebase:phase1:check": "node scripts/check-firebase-phase-1.mjs",
+    "firebase:deploy:dev": "firebase deploy --config ../firebase.json --only firestore:rules,firestore:indexes,storage --project kallayani-storefront-dev",
+    "firebase:deploy:staging": "firebase deploy --config ../firebase.json --only firestore:rules,firestore:indexes,storage --project kallayani-storefront-staging"
+  },
+  "dependencies": {
+    "compression": "^1.8.1",
+    "cors": "^2.8.5",
+    "express": "^5.1.0",
+    "express-rate-limit": "^8.1.0",
+    "firebase-admin": "^14.5.0",
+    "helmet": "^8.1.0",
+    "multer": "^2.0.2",
+    "pino": "^10.1.0",
+    "pino-http": "^11.0.0",
+    "sharp": "^0.34.4",
+    "zod": "^4.1.12"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.39.1",
+    "@types/compression": "^1.8.1",
+    "@types/cors": "^2.8.19",
+    "@types/express": "^5.0.5",
+    "@types/multer": "^2.0.0",
+    "@types/node": "^22.19.1",
+    "eslint": "^9.39.1",
+    "firebase-tools": "^15.31.0",
+    "globals": "^16.5.0",
+    "tsx": "^4.21.0",
+    "typescript": "~5.7.2",
+    "typescript-eslint": "^8.48.1"
+  }
+}
