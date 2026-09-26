@@ -1,17 +1,15 @@
-# Kallayani commerce application
+# Kallayani
 
-The project is split into two independently runnable TypeScript applications:
+Production-oriented commerce foundation with independently runnable applications:
 
-- `frontend/` — React, Vite, Redux Toolkit, RTK Query, and Firebase Authentication.
-- `backend/` — Express, Firebase Admin SDK, Firestore, Firebase Storage, validation, logging, and role-based authorization.
+- `frontend/`: React, Vite, Redux Toolkit, RTK Query, Firebase Authentication
+- `backend/`: Express, Firebase Admin, Firestore, Storage, Sharp, Zod
 
-The browser never reads or writes Firestore or Storage directly. It signs users in with Firebase Authentication and sends the Firebase ID token to Express. Express verifies the token, validates every request, and performs database or media operations with the Firebase Admin SDK.
+## Data and resources
 
-## Local development
+The browser authenticates with Firebase, then sends its ID token to Express. Express owns all Firestore, inventory, order, and Storage operations. New product images live in Firebase Storage; Firestore stores their metadata. Local `frontend/public/images/` files are seed/migration assets.
 
-Create `frontend/.env.local` from `frontend/.env.example`. The existing Firebase web configuration can be used there. For local emulators, set `VITE_USE_FIREBASE_EMULATORS=true`.
-
-Run these in separate terminals:
+## Run locally
 
 ```bash
 npm run firebase:emulators --workspace backend
@@ -20,21 +18,10 @@ npm run dev:backend
 npm run dev:frontend
 ```
 
-Services:
+Frontend: `http://localhost:5173` · API: `http://localhost:3001` · Firebase UI: `http://localhost:4000`
 
-- Frontend: `http://localhost:5173`
-- Express API: `http://localhost:3001`
-- API health: `http://localhost:3001/health`
-- Firebase Emulator UI: `http://localhost:4000`
+Validate with `npm run typecheck`, `npm run lint`, and `npm run build`.
 
-## Production credentials
+## End goal
 
-The Firebase web configuration belongs only in the frontend. The backend must use Application Default Credentials or `FIREBASE_SERVICE_ACCOUNT_JSON`; never commit a service-account file. Set `FIREBASE_PROJECT_ID`, `FIREBASE_STORAGE_BUCKET`, `FRONTEND_ORIGIN`, and `NODE_ENV=production` in the backend deployment environment.
-
-## Quality checks
-
-```bash
-npm run typecheck
-npm run lint
-npm run build
-```
+A polished storefront and simple staff admin connected to a secure API, remotely managed catalogue/media, reliable stock and orders, and separately deployable frontend/backend services. Payment, shipping, tax, and email providers can be added behind the existing order API.

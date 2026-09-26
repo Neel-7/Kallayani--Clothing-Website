@@ -17,7 +17,6 @@
     "firebase:verify:media": "node --env-file=../frontend/.env.local --import ./scripts/firebase-development-env.mjs --import tsx scripts/verify-firestore.ts --require-storage-media",
     "firebase:set-role": "node --env-file=../frontend/.env.local --import ./scripts/firebase-development-env.mjs --import tsx scripts/set-firebase-role.ts",
     "firebase:migrate:media": "node --env-file=../frontend/.env.local --import ./scripts/firebase-script-env.mjs --import tsx scripts/migrate-catalog-media.ts",
-    "firebase:phase1:check": "node scripts/check-firebase-phase-1.mjs",
     "firebase:deploy:dev": "firebase deploy --config ../firebase.json --only firestore:rules,firestore:indexes,storage --project kallayani-storefront-dev",
     "firebase:deploy:staging": "firebase deploy --config ../firebase.json --only firestore:rules,firestore:indexes,storage --project kallayani-storefront-staging"
   },
